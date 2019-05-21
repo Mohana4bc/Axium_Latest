@@ -1,0 +1,19 @@
+<mvc:View xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" controllerName="com.axium.Axium.controller.ScanDelNo"
+	xmlns:html="http://www.w3.org/1999/xhtml">
+	<App>
+		<pages>
+			<Page title="Outbound Shipping" showNavButton="true" navButtonPress="onPressBack">
+				<content>
+					<Input id="id1" placeholder="Scan Delivery Number" value="" liveChange="handleSearch"></Input>
+				</content>
+				<!--<footer>-->
+				<!--	<Bar>-->
+				<!--		<contentRight>-->
+				<!--			<Button text="Next" press="handleSearch" type="Accept"/>-->
+				<!--		</contentRight>-->
+				<!--	</Bar>-->
+				<!--</footer>-->
+			</Page>
+		</pages>
+	</App>
+</mvc:View>

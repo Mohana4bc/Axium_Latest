@@ -1,0 +1,39 @@
+<mvc:View xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" controllerName="com.axium.Axium.controller.PlantStorageLoc"
+	xmlns:html="http://www.w3.org/1999/xhtml" xmlns:f="sap.ui.layout.form" xmlns:l="sap.ui.layout">
+	<App>
+		<pages>
+			<Page>
+				<customHeader>
+					<Bar>
+						<contentLeft>
+							<!--<Button id="back" type="Emphasized" text="BACK" press="onPressBack"/>-->
+							<Button id="back" icon="sap-icon://nav-back" press="onPressBack"/>
+						</contentLeft>
+						<contentMiddle>
+							<Text text="Physical Inventory"></Text>
+						</contentMiddle>
+					</Bar>
+				</customHeader>
+				<content>
+					<f:SimpleForm columnsL="7" columnsM="7" editable="false" emptySpanL="1" emptySpanM="1" labelSpanL="4" labelSpanM="4"
+						layout="ResponsiveGridLayout" maxContainerCols="2" minWidth="1024">
+						<f:content>
+							<Label text="Plant" design="Bold" width="100%" textAlign="Begin" textDirection="Inherit" required="true" class="sapUiSmallMarginTop"></Label>
+							<ComboBox id="plantId" filterSecondaryValues="true" showSecondaryValues="true" placeholder="Select Plant" selectionChange="Plant"></ComboBox>
+							<Label text="Storage Location" design="Bold" width="100%" textAlign="Begin" textDirection="Inherit" required="true"
+								class="sapUiSmallMarginTop"></Label>
+							<ComboBox id="storageId" filterSecondaryValues="true" showSecondaryValues="true" placeholder="Select Storage Location"></ComboBox>
+						</f:content>
+					</f:SimpleForm>
+				</content>
+				<footer>
+					<Bar>
+						<contentRight>
+							<Button text="Next" press="onNext" type="Accept"/>
+						</contentRight>
+					</Bar>
+				</footer>
+			</Page>
+		</pages>
+	</App>
+</mvc:View>

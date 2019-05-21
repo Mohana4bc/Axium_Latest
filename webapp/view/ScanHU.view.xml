@@ -1,0 +1,58 @@
+<mvc:View xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" controllerName="com.axium.Axium.controller.ScanHU"
+	xmlns:html="http://www.w3.org/1999/xhtml" xmlns:tnt="sap.tnt" xmlns:f="sap.ui.layout.form">
+	<App>
+		<pages>
+			<Page title="FG Put Away" showNavButton="true" navButtonPress="onPressBack">
+				<!--<tnt:InfoLabel text="PLEASE SCAN BIN NUMBER BEFORE SUBMIT" colorScheme="3" renderMode="Narrow"></tnt:InfoLabel>-->
+				<customHeader>
+					<Bar>
+						<contentRight>
+							<Label design="Bold" text="Bin Number" required="true" class="sapUiSmallMarginTop"></Label>
+							<Input id="fgPutAwayBinId" enabled="true" placeholder="Please Scan Bin Number" change="onBinScan"></Input>
+						</contentRight>
+						<contentMiddle>
+							<Label text="FG Put Away"></Label>
+							<!--<Text text="{oDeliveryNo>DeliveryNo}"></Text>-->
+						</contentMiddle>
+						<contentLeft>
+							<Button icon="sap-icon://nav-back" press="onPressBack"/>
+						</contentLeft>
+					</Bar>
+				</customHeader>
+				<content>
+					<f:SimpleForm columnsL="7" columnsM="7" editable="false" emptySpanL="1" emptySpanM="1" labelSpanL="4" labelSpanM="4"
+						layout="ResponsiveGridLayout" maxContainerCols="2" minWidth="1024">
+						<f:content>
+							<Label text="Warehouse Number" required="true" class="sapUiSmallMarginTop"></Label>
+							<ComboBox id="fgWareHouseid" filterSecondaryValues="true" showSecondaryValues="true" placeholder="Select Warehouse Number"
+								selectionChange="getWareHouseNum"></ComboBox>
+							<Label text="HU Number" class="sapUiSmallMarginTop"></Label>
+							<SearchField id="id1" placeholder="Scan Handling Unit Number" liveChange="onhandleSearch" showSearchButton="false"/>
+						</f:content>
+					</f:SimpleForm>
+					<List items="{oListHU>/HUSet}" headerText="HU Number" mode="MultiSelect" id="idList">
+						<items>
+							<ObjectListItem title="{oListHU>ExternalHU}">
+								<attributes>
+									<ObjectAttribute text="{oListHU>MaterialNum}" title="Material Number"/>
+									<ObjectAttribute text="{oListHU>MaterialDesc}" title="Material Description"/>
+								</attributes>
+							</ObjectListItem>
+						</items>
+					</List>
+				</content>
+				<footer>
+					<Bar>
+						<contentLeft>
+							<Button text="Available Bins" type="Emphasized" press="onPressavailableBins"/>
+						</contentLeft>
+						<contentRight>
+							<Button text="Submit" id="idSubmit" type="Accept" icon="sap-icon://save" press="onSubmit"/>
+							<Button text="Delete" type="Reject" icon="sap-icon://delete" press="onDelete"/>
+						</contentRight>
+					</Bar>
+				</footer>
+			</Page>
+		</pages>
+	</App>
+</mvc:View>

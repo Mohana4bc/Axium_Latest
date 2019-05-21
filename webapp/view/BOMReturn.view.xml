@@ -1,0 +1,43 @@
+<mvc:View xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" controllerName="com.axium.Axium.controller.BOMReturn"
+	xmlns:html="http://www.w3.org/1999/xhtml" xmlns:f="sap.ui.layout.form">
+	<App>
+		<pages>
+			<Page title="Bill of Material" showNavButton="true" navButtonPress="onPressBack">
+				<content>
+				<f:SimpleForm columnsL="7" columnsM="7" editable="false" emptySpanL="1" emptySpanM="1" labelSpanL="4" labelSpanM="4"
+						layout="ResponsiveGridLayout" maxContainerCols="2" minWidth="1024">
+						<f:content>
+							<Label text="Production Order" design="Bold" width="100%" required="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
+							<Text text="{ProductionOrderMaterial>/ProductionOrderMaterialSet/0/ProductionOrder}"/>
+							<Label text="Production Code" design="Bold" width="100%" required="false" textAlign="Begin" textDirection="Inherit" visible="true"/>
+							<Text text="{ProductionOrderMaterial>/ProductionOrderMaterialSet/0/ProductCode}"/>
+						</f:content>
+					</f:SimpleForm>
+					<List items="{ProductionOrderMaterial>/ProductionOrderMaterialSet}" headerText=" Material" id="idtable1" mode="MultiSelect">
+						<items>
+							<ObjectListItem title="{ProductionOrderMaterial>MaterialNumber}" type="Navigation" press="onselectedMatNo">
+								<!--<firstStatus>-->
+								<!--	<ObjectStatus text="{oBOM>ReturnQnty}" title="Return Quantity" state="Success"/>-->
+								<!--</firstStatus>-->
+								<!--<secondStatus>-->
+								<!--	<ObjectStatus text="{oBOM>StorageBin}" title="Bin Number" state="Success"/>-->
+								<!--</secondStatus>-->
+								<attributes>
+									<ObjectAttribute text="{ProductionOrderMaterial>MaterialDesc}"/>
+									<ObjectAttribute text="{ProductionOrderMaterial>RequirementQnty}" title="Issued Quantity"/>
+								</attributes>
+							</ObjectListItem>
+						</items>
+					</List>
+				</content>
+				<footer>
+					<Bar>
+						<contentRight>
+							<Button text="Submit" type="Accept" press="onReturn"/>
+						</contentRight>
+					</Bar>
+				</footer>
+			</Page>
+		</pages>
+	</App>
+</mvc:View>

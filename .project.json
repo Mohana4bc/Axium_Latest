@@ -1,0 +1,21 @@
+{
+  "generation": [
+    {
+      "templateId": "servicecatalog.connectivityComponent",
+      "templateVersion": "0.0.0",
+      "dateTimeStamp": "Mon, 19 Nov 2018 18:09:32 GMT"
+    }
+  ],
+  "mockpreview": {
+    "mockUri": "/sap/opu/odata/sap/ZWM_GW_RFSCREENS_SRV",
+    "metadataFilePath": "",
+    "loadJSONFiles": false,
+    "loadCustomRequests": false,
+    "mockRequestsFilePath": ""
+  },
+  "hcpdeploy": {
+    "account": "p2000096811trial",
+    "name": "rmim",
+    "lastVersionWeTriedToDeploy": "1.0.1"
+  }
+}

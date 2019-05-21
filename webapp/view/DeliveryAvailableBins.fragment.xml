@@ -1,0 +1,13 @@
+<core:FragmentDefinition xmlns:core="sap.ui.core" xmlns="sap.m">
+	<SelectDialog cancel="_handleValueHelpClose" liveChange="handleBinSearch" class="sapUiPopupWithPadding" confirm="_handleValueHelpClose"
+		items="{path:'oDelAvailableBin>/results'}" title="Available Bins">
+		<ObjectListItem>
+			<attributes>
+				<ObjectAttribute text="{oDelAvailableBin>StorageBin}" title="Bin Number"/>
+				<ObjectAttribute text="{oDelAvailableBin>Pallets}" title="Pallets"/>
+				<ObjectAttribute text="{oDelAvailableBin>UOM}" title="UOM"/>
+				<ObjectAttribute text="{oDelAvailableBin>BatchNo}" title="Batch Number"/>
+			</attributes>
+		</ObjectListItem>
+	</SelectDialog>
+</core:FragmentDefinition>

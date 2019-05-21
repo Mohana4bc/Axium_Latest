@@ -1,0 +1,68 @@
+<mvc:View xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" controllerName="com.axium.Axium.controller.InvenHUMat"
+	xmlns:html="http://www.w3.org/1999/xhtml" xmlns:l="sap.ui.layout" xmlns:f="sap.ui.layout.form" xmlns:tnt="sap.tnt">
+	<App>
+		<pages title="Inventory Report">
+			<Page showNavButton="true" navButtonPress="onPressBack">
+				<tnt:InfoLabel text="PLEASE SCAN BIN NUMBER BEFORE SAVING" colorScheme="3" renderMode="Narrow"></tnt:InfoLabel>
+				<customHeader>
+					<Bar>
+						<contentRight>
+							<Label design="Bold" text="Bin Number" required="true" class="sapUiSmallMarginTop"></Label>
+							<Input id="binId" placeholder="Please Scan Bin Number" change="binNumberValidation"></Input>
+						</contentRight>
+						<contentMiddle>
+							<Label text="Inventory Report"></Label>
+						</contentMiddle>
+						<contentLeft>
+							<Button icon="sap-icon://nav-back" press="onPressBack"/>
+						</contentLeft>
+					</Bar>
+				</customHeader>
+				<content>
+					<f:SimpleForm columnsL="7" columnsM="7" editable="false" emptySpanL="1" emptySpanM="1" labelSpanL="4" labelSpanM="4"
+						layout="ResponsiveGridLayout" maxContainerCols="2" minWidth="1024">
+						<f:content>
+							<Label design="Bold" text="HU Number " class="sapUiSmallMarginTop"></Label>
+							<Input value="" liveChange="onHandleHUNumber" id="idHUNum" textAlign="Left" width="100%"/>
+							<!--<Label design="Bold" text="Material Number" class="sapUiSmallMarginTop"></Label>-->
+							<!--<Input value="" id="idMatNum" textAlign="Left" width="100%"/>-->
+							<Label text="Material Number" design="Bold" width="100%" textAlign="Begin" textDirection="Inherit" visible="true"></Label>
+							<ComboBox id="idMatNum" showSecondaryValues="true" filterSecondaryValues="true" placeholder="Select Material"
+								selectionChange="selectMaterial"></ComboBox>
+							<Label design="Bold" text="Batch Number " class="sapUiSmallMarginTop"></Label>
+							<Input value="" id="idBatchNum" enabled="true" textAlign="Left" width="100%"/>
+							<Label design="Bold" text="Qty " class="sapUiSmallMarginTop"></Label>
+							<Input value="" id="idQty" enabled="true" textAlign="Left" width="100%"/>
+							<Label design="Bold" text="Count " class="sapUiSmallMarginTop"></Label>
+							<Input value="" id="idHUMatCount" enabled="false" textAlign="Left" width="100%"/>
+							<Button id="idAdd" text="Add Material" type="Emphasized" press="onAddMaterial"></Button>
+						</f:content>
+					</f:SimpleForm>
+					<List items="{InvenHUBin>/HUBinSet}" headerText="Materials" mode="MultiSelect" id="idList">
+						<items>
+							<ObjectListItem title="{InvenHUBin>ExternalHU}" id="id6">
+								<attributes>
+									<ObjectAttribute title="Material" text="{InvenHUBin>Material}"/>
+									<ObjectAttribute title="Material Description" text="{InvenHUBin>MatDesc}"/>
+									<ObjectAttribute title="Plant" text="{InvenHUBin>Plant}"/>
+									<ObjectAttribute title="Storage Location" text="{InvenHUBin>StorageLocation}"/>
+									<ObjectAttribute title="Batch Number" text="{InvenHUBin>BatchNumber}"/>
+									<ObjectAttribute title="Quantity" text="{InvenHUBin>Quantity}"/>
+								</attributes>
+							</ObjectListItem>
+						</items>
+					</List>
+				</content>
+				<footer>
+					<Bar>
+						<contentRight>
+							<!--<Button text="Submit" press="onInvenSubmit" type="Accept"/>-->
+							<Button text="Save" type="Accept" icon="sap-icon://save" press="onInvenSubmit"/>
+							<Button text="Delete" type="Reject" icon="sap-icon://delete" press="onDelete"/>
+						</contentRight>
+					</Bar>
+				</footer>
+			</Page>
+		</pages>
+	</App>
+</mvc:View>

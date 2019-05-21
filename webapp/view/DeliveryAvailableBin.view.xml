@@ -1,0 +1,48 @@
+<mvc:View xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m"
+	controllerName="com.axium.Axium.controller.DeliveryAvailableBin" xmlns:html="http://www.w3.org/1999/xhtml">
+	<App>
+		<pages>
+			<Page title="Available Bins" showNavButton="true" navButtonPress="onPressBack">
+				<!--	<Page>-->
+				<!--<customHeader>-->
+				<!--	<Bar>-->
+				<!--		<contentLeft>-->
+				<!--			<Button text="Back" press="onPressBack" type="Emphasized"></Button>-->
+				<!--		</contentLeft>-->
+				<!--		<contentMiddle>-->
+				<!--			<Text text="Available Bins"></Text>-->
+				<!--		</contentMiddle>-->
+				<!--	</Bar>-->
+				<!--</customHeader>-->
+				<content>
+					<Table id="idtable1" items="{path:'oDelAvailableBin>/results'}">
+						<columns>
+							<Column>
+								<Label id="id1" text="Available Bins"/>
+							</Column>
+							<Column>
+								<Label id="id2" text="Available Pallets"/>
+							</Column>
+							<Column>
+								<Label id="id3" text="UOM"/>
+							</Column>
+						</columns>
+						<items>
+							<ColumnListItem>
+								<cells>
+									<Text text="{oDelAvailableBin>StorageBin}"/>
+								</cells>
+								<cells>
+									<Text text="{oDelAvailableBin>Pallets}"/>
+								</cells>
+								<cells>
+									<Text text="{oDelAvailableBin>UOM}"/>
+								</cells>
+							</ColumnListItem>
+						</items>
+					</Table>
+				</content>
+			</Page>
+		</pages>
+	</App>
+</mvc:View>

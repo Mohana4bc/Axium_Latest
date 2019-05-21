@@ -1,0 +1,33 @@
+<mvc:View xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" controllerName="com.axium.Axium.controller.BinScan"
+	xmlns:html="http://www.w3.org/1999/xhtml" xmlns:l="sap.ui.layout" xmlns:f="sap.ui.layout.form">
+	<App>
+		<pages>
+			<Page title="BinScan" showNavButton="true" navButtonPress="onPressBack">
+				<content>
+					<f:SimpleForm columnsL="7" columnsM="7" editable="false" emptySpanL="1" emptySpanM="1" labelSpanL="4" labelSpanM="4"
+						layout="ResponsiveGridLayout" maxContainerCols="2" minWidth="1024">
+						<f:content>
+							<Label design="Bold" text="Handling Unit Number " class="sapUiSmallMarginTop"></Label>
+							<Input value="{oHUSelect>/huNo}" id="id1" textAlign="Left" editable="false" width="100%"/>
+							<!--<Label design="Bold" text="Material" class="sapUiSmallMarginTop"></Label>-->
+							<!--<Input value="{oHUSelect>/material}" id="id3" textAlign="Left" editable="false" width="100%"/>-->
+							<Label design="Bold" text="Material Number " class="sapUiSmallMarginTop"></Label>
+							<Input value="{oHUSelect>/matNum}" id="idMat" textAlign="Left" editable="false" width="100%"/>
+							<Label design="Bold" text="Material Description " class="sapUiSmallMarginTop"></Label>
+							<Input value="{oHUSelect>/description}" id="id4" textAlign="Left" editable="false" width="100%"/>
+							<Label design="Bold" text="Batch Number " class="sapUiSmallMarginTop"></Label>
+							<Input value="{oHUSelect>/batch}" id="id5" textAlign="Left" editable="false" width="100%"/>
+							<!--<Label design="Bold" text="Scanned Quantity" class="sapUiSmallMarginTop"></Label>-->
+							<!--<Input value="{oHUSelect>/Qty}" id="id6" textAlign="Left" editable="false" width="100%"/>-->
+							<!--<Label design="Bold" text="Plant" class="sapUiSmallMarginTop"></Label>-->
+							<!--<Input value="{oHUSelect>/plant}" id="id7" textAlign="Left" editable="false" width="100%"/>-->
+							<Label design="Bold" text="Bin Number" class="sapUiSmallMarginTop"></Label>
+							<SearchField id="id2" liveChange="onBinScan" showSearchButton="false" placeholder="Scan Bin Number" value="{oHUSelect>/binNo}" width="100%"/>
+							<Button text="Available Bins" type="Emphasized" press="onPressavailableBins"/>
+						</f:content>
+					</f:SimpleForm>
+				</content>
+			</Page>
+		</pages>
+	</App>
+</mvc:View>

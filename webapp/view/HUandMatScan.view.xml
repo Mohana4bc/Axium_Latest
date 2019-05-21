@@ -1,0 +1,58 @@
+<mvc:View xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" xmlns:f="sap.ui.layout.form" xmlns:l="sap.ui.layout"
+	controllerName="com.axium.Axium.controller.HUandMatScan" xmlns:html="http://www.w3.org/1999/xhtml">
+	<App>
+		<pages>
+			<Page>
+				<customHeader>
+					<Bar>
+						<contentLeft>
+							<Button id="back" type="Emphasized" text="BACK" press="onPressBack"/>
+						</contentLeft>
+						<contentMiddle>
+							<Text text="HU/Material Scan"></Text>
+						</contentMiddle>
+					</Bar>
+				</customHeader>
+				<content>
+					<f:SimpleForm columnsL="7" columnsM="7" editable="false" emptySpanL="1" emptySpanM="1" labelSpanL="4" labelSpanM="4"
+						layout="ResponsiveGridLayout" maxContainerCols="2" minWidth="1024">
+						<f:content>
+							<Label text="HU Scan" design="Bold" width="100%" textAlign="Begin" textDirection="Inherit" visible="true"></Label>
+							<SearchField id="scanHUNumber" liveChange="HuScan" showSearchButton="false" placeholder="Scan HU Number"></SearchField>
+							<Label text="Material" design="Bold" width="100%" textAlign="Begin" textDirection="Inherit" visible="true"></Label>
+							<ComboBox id="matNumber" showSecondaryValues="true" filterSecondaryValues="true" selectionChange="MatScan" placeholder="Scan Material"></ComboBox>
+							<Label text="Material Description" design="Bold" width="100%" textAlign="Begin" textDirection="Inherit" visible="true"></Label>
+							<Input id="materialDesc" value="" required="true" enabled="false"/>
+							<Label text="Batch Number" design="Bold" width="100%" textAlign="Begin" textDirection="Inherit" visible="true"></Label>
+							<Input id="BatchNumber" required="true" value="" enabled="false" placeholder="Enter Batch Number" maxLength="10"/>
+							<Label text="Quantity" design="Bold" width="100%" textAlign="Begin" textDirection="Inherit" visible="true"></Label>
+							<Input id="Quantity" value="" required="true" enabled="false" placeholder="Enter Quantity">
+								<layoutData>
+									<l:GridData span="L2 M4 S6"/>
+								</layoutData>
+							</Input>
+							<Input id="UOM" value="" required="true" enabled="false" visible="false" placeholder="UOM">
+								<layoutData>
+									<l:GridData span="L2 M4 S6"/>
+								</layoutData>
+							</Input>
+							<Label text="Destination Storage Type" class="sapUiSmallMarginTop"></Label>
+							<ComboBox id="destinationStorage" showSecondaryValues="true" filterSecondaryValues="true" placeholder="Enter Destination Storage"
+								enabled="false"></ComboBox>
+							<Label text="Destination Storage Bin" required="true" class="sapUiSmallMarginTop"></Label>
+							<SearchField id="DestinationBin" showSearchButton="false" placeholder="Enter Destination Bin" liveChange="validateBin"></SearchField>
+							<Button text="Available Bin" press="onAvailableBin" type="Emphasized" enabled="true"></Button>
+						</f:content>
+					</f:SimpleForm>
+				</content>
+				<footer>
+					<Bar>
+						<contentRight>
+							<Button text="Submit" type="Accept" press="onSave" enabled="true"/>
+						</contentRight>
+					</Bar>
+				</footer>
+			</Page>
+		</pages>
+	</App>
+</mvc:View>

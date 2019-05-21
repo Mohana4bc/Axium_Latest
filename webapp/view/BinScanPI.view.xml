@@ -1,0 +1,77 @@
+<mvc:View xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" controllerName="com.axium.Axium.controller.BinScanPI"
+	xmlns:html="http://www.w3.org/1999/xhtml" xmlns:f="sap.ui.layout.form">
+	<App>
+		<pages>
+			<Page>
+				<customHeader>
+					<Bar>
+						<contentLeft>
+							<Button id="back" icon="sap-icon://nav-back" press="onPressBack"/>
+						</contentLeft>
+						<contentMiddle>
+							<Text text="Scan Bin"></Text>
+						</contentMiddle>
+					</Bar>
+				</customHeader>
+				<content>
+					<f:SimpleForm columnsL="7" columnsM="7" editable="false" emptySpanL="1" emptySpanM="1" labelSpanL="4" labelSpanM="4"
+						layout="ResponsiveGridLayout" maxContainerCols="2" minWidth="1024">
+						<f:content>
+							<Label text="Bin Number" design="Bold" width="100%" textAlign="Begin" textDirection="Inherit" required="true" class="sapUiSmallMarginTop"></Label>
+							<Input id="bin" placeholder="Scan Bin" fieldWidth="20%" change="onBinScan"/>
+							<Label text="Status" design="Bold" width="100%" textAlign="Begin" textDirection="Inherit" class="sapUiSmallMarginTop"></Label>
+							<ComboBox id="PIstatus" filterSecondaryValues="true" showSecondaryValues="true" placeholder="Select Status to Search">
+								<core:ListItem text="BIN_CLEARED"/>
+								<core:ListItem text="COUNTED"/>
+								<core:ListItem text="RECOUNT_COMPLETED"/>
+								<core:ListItem text="RECOUNT_INITIATED"/>
+								<core:ListItem text="SUBMITTED"/>
+							</ComboBox>
+							<Button text="Search" type="Emphasized" icon="sap-icon://search" press="onSearchPressed"/>
+							<Button text="Refresh" icon="sap-icon://refresh" press="onRefreshPressed"/>
+						</f:content>
+					</f:SimpleForm>
+					<List items="{oListHU>/BinSet}" headerText="Bins" mode="MultiSelect" id="idList">
+						<items>
+							<ObjectListItem type="Navigation" intro="{oListHU>bin}" title="{oListHU>status}" press="onBinPress">
+								<attributes>
+									<ObjectAttribute text="{oListHU>bat}" title="Batch Number"/>
+									<ObjectAttribute text="{oListHU>mat}" title="Material"/>
+								</attributes>
+							</ObjectListItem>
+						</items>
+					</List>
+				</content>
+				<!--<content>-->
+				<!--	<Table id="idtable1" items="{PlantStorage>/binDet}">-->
+				<!--		<columns>-->
+				<!--			<Column>-->
+				<!--				<Label id="binid" text="Bin Number"/>-->
+				<!--			</Column>-->
+				<!--			<Column>-->
+				<!--				<Label id="status" text="Status"/>-->
+				<!--			</Column>-->
+				<!--		</columns>-->
+				<!--		<items>-->
+				<!--			<ColumnListItem>-->
+				<!--				<cells>-->
+				<!--					<Text text="{PlantStorage>BinNumber}"/>-->
+				<!--				</cells>-->
+				<!--				<cells>-->
+				<!--					<Text text="{PlantStorage>Status}"/>-->
+				<!--				</cells>-->
+				<!--			</ColumnListItem>-->
+				<!--		</items>-->
+				<!--	</Table>-->
+				<!--</content>-->
+				<footer>
+					<Bar>
+						<contentRight>
+							<Button text="Submit" press="onSubmit" type="Accept"/>
+						</contentRight>
+					</Bar>
+				</footer>
+			</Page>
+		</pages>
+	</App>
+</mvc:View>

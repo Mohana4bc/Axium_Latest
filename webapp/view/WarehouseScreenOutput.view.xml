@@ -1,0 +1,122 @@
+<mvc:View xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m"
+	controllerName="com.axium.Axium.controller.WarehouseScreenOutput" xmlns:html="http://www.w3.org/1999/xhtml" xmlns:l="sap.ui.layout"
+	xmlns:f="sap.ui.layout.form">
+	<App>
+		<pages>
+			<Page title="WM Bin Stock Stock Output" showHeader="true" showFooter="true" class="sapUiContentPadding" showNavButton="true"
+				navButtonPress="onPressBack">
+				<content>
+					<f:SimpleForm columnsL="7" columnsM="7" editable="false" emptySpanL="1" emptySpanM="1" labelSpanL="4" labelSpanM="4"
+						layout="ResponsiveGridLayout" maxContainerCols="2" minWidth="1024">
+						<f:content>
+							<Label text="Warehouse Number"></Label>
+							<Text text="{WarehouseScreenOutputModel>/0/WareHouseNumber}"></Text>
+							<!--<Label text="Warehouse Description"></Label>-->
+							<!--<Text text="{WarehouseScreenOutputModel>/0/WHDesc}"></Text>-->
+							<Label text="Plant"></Label>
+							<Text text="{WarehouseScreenOutputModel>/0/Plant}"></Text>
+						</f:content>
+					</f:SimpleForm>
+					<!--{ path:'WarehouseScreenOutputModel>/', sorter: { path: 'StorageBin', group: true } }-->
+					<List items="{ path:'WarehouseScreenOutputModel>/'}" id="MainList" growing="true" growingThreshold="100">
+						<!--<headerToolbar>-->
+						<!--	<Toolbar>-->
+						<!--		<Title text="Warehouse Details"></Title>-->
+						<!--		<ToolbarSpacer></ToolbarSpacer>-->
+						<!--		<SearchField width="50%" search="onFilter"></SearchField>-->
+						<!--	</Toolbar>-->
+						<!--</headerToolbar>-->
+						<!--numberState="{= ${WarehouseScreenOutputModel>AvailableStock} > 0.000 ? 'Success' : 'Error' }"-->
+						<!--number="{ parts:[{path:'Price'},{path:'CurrencyCode'}], type: 'sap.ui.model.type.Currency', formatOptions: {showMeasure: false} }"-->
+						<!--{WarehouseScreenOutputModel>AvailableStock}-->
+						<!--numberUnit="{WarehouseScreenOutputModel>BaseUnitMeasure}"-->
+						<!--number="{ parts:[{path:'WarehouseScreenOutputModel>AvailableStock'}], formatOptions: {showMeasure: false} }"-->
+						<!--		numberUnit="{WarehouseScreenOutputModel>BaseUnitMeasure}"-->
+						<!--		numberState="{= ${WarehouseScreenOutputModel>AvailableStock} > 0.000 ? 'Success' : 'Error' }"-->
+						<items>
+							<ObjectListItem intro="{WarehouseScreenOutputModel>MaterialDesc}" title="{WarehouseScreenOutputModel>Material}"
+								number="{ parts:[{path:'WarehouseScreenOutputModel>AvailableStock'}], formatOptions: {showMeasure: false} }"
+								numberUnit="{WarehouseScreenOutputModel>BaseUnitMeasure}"
+								numberState="{= ${WarehouseScreenOutputModel>AvailableStock} > 0.000 ? 'Success' : 'Error' }">
+								<attributes>
+									<ObjectAttribute title="Batch Number" text="{WarehouseScreenOutputModel>Batch}"/>
+									<ObjectAttribute title="Bin Number" text="{WarehouseScreenOutputModel>StorageBin}"/>
+								</attributes>
+								<!--<firstStatus>-->
+								<!--	<ObjectStatus text="{WarehouseScreenOutputModel>AvailableStock} {WarehouseScreenOutputModel>BaseUnitMeasure}"/>-->
+								<!--</firstStatus>-->
+								<!--<secondStatus>-->
+								<!--<ObjectStatus-->
+								<!--text="{ parts: [ {path: 'WarehouseScreenOutputModel>BaseUnitMeasure'}, {path: 'WarehouseScreenOutputModel>AvailableStock'} ], formatter: '.formatter.calculateInventory' }"></ObjectStatus>-->
+								<!--</secondStatus>-->
+							</ObjectListItem>
+						</items>
+					</List>
+					<!--<Table id="inventoryTable" items="{path:'WarehouseScreenOutputModel>/'}">-->
+					<!--	<columns>-->
+					<!--		<Column>-->
+					<!--			<Label text="Available Stock" id="id1"/>-->
+					<!--		</Column>-->
+					<!--		<Column>-->
+					<!--			<Label text="Base UOM." id="id2"/>-->
+					<!--		</Column>-->
+					<!--		<Column>-->
+					<!--			<Label text="Material" id="id3"/>-->
+					<!--		</Column>-->
+					<!--		<Column>-->
+					<!--			<Label text="Plant" id="id4"/>-->
+					<!--		</Column>-->
+					<!--		<Column>-->
+					<!--			<Label text="Storage Bin" id="id5"/>-->
+					<!--		</Column>-->
+					<!--		<Column>-->
+					<!--			<Label text="Storage Type" id="id6"/>-->
+					<!--		</Column>-->
+					<!--		<Column>-->
+					<!--			<Label text="Total Stock" id="id7"/>-->
+					<!--		</Column>-->
+					<!--		<Column>-->
+					<!--			<Label text="Ware House Number" id="id8"/>-->
+					<!--		</Column>-->
+					<!--	</columns>-->
+					<!--	<items>-->
+					<!--		<ColumnListItem>-->
+					<!--			<cells>-->
+					<!--				<Text text="{WarehouseScreenOutputModel>AvailableStock}" id="one"/>-->
+					<!--			</cells>-->
+					<!--			<cells>-->
+					<!--				<Text text="{WarehouseScreenOutputModel>BaseUnitMeasure}" id="two"/>-->
+					<!--			</cells>-->
+					<!--			<cells>-->
+					<!--				<Text text="{WarehouseScreenOutputModel>Material}" id="three"/>-->
+					<!--			</cells>-->
+					<!--			<cells>-->
+					<!--				<Text text="{WarehouseScreenOutputModel>Plant}" id="four"/>-->
+					<!--			</cells>-->
+					<!--			<cells>-->
+					<!--				<Text text="{WarehouseScreenOutputModel>StorageBin}" id="five"/>-->
+					<!--			</cells>-->
+					<!--			<cells>-->
+					<!--				<Text text="{WarehouseScreenOutputModel>StorageType}" id="six"/>-->
+					<!--			</cells>-->
+					<!--			<cells>-->
+					<!--				<Text text="{WarehouseScreenOutputModel>TotalStock}" id="seven"/>-->
+					<!--			</cells>-->
+					<!--			<cells>-->
+					<!--				<Text text="{WarehouseScreenOutputModel>WareHouseNumber}" id="eight"/>-->
+					<!--			</cells>-->
+					<!--		</ColumnListItem>-->
+					<!--	</items>-->
+					<!--</Table>-->
+				</content>
+				<footer>
+					<Bar>
+						<contentMiddle>
+							<!--<Button text="Search" press="" type="Emphasized"/>-->
+						</contentMiddle>
+					</Bar>
+				</footer>
+			</Page>
+		</pages>
+	</App>
+</mvc:View>

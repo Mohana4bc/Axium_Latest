@@ -1,0 +1,48 @@
+<mvc:View xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" xmlns:f="sap.ui.layout.form" xmlns:tnt="sap.tnt" controllerName="com.axium.Axium.controller.Material"
+	xmlns:html="http://www.w3.org/1999/xhtml">
+	<App>
+		<pages>
+			<Page>
+				<tnt:InfoLabel text="CLICK ON MATERIAL TO FILL DETAILS" colorScheme="3" renderMode="Narrow"></tnt:InfoLabel>
+				<customHeader>
+					<Bar>
+						<contentLeft>
+							<Button id="back" type="Emphasized" text="BACK" press="onPressBack"/>
+						</contentLeft>
+						<contentMiddle>
+							<Text text="Materials"></Text>
+						</contentMiddle>
+					</Bar>
+				</customHeader>
+				<content>
+					<f:Form id="Admission" editable="true">
+						<f:layout>
+							<f:ResponsiveGridLayout/>
+						</f:layout>
+						<f:formContainers>
+							<f:FormContainer>
+								<f:formElements>
+									<f:FormElement label="Delivery Note ">
+										<f:fields>
+											<Input id="deliveryNote" value="" required="true" width="50%" maxLength="16" placeholder="Enter Delivery Note"/>
+										</f:fields>
+									</f:FormElement>
+								</f:formElements>
+							</f:FormContainer>
+						</f:formContainers>
+					</f:Form>
+					<List id="Materials" items="{Materials>/materialSet}" headerText="Materials" mode="MultiSelect" itemPress="onSelectMaterial">
+						<StandardListItem title="{Materials>MaterialDesc}" type="Navigation" description="{Materials>MaterialNumber}"/>
+					</List>
+				</content>
+				<footer>
+					<Bar>
+						<contentRight>
+							<Button id="SubmitId" text="Submit" type="Accept" press="onSubmit" visible="false"/>
+						</contentRight>
+					</Bar>
+				</footer>
+			</Page>
+		</pages>
+	</App>
+</mvc:View>

@@ -1,0 +1,95 @@
+<mvc:View xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" controllerName="com.axium.Axium.controller.MaterialBinScan"
+	xmlns:html="http://www.w3.org/1999/xhtml" xmlns:l="sap.ui.layout" xmlns:t="sap.ui.table" xmlns:form="sap.ui.layout.form">
+	<App>
+		<pages>
+			<Page title="FG PICK OF DELIVERY {oScannedQtySelect>/myDelNum}" showNavButton="true" navButtonPress="onPressBack">
+				<content>
+					<!--<l:VerticalLayout class="sapUiSmallMargin">-->
+					<!--	<Label text="" design="Bold" width="100%" textAlign="Begin" textDirection="Inherit" visible="true"></Label>-->
+					<!--	<Label text="Material" design="Bold" width="100%" textAlign="Begin" textDirection="Inherit" visible="true"></Label>-->
+					<!--	<Input id="id2" value="{oMatSelect>/myMatNo}" enabled="false"></Input>-->
+					<!--	<Label text="Material Description" design="Bold" width="100%" textAlign="Begin" textDirection="Inherit" visible="true"></Label>-->
+					<!--	<Input id="id10" value="{oMatSelect>/myMatDesc}" enabled="false"></Input>-->
+					<!--	<Label text="Delivery Number" design="Bold" width="100%" textAlign="Begin" textDirection="Inherit" visible="true"></Label>-->
+					<!--	<Input id="id9" value="{oMatSelect>/myDelNum}" enabled="false"></Input>-->
+					<!--	<Label text="Required Quantity" design="Bold" width="100%" textAlign="Begin" textDirection="Inherit" visible="true"></Label>-->
+					<!--	<Input id="id3" value="{oMatSelect>/myQuantity}" enabled="false"></Input>-->
+					<!--	<Label text="Scanned Quantity" design="Bold" width="100%" textAlign="Begin" textDirection="Inherit" visible="true"></Label>-->
+					<!--	<Input id="id4" value="{oMatSelect>/myScanQty}" enabled="false"></Input>-->
+					<!--	<Label text="Batch Number" design="Bold" width="100%" textAlign="Begin" textDirection="Inherit" visible="true"></Label>-->
+					<!--	<Input id="id8" enabled="true" placeholder="Scan Batch Number" change="handleBatchNumber"></Input>-->
+					<!--	<Label text="Bin Number" design="Bold" width="100%" textAlign="Begin" textDirection="Inherit" visible="true"></Label>-->
+					<!--	<Input id="id1" enabled="true" placeholder="Scan Bin Number" change="handleBinNumber"></Input>-->
+					<!--</l:VerticalLayout>-->
+					<!--<VBox height="5%"/>-->
+					<!--<Label text="Material" design="Bold" width="100%" required="false" textAlign="Begin" textDirection="Inherit" visible="true"/>-->
+					<!--<Input id="id2" enabled="false" fieldWidth="22%" value="{oMatSelect>/myMatNo}" description="{oMatSelect>/myMatDesc}"></Input>-->
+					<!--<Text id="id2" text="{oScannedQtySelect>/myMatNo}"/>-->
+					<!--<VBox height="5%"/>-->
+					<!--<Label text="Material Description" design="Bold" width="100%" required="false" textAlign="Begin" textDirection="Inherit" visible="true"/>-->
+					<!--<Text id="id10" text="{oScannedQtySelect>/myMatDesc}"/>-->
+					<!--<VBox height="5%"/>-->
+					<!--<Label text="Delivery Number" design="Bold" width="100%" required="false" textAlign="Begin" textDirection="Inherit" visible="true"/>-->
+					<!--<Text id="id9" text="{oScannedQtySelect>/myDelNum}"/>-->
+					<!--<VBox height="5%"/>-->
+					<!--<Label text="Required Pallets" design="Bold" width="100%" required="false" textAlign="Begin" textDirection="Inherit" visible="true"/>-->
+					<!--<Text id="id3" text="{oScannedQtySelect>/myQuantity}"/>-->
+					<!--<VBox height="5%"/>-->
+					<!--<Label text="Scanned Quantity" design="Bold" width="100%" required="false" textAlign="Begin" textDirection="Inherit" visible="true"/>-->
+					<!--<Input id="id4" enabled="false"></Input>-->
+					<!--<Text id="id4" text="{oMatSelect>/myScanQty}"/>-->
+					<!--<VBox height="5%"/>-->
+					<!--<form:SimpleForm columnsL="7" columnsM="7" editable="false" emptySpanL="1" emptySpanM="1" labelSpanL="4" labelSpanM="4"-->
+					<!--	layout="ResponsiveGridLayout" maxContainerCols="2" minWidth="1050">-->
+					<!--<form:SimpleForm>-->
+					<!--<form:SimpleForm columnsL="7" columnsM="7" editable="false" emptySpanL="1" emptySpanM="1" labelSpanL="4" labelSpanM="4"-->
+					<!--layout="ResponsiveGridLayout" maxContainerCols="2" minWidth="2000">-->
+					<!--<form:SimpleForm layout="ResponsiveGridLayout">-->
+					<!--	<form:content>-->
+					<!--		<Label text="Material Number"></Label>-->
+					<!--		<Text id="id2" text="{oScannedQtySelect>/myMatNo}"></Text>-->
+					<!--		<Label text="Material Description"></Label>-->
+					<!--		<Text id="id10" text="{oScannedQtySelect>/myMatDesc}"></Text>-->
+					<!--		<Label text="Delivery Number"></Label>-->
+					<!--		<Text id="id9" text="{oScannedQtySelect>/myDelNum}"></Text>-->
+					<!--		<Label text="Required Quantity"></Label>-->
+					<!--		<Text id="id3" text="{oScannedQtySelect>/myQuantity}"></Text>-->
+					<!--	</form:content>-->
+					<!--</form:SimpleForm>-->
+					<!--<l:VerticalLayout>-->
+					<!--	<Label text="Scanned Pallets" design="Bold" width="100%" textAlign="Begin" textDirection="Inherit" visible="true"></Label>-->
+					<!--	<Input id="id4" enabled="false" value="{oScannedQtySelect>/myScannedQty}"></Input>-->
+					<!--	<Label text="Bin Number" required="true" design="Bold" width="100%" textAlign="Begin" textDirection="Inherit" visible="true"></Label>-->
+					<!--	<Input id="id1" enabled="true" placeholder="Scan Bin Number" liveChange="handleBinNumber"></Input>-->
+					<!--<Label text="Batch Number" id="idBatch" required="true" design="Bold" width="100%" textAlign="Begin" textDirection="Inherit" visible="true"></Label>-->
+					<!--<Input id="id8" placeholder="Scan Batch Number"></Input>-->
+					<!--</l:VerticalLayout>-->
+					<form:SimpleForm columnsL="7" columnsM="7" editable="false" emptySpanL="1" emptySpanM="1" labelSpanL="4" labelSpanM="4"
+						layout="ResponsiveGridLayout" maxContainerCols="2" minWidth="1024">
+						<form:content>
+							<Label design="Bold" text="Material Number" class="sapUiSmallMarginTop"></Label>
+							<Input id="id2" editable="false" value="{oScannedQtySelect>/myMatNo}"/>
+							<Label design="Bold" text="Material Description" class="sapUiSmallMarginTop"></Label>
+							<Input id="id10" editable="false" value="{oScannedQtySelect>/myMatDesc}"/>
+							<Label design="Bold" text=" Required Pallets" class="sapUiSmallMarginTop"></Label>
+							<Input id="id3" editable="false" value="{oScannedQtySelect>/myQuantity}"/>
+							<Label design="Bold" text="Scanned Pallets" class="sapUiSmallMarginTop"></Label>
+							<Input id="id4" editable="false" value="{oScannedQtySelect>/myScannedQty}"></Input>
+							<Label design="Bold" text="Bin Number" class="sapUiSmallMarginTop"></Label>
+							<Input id="id1" enabled="true" placeholder="Scan Bin Number" liveChange="handleBinNumber"></Input>
+							<Button text="Available Bins" press="onAvailableBinPress" type="Emphasized"/>
+						</form:content>
+					</form:SimpleForm>
+				</content>
+				<!--<footer>-->
+				<!--	<Bar>-->
+				<!--		<contentRight>-->
+				<!--			<Button text="Available Bins" press="onAvailableBinPress" type="Accept"/>-->
+				<!--<Button text="Next" type="Accept" press="handleBatchNumber"/>-->
+				<!--		</contentRight>-->
+				<!--	</Bar>-->
+				<!--</footer>-->
+			</Page>
+		</pages>
+	</App>
+</mvc:View>

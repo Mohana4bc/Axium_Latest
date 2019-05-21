@@ -1,0 +1,43 @@
+<mvc:View xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" controllerName="com.axium.Axium.controller.BinScanReturn"
+	xmlns:html="http://www.w3.org/1999/xhtml" xmlns:l="sap.ui.layout" xmlns:f="sap.ui.layout.form">
+	<App>
+		<Page title="Bin Scan" showNavButton="true" navButtonPress="onPressBack">
+			<content>
+				<!--<tnt:InfoLabel text="AFTER SPLITING CLICK ON SAVE TO SAVE DATA" colorScheme="3" renderMode="Narrow"></tnt:InfoLabel>-->
+				<f:SimpleForm columnsL="7" columnsM="7" editable="false" emptySpanL="1" emptySpanM="1" labelSpanL="4" labelSpanM="4"
+					layout="ResponsiveGridLayout" maxContainerCols="2" minWidth="1024">
+					<f:content>
+						<Label design="Bold" text="Material Number " class="sapUiSmallMarginTop"></Label>
+						<Input value="{ProductionOrderMaterial>MaterialNumber}" id="id1" textAlign="Left" editable="false" width="100%"/>
+						<Label design="Bold" text="Return Quantity" class="sapUiSmallMarginTop"></Label>
+						<Input value="" placeholder="Return Quantity" id="id2" type="Number" width="100%"/>
+						<Label design="Bold" text="Batch Number" class="sapUiSmallMarginTop"></Label>
+						<SearchField id="BatchNumber" showSearchButton="false" placeholder="Batch Number" value="{oMatSelect>/batchNo}" width="100%"/>
+						<Label design="Bold" text="Bin Number" class="sapUiSmallMarginTop"></Label>
+						<SearchField id="BinNumber" showSearchButton="false" placeholder="Scan Bin Number" value="{oMatSelect>/binNo}" width="100%"/>
+						<Button text="Available Bins" type="Emphasized" press="onPressavailableBins"/>
+					</f:content>
+				</f:SimpleForm>
+				<List id="BatchSplit" class="sapUiResponsiveMargin" width="auto">
+					<NotificationListGroup title="Material Number : {ProductionOrderMaterial>MaterialNumber}" showCloseButton="false" collapsed="false"
+						items="{ProductionOrderMaterial>MaterialSplit}">
+						<items>
+							<NotificationListItem title="Quantity : {ProductionOrderMaterial>ReturnQnty}" authorName="Bin Number: {ProductionOrderMaterial>StorageBin}"
+								showCloseButton="false" description="Batch No: {ProductionOrderMaterial>BatchNo} "/>
+						</items>
+					</NotificationListGroup>
+				</List>
+			</content>
+			<footer>
+				<Bar>
+					<contentLeft>
+						<Button id="split" text="Split" type="Emphasized" press="handleBatch" tooltip="Batch split"/>
+					</contentLeft>
+					<contentRight>
+						<Button text="Save" type="Accept" press="handleBatchNumber"/>
+					</contentRight>
+				</Bar>
+			</footer>
+		</Page>
+	</App>
+</mvc:View>

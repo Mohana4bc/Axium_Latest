@@ -1,0 +1,64 @@
+<mvc:View xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" controllerName="com.axium.Axium.controller.MaterialDetPI"
+	xmlns:html="http://www.w3.org/1999/xhtml" xmlns:tnt="sap.tnt">
+	<App>
+		<pages>
+			<Page >
+				<tnt:InfoLabel text="SELECT MATERIAL TO SCAN QUANTITY BEFORE PRESSING NEXT BUTTON" colorScheme="3" renderMode="Narrow"></tnt:InfoLabel>
+				<customHeader>
+					<Bar>
+						<contentLeft>
+							<Button id="back" icon="sap-icon://nav-back" press="onPressBack"/>
+						</contentLeft>
+						<contentMiddle>
+							<Text text="Material Details"></Text>
+						</contentMiddle>
+					</Bar>
+				</customHeader>
+				<content>
+					<Table enableBusyIndicator="true" items="{PhysicalInventory>/matDet}" mode="SingleSelectMaster" selectionChange="onSelectMaterial"
+						id="materialDet" growing="true">
+						<columns>
+							<Column hAlign="Center" width="60px" demandPopin="true">
+								<Label text="Material Number" design="Bold"></Label>
+							</Column>
+							<Column hAlign="Center" width="60px" demandPopin="true">
+								<Label text="Material Description" design="Bold"></Label>
+							</Column>
+							<Column hAlign="Center" width="60px" demandPopin="true">
+								<Label text="Batch Number" design="Bold"></Label>
+							</Column>
+							<Column hAlign="Center" width="60px" demandPopin="true">
+								<Label text="Pallet" design="Bold"></Label>
+							</Column>
+							<Column hAlign="Center" width="60px" demandPopin="true">
+								<Label text="Boxes" design="Bold"></Label>
+							</Column>
+							<Column hAlign="Center" width="60px" demandPopin="true">
+								<Label text="Quantity" design="Bold"></Label>
+							</Column>
+						</columns>
+						<items>
+							<ColumnListItem>
+								<cells>
+									<Text id="mat" text="{PhysicalInventory>Material}"></Text>
+									<Text id="matDesc" text="{PhysicalInventory>MaterialDesc}"></Text>
+									<Text id="batch" text="{PhysicalInventory>BatchNo}"></Text>
+									<Text id="pallet" text="{PhysicalInventory>Pallets}"></Text>
+									<Text id="box" text="{PhysicalInventory>Boxes}"></Text>
+									<Text id="count" text="{PhysicalInventory>Count}"></Text>
+								</cells>
+							</ColumnListItem>
+						</items>
+					</Table>
+				</content>
+				<footer>
+					<Bar>
+						<contentRight>
+							<Button text="Next" press="onNext" type="Accept"/>
+						</contentRight>
+					</Bar>
+				</footer>
+			</Page>
+		</pages>
+	</App>
+</mvc:View>

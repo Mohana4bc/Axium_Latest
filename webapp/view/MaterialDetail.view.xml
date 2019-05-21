@@ -1,0 +1,76 @@
+<mvc:View xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" xmlns:l="sap.ui.layout" controllerName="com.axium.Axium.controller.MaterialDetail"
+	xmlns:html="http://www.w3.org/1999/xhtml" xmlns:f="sap.ui.layout.form">
+	<App>
+		<pages>
+			<!--<Page title="Material Details" showNavButton="true" navButtonPress="onPressBack-->
+			<Page>
+				<customHeader>
+					<Bar>
+						<contentLeft>
+							<Button id="back" type="Emphasized" text="BACK" press="onPressBack"/>
+						</contentLeft>
+						<contentMiddle>
+							<Text text="Material Details"></Text>
+						</contentMiddle>
+					</Bar>
+				</customHeader>
+				<content>
+					<f:SimpleForm columnsL="7" columnsM="7" editable="false" emptySpanL="1" emptySpanM="1" labelSpanL="4" labelSpanM="4"
+						layout="ResponsiveGridLayout" maxContainerCols="2" minWidth="1024">
+						<f:content>
+							<Label text="PO Quantity" design="Bold" width="100%" textAlign="Begin" textDirection="Inherit" visible="true"></Label>
+							<Input id="Quantity" value="{Materials>Quantity}" required = "true" enabled="false"></Input>
+							<Label text="Storage Location" design="Bold" width="100%" textAlign="Begin" textDirection="Inherit" required="true" class="sapUiSmallMarginTop"></Label>
+							<ComboBox id="storagelocId" filterSecondaryValues="true" showSecondaryValues="true" placeholder="Enter Storage Location" change="StorageLoc"></ComboBox>
+							<Label id= "batchNumberid" text="Batch Number" design="Bold" width="100%" textAlign="Begin" textDirection="Inherit" visible="true"></Label>
+							<Input id="BatchNumber" liveChange="BatchValidation" value="" placeholder="Enter Batch Number" required = "true" maxLength="10"/>
+							<Label text="Manufacturing Date" design="Bold" width="100%" textAlign="Begin" textDirection="Inherit" visible="true"></Label>
+							<DatePicker id="ManufacturingDate" placeholder="Enter manufacturing date" required = "true" change="OnhandleDate"></DatePicker>
+							<Label text="Received Quantity" design="Bold" width="100%" textAlign="Begin" textDirection="Inherit" visible="true"></Label>
+							<Input id="ReceivedQuantity" value="" placeholder="Enter Received Quantity" required = "true" enabled="true"></Input>
+							<!--<Label text="Bin Number" design="Bold" width="100%" textAlign="Begin" textDirection="Inherit" visible="true"></Label>
+							<SearchField id="BinNumber" showSearchButton="false" placeholder="Scan Bin Number"></SearchField>-->
+							<Button id="boxQuantity" text="Enter Box Quantity" type="Emphasized" press="onPressBoxQuantity"/> 
+						</f:content>
+					</f:SimpleForm>
+					<!--	<List id="batchSplit" items="Materials>/materialSet/MaterialSplit" headerText="Batch Split">
+						<items> 
+							<ObjectListItem
+								title="{Materials>/BatchNo}"
+								number="{Materials>/ReceivedQuantity}"
+								type="Active">
+									<attributes> 
+										<ObjectAttribute text="{Materials>/BinNumber}" />
+									</attributes> 
+							</ObjectListItem> 
+						</items>	 
+					</List>-->
+					<List id="BatchSplit" class="sapUiResponsiveMargin" width="auto">
+						<NotificationListGroup title="Material Number : {Materials>MaterialNumber}" 
+							authorName="MaterialDesc: {Materials>MaterialDesc}" showCloseButton="false"
+							collapsed="false" items="{Materials>MaterialSplit}">
+							<items>
+								<!--<NotificationListItem title="Quantity : {Materials>ReceivedQuantity}" authorName="Bin Number: {Materials>BinNumber}"
+									showCloseButton="false" description="Batch No: {Materials>BatchNo} "/>-->
+								<NotificationListItem title="Quantity : {Materials>ReceivedQuantity}"
+									showCloseButton="false" description="Batch No: {Materials>BatchNo} "/>	
+							</items>
+						</NotificationListGroup>
+					</List>
+				</content>
+				<footer>
+					<Bar>
+						<contentLeft>
+							<Button id = "splitButton" icon="sap-icon://share-2" type="Emphasized" press="onPressSpilt" tooltip="Batch split"/>
+							<Button id = "saveBoxquantity" icon="sap-icon://save" text="Save Box Quantity" type="Emphasized" press="onPressSaveBoxQuantity" tooltip="Save Box Quantity"/>
+						</contentLeft>
+						<contentRight>
+							<!--<Button text="Available Bin" type="Emphasized" press="onPressAvailableBin"/>-->
+							<Button text="Next" type="Accept" press="onNext" enabled="true"/>
+						</contentRight>
+					</Bar>
+				</footer>
+			</Page>
+		</pages>
+	</App>
+</mvc:View>

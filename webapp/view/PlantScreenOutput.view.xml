@@ -1,0 +1,114 @@
+<mvc:View xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" controllerName="com.axium.Axium.controller.PlantScreenOutput"
+	xmlns:html="http://www.w3.org/1999/xhtml" xmlns:l="sap.ui.layout" xmlns:f="sap.ui.layout.form">
+	<App>
+		<pages>
+			<Page title="IM Stock Output View" showHeader="true" showFooter="true" class="sapUiContentPadding" showNavButton="true"
+				navButtonPress="onPressBack">
+				<content>
+					<!--<f:SimpleForm columnsL="7" columnsM="7" editable="false" emptySpanL="1" emptySpanM="1" labelSpanL="4" labelSpanM="4"-->
+					<!--	layout="ResponsiveGridLayout" maxContainerCols="2" minWidth="1024">-->
+					<!--	<f:content>-->
+					<!--		<Label text="Material Number"></Label>-->
+					<!--		<Text text="{PlantScreenOutputModel>/0/matnr}"></Text>-->
+					<!--		<Label text="Material Description"></Label>-->
+					<!--		<Text text="{PlantScreenOutputModel>/0/maktx}"></Text>-->
+					<!--<Label text="Material Type"></Label>-->
+					<!--<Text text="{PlantScreenOutputModel>/0/mtart}"></Text>-->
+					<!--	</f:content>-->
+					<!--</f:SimpleForm>-->
+					<List items="{ path: 'PlantScreenOutputModel>/'}" id="MainList" growing="true" growingThreshold="100">
+						<!--<headerToolbar>-->
+						<!--	<Toolbar>-->
+						<!--		<Title text="Ïnventory Details"></Title>-->
+						<!--		<ToolbarSpacer></ToolbarSpacer>-->
+						<!--		<SearchField width="50%" search="onFilter"></SearchField>-->
+						<!--	</Toolbar>-->
+						<!--</headerToolbar>-->
+						<items>
+							<ObjectListItem title="{PlantScreenOutputModel>werks}" intro="{PlantScreenOutputModel>name1}" number="{PlantScreenOutputModel>labst}"
+								numberUnit="{PlantScreenOutputModel>meins}" numberState="{= ${PlantScreenOutputModel>labst} > 0.000 ? 'Success' : 'Error' }">
+								<attributes>
+									<ObjectAttribute text="{PlantScreenOutputModel>lgort}"/>
+									<ObjectAttribute title="Batch Number" text="{PlantScreenOutputModel>BatchNo}"/>
+									<ObjectAttribute title="Material Number" text="{PlantScreenOutputModel>matnr}"/>
+									<ObjectAttribute title="Material Description" text="{PlantScreenOutputModel>maktx}"/>
+								</attributes>
+								<!--<firstStatus>-->
+								<!--	<ObjectStatus text="{PlantScreenOutputModel>labst} {PlantScreenOutputModel>meins}"/>-->
+								<!--</firstStatus>-->
+								<secondStatus>
+									<!--<ObjectStatus-->
+									<!--	text="{ parts: [ {path: 'PlantScreenOutputModel>meins'}, {path: 'PlantScreenOutputModel>labst'} ], formatter: '.formatter.calculateInventory' }"></ObjectStatus>-->
+									<ObjectStatus text="{PlantScreenOutputModel>OutputEach} EA"></ObjectStatus>
+								</secondStatus>
+							</ObjectListItem>
+						</items>
+					</List>
+					<!--<Table id="inventoryTable" items="{path:'PlantScreenOutputModel>/'}">-->
+					<!--	<columns>-->
+					<!--		<Column>-->
+					<!--			<Label text="Stock" id="id1"/>-->
+					<!--		</Column>-->
+					<!--		<Column>-->
+					<!--			<Label text="Storage Location" id="id2"/>-->
+					<!--		</Column>-->
+					<!--		<Column>-->
+					<!--			<Label text="Material Desc." id="id3"/>-->
+					<!--		</Column>-->
+					<!--		<Column>-->
+					<!--			<Label text="Material" id="id4"/>-->
+					<!--		</Column>-->
+					<!--		<Column>-->
+					<!--			<Label text="Base UOM." id="id5"/>-->
+					<!--		</Column>-->
+					<!--		<Column>-->
+					<!--			<Label text="Material Type" id="id6"/>-->
+					<!--		</Column>-->
+					<!--		<Column>-->
+					<!--			<Label text="Name" id="id7"/>-->
+					<!--		</Column>-->
+					<!--		<Column>-->
+					<!--			<Label text="Plant" id="id8"/>-->
+					<!--		</Column>-->
+					<!--	</columns>-->
+					<!--	<items>-->
+					<!--		<ColumnListItem>-->
+					<!--			<cells>-->
+					<!--				<Text text="{PlantScreenOutputModel>labst}" id="one"/>-->
+					<!--			</cells>-->
+					<!--			<cells>-->
+					<!--				<Text text="{PlantScreenOutputModel>lgort}" id="two"/>-->
+					<!--			</cells>-->
+					<!--			<cells>-->
+					<!--				<Text text="{PlantScreenOutputModel>maktx}" id="three"/>-->
+					<!--			</cells>-->
+					<!--			<cells>-->
+					<!--				<Text text="{PlantScreenOutputModel>matnr}" id="four"/>-->
+					<!--			</cells>-->
+					<!--			<cells>-->
+					<!--				<Text text="{PlantScreenOutputModel>meins}" id="five"/>-->
+					<!--			</cells>-->
+					<!--			<cells>-->
+					<!--				<Text text="{PlantScreenOutputModel>mtart}" id="six"/>-->
+					<!--			</cells>-->
+					<!--			<cells>-->
+					<!--				<Text text="{PlantScreenOutputModel>name1}" id="seven"/>-->
+					<!--			</cells>-->
+					<!--			<cells>-->
+					<!--				<Text text="{PlantScreenOutputModel>werks}" id="eight"/>-->
+					<!--			</cells>-->
+					<!--		</ColumnListItem>-->
+					<!--	</items>-->
+					<!--</Table>-->
+				</content>
+				<footer>
+					<Bar>
+						<contentMiddle>
+							<!--<Button text="Search" press="" type="Emphasized"/>-->
+						</contentMiddle>
+					</Bar>
+				</footer>
+			</Page>
+		</pages>
+	</App>
+</mvc:View>

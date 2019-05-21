@@ -1,0 +1,81 @@
+<mvc:View controllerName="com.axium.Axium.controller.Home" xmlns:html="http://www.w3.org/1999/xhtml" xmlns:mvc="sap.ui.core.mvc"
+	displayBlock="true" xmlns="sap.m">
+	<App id="idAppControl">
+		<pages>
+			<Page title="{i18n>title}" class="sapMBarChild">
+				<content>
+					<!--<VBox height="4%" alignItems="Center"/>-->
+					<!--<VBox alignItems="Center">-->
+					<!--	<Image width="219px" height="40px" src="images/Axium_Logo.png"></Image>-->
+					<!--</VBox>-->
+					<VBox height="20%" alignItems="Center"/>
+					<VBox alignItems="Center">
+						<!--<Button text="Finished Goods Put Away" iconDensityAware="false" visible="true" enabled="true" width="219px" iconFirst="true"-->
+						<!--	type="Emphasized" press="onPressFG" icon="sap-icon://order-status"/>-->
+						<!--<Button text="RM Pick" iconDensityAware="false" visible="true" enabled="true" width="219px" iconFirst="true" type="Emphasized"-->
+						<!--	press="onPick" icon="sap-icon://bar-code"/>-->
+						<!--<Button text="RM Return" iconDensityAware="false" visible="true" enabled="true" width="219px" iconFirst="true" type="Emphasized"-->
+						<!--	press="onReturn" icon="sap-icon://bar-code"/>-->
+						<Button text="Raw Material Receipt" class="sapMBtnContent" iconDensityAware="false" visible="true" enabled="true" width="325px"
+							iconFirst="true" type="Emphasized" press="onRMPutAway" icon="sap-icon://bar-code"/>
+						<Button text="Bin To Bin Transfer" class="sapMBtnContent" iconDensityAware="false" visible="true" enabled="true" width="325px"
+							iconFirst="true" type="Emphasized" press="onPressBinToBin" icon="sap-icon://bar-code"/>
+						<Button text="Finished Goods Put Away" class="sapMBtnContent" iconDensityAware="false" visible="true" enabled="true" width="325px"
+							iconFirst="true" type="Emphasized" press="onPressFG" icon="sap-icon://bar-code"/>
+						<Button text="IM Stock Overview" iconDensityAware="false" visible="true" enabled="true" width="325px" iconFirst="true" type="Emphasized"
+							press="onPressPlantScreen" icon="sap-icon://factory"/>
+						<Button text="WM Bin Stock" class="sapMBtnContent" iconDensityAware="false" visible="true" enabled="true" width="325px" iconFirst="true"
+							type="Emphasized" press="onPressWarehouseScreen" icon="sap-icon://bar-code"/>
+						<!--<Button text="WM Bin Stock" iconDensityAware="false" visible="true" enabled="true" width="219px" iconFirst="true" type="Emphasized"-->
+						<!--	press="onPressWarehouseScreen" icon="sap-icon://shelf"/>-->
+						<!--<Button text="Finished Goods Put Away" iconDensityAware="false" visible="true" enabled="true" width="219px" iconFirst="true"-->
+						<!--	type="Emphasized" press="onPressFG" icon="sap-icon://order-status"/>-->
+						<Button text="Outbound Shipping" class="sapMBtnContent" iconDensityAware="false" visible="true" enabled="true" width="325px"
+							iconFirst="true" type="Emphasized" press="onPressFGPick" icon="sap-icon://bar-code"/>
+						<Button text="Physical Inventory" class="sapMBtnContent" iconDensityAware="false" visible="true" enabled="true" width="325px"
+							iconFirst="true" type="Emphasized" press="onPhysicalInventory" icon="sap-icon://bar-code"/>
+						<Button text="Inventory Recon App" class="sapMBtnContent" iconDensityAware="false" visible="true" enabled="true" width="325px"
+							iconFirst="true" type="Emphasized" press="onInventoryPress" icon="sap-icon://bar-code"/>
+						<!--<Button text="Bin To Bin Transfer" iconDensityAware="false" visible="true" enabled="true" width="219px" iconFirst="true" type="Emphasized"-->
+						<!--	press="onPressBinToBin" icon="sap-icon://shelf"/>-->
+					</VBox>
+					<!--<VBox height="5%" alignItems="Center"/>-->
+					<!--<VBox alignItems="Center">-->
+					<!--	<Image src="images/warehouse.png"></Image>-->
+					<!--</VBox>-->
+				</content>
+			</Page>
+		</pages>
+	</App>
+</mvc:View>
+<!--<Button text="Finished Goods Put Away" iconDensityAware="false" visible="true" enabled="true" width="219px" iconFirst="true"-->
+<!--	type="Emphasized" press="onPressFG" icon="sap-icon://order-status"/>-->
+<!--<Button text="RM Pick" iconDensityAware="false" visible="true" enabled="true" width="219px" iconFirst="true" type="Emphasized"-->
+<!--	press="onPick" icon="sap-icon://bar-code"/>-->
+<!--<Button text="RM Return" iconDensityAware="false" visible="true" enabled="true" width="219px" iconFirst="true" type="Emphasized"-->
+<!--	press="onReturn" icon="sap-icon://bar-code"/>-->
+<!--						<Button text="Raw Material Receipt" class="sapMBtnContent" iconDensityAware="false" visible="true" enabled="true" width="325px"-->
+<!--							iconFirst="true" type="Emphasized" press="onRMPutAway" icon="sap-icon://bar-code"/>-->
+<!--Stock Overview-->
+<!--						<Button text="IM Stock Overview" iconDensityAware="false" visible="true" enabled="true" width="325px" iconFirst="true" type="Emphasized"-->
+<!--							press="onPressPlantScreen" icon="sap-icon://factory"/>-->
+<!--						<Button text="WM Bin Stock" class="sapMBtnContent" iconDensityAware="false" visible="true" enabled="true" width="325px" iconFirst="true"-->
+<!--							type="Emphasized" press="onPressWarehouseScreen" icon="sap-icon://bar-code"/>-->
+<!--						<Button text="Bin To Bin Transfer" class="sapMBtnContent" iconDensityAware="false" visible="true" enabled="true" width="325px"-->
+<!--							iconFirst="true" type="Emphasized" press="onPressBinToBin" icon="sap-icon://bar-code"/>-->
+<!--<Button text="WM Bin Stock" iconDensityAware="false" visible="true" enabled="true" width="219px" iconFirst="true" type="Emphasized"-->
+<!--	press="onPressWarehouseScreen" icon="sap-icon://shelf"/>-->
+<!--<Button text="Finished Goods Put Away" iconDensityAware="false" visible="true" enabled="true" width="219px" iconFirst="true"-->
+<!--	type="Emphasized" press="onPressFG" icon="sap-icon://order-status"/>-->
+<!--						<Button text="Finished Goods Put Away" class="sapMBtnContent" iconDensityAware="false" visible="true" enabled="true" width="325px"-->
+<!--							iconFirst="true" type="Emphasized" press="onPressFG" icon="sap-icon://bar-code"/>-->
+<!--						<Button text="Outbound Shipping" class="sapMBtnContent" iconDensityAware="false" visible="true" enabled="true" width="325px"-->
+<!--							iconFirst="true" type="Emphasized" press="onPressFGPick" icon="sap-icon://bar-code"/>-->
+<!--						<Button text="Physical Inventory" class="sapMBtnContent" iconDensityAware="false" visible="true" enabled="true" width="325px"-->
+<!--							iconFirst="true" type="Emphasized" press="onPhysicalInventory" icon="sap-icon://bar-code"/>-->
+<!--<Button text="Bin To Bin Transfer" iconDensityAware="false" visible="true" enabled="true" width="219px" iconFirst="true" type="Emphasized"-->
+<!--	press="onPressBinToBin" icon="sap-icon://shelf"/>-->
+<!--<Button text="Outbound Shipping" class="sapMBtnContent" iconDensityAware="false" visible="true" enabled="true" width="325px"-->
+<!--							iconFirst="true" type="Emphasized" press="onPressFGPick" icon="sap-icon://bar-code"/>-->
+<!--						<Button text="Physical Inventory" class="sapMBtnContent" iconDensityAware="false" visible="true" enabled="true" width="325px"-->
+<!--							iconFirst="true" type="Emphasized" press="onPhysicalInventory" icon="sap-icon://bar-code"/>-->

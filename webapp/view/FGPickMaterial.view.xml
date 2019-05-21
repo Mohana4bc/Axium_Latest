@@ -1,0 +1,80 @@
+<mvc:View xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" controllerName="com.axium.Axium.controller.FGPickMaterial"
+	xmlns:html="http://www.w3.org/1999/xhtml" xmlns:t="sap.ui.table" xmlns:tnt="sap.tnt">
+	<App>
+		<pages>
+			<Page title="FG Pick Materials" showNavButton="true" enableScrolling="false">
+				<tnt:InfoLabel text="SELECT MATERIAL TO SCAN QUANTITY BEFORE SUBMIT" colorScheme="3" renderMode="Narrow"></tnt:InfoLabel>
+				<customHeader>
+					<Bar>
+						<contentRight>
+							<Label design="Bold" text="Door Number" required="true" class="sapUiSmallMarginTop"></Label>
+							<Input id="doorid" enabled="false" placeholder="Please Scan Door Number" liveChange="doorValidation"></Input>
+						</contentRight>
+						<contentMiddle>
+							<Label text="FG Pick Materials"></Label>
+							<!--<Text text="{oDeliveryNo>DeliveryNo}"></Text>-->
+						</contentMiddle>
+						<contentLeft>
+							<Button icon="sap-icon://nav-back" press="onPressBack"/>
+						</contentLeft>
+					</Bar>
+				</customHeader>
+				<content>
+					<!--<ScrollContainer width="100%" vertical="true" focusable="true">-->
+					<Table enableBusyIndicator="true" items="{oDeliveryNo>/results}" mode="SingleSelectMaster" selectionChange="onSelectMaterial"
+						id="FGPickMaterials" growing="true">
+						<columns>
+							<Column hAlign="Center" width="60px" demandPopin="true">
+								<Label text="Material Description" design="Bold"></Label>
+								<!--<Text text="Material Name"></Text>-->
+							</Column>
+							<Column hAlign="Center" width="60px" demandPopin="true">
+								<Label text="Material Number" design="Bold"></Label>
+								<!--<Text text="Material Number"></Text>-->
+							</Column>
+							<Column hAlign="Center" width="60px" demandPopin="true">
+								<Label text="Delivery Number" design="Bold"></Label>
+								<!--<Text text="Delivery Number"></Text>-->
+							</Column>
+							<!--<Column hAlign="Center" width="60px" demandPopin="true">-->
+							<!--	<Label text="Batch Number Required" design="Bold"></Label>-->
+							<!--<Text text="Delivery Number"></Text>-->
+							<!--</Column>-->
+							<Column hAlign="Center" width="60px" demandPopin="true">
+								<Label text="Required Pallets" design="Bold"></Label>
+								<!--<Text text="Required Quantity"></Text>-->
+							</Column>
+							<Column hAlign="Center" width="60px" demandPopin="true">
+								<Label text="Scanned Pallets" design="Bold"></Label>
+								<!--<Text text="Scanned Quantity"></Text>-->
+							</Column>
+						</columns>
+						<items>
+							<ColumnListItem>
+								<cells>
+									<Text text="{oDeliveryNo>MaterialDescription}"></Text>
+									<Text text="{oDeliveryNo>MaterialNumber}"></Text>
+									<Text text="{oDeliveryNo>DeliveryNo}"></Text>
+									<!--<Text text="{oDeliveryNo>Indicator}"></Text>-->
+									<Text text="{oDeliveryNo>Quantity}"></Text>
+									<!--			<Input id="id4" enabled="false"-->
+									<!--value="{ path: '{oDeliveryNo>Quantity}', type:'sap.ui.model.odata.type.Decimal', formatOptions: { minIntegerDigits: 1, minFractionDigits: 2, maxFractionDigits: 2, decimals: 2, decimalSeparator: '.', roundingMode: 'HALF_CEILING', groupingEnabled: false }}"></Input>-->
+									<Text text="{oDeliveryNo>ScannedQuantity}"></Text>
+								</cells>
+							</ColumnListItem>
+						</items>
+					</Table>
+					<!--</ScrollContainer>-->
+					<!--<Dialog escapeHandler=".onEscapePress" title="Scan Door Number" id="doorDialog"/>-->
+				</content>
+				<!--<footer>-->
+				<!--	<Bar>-->
+				<!--		<contentRight>-->
+				<!--			<Button text="PGI Submit" press="onFullSubmit" type="Accept"/>-->
+				<!--		</contentRight>-->
+				<!--	</Bar>-->
+				<!--</footer>-->
+			</Page>
+		</pages>
+	</App>
+</mvc:View>

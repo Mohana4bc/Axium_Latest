@@ -1,0 +1,19 @@
+<mvc:View xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" controllerName="com.axium.Axium.controller.Pick"
+	xmlns:html="http://www.w3.org/1999/xhtml">
+	<App>
+			<pages>
+			<Page title="Pick" showNavButton="true" navButtonPress="onPressBack">
+				<content>
+					<SearchField id="id1" showSearchButton="false" placeholder="Scan Pick Slip Number"/>
+				</content>
+				<footer>
+					<Bar>
+						<contentRight>
+							<Button text="Next" press="onNext" type="Accept"/>
+						</contentRight>
+					</Bar>
+				</footer>
+			</Page>
+		</pages>
+	</App>
+</mvc:View>

@@ -1,0 +1,11 @@
+/* Enter your custom styles here */
+
+.sapMBtnContent {
+    font-size: x-large;
+    height: 55px;
+}
+
+.sapMBarChild:first-child {
+    margin-left: 0.25rem;
+    font-size: x-large;
+}

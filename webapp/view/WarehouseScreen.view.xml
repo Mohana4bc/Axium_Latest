@@ -1,0 +1,75 @@
+<mvc:View xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" controllerName="com.axium.Axium.controller.WarehouseScreen"
+	xmlns:html="http://www.w3.org/1999/xhtml" xmlns:l="sap.ui.layout" xmlns:f="sap.ui.layout.form">
+	<App>
+		<pages>
+			<Page title="WM Bin Stock Output View" showHeader="true" showFooter="true" class="sapUiContentPadding" showNavButton="true"
+				navButtonPress="onPressBack">
+				<content>
+					<f:SimpleForm columnsL="7" columnsM="7" editable="false" emptySpanL="1" emptySpanM="1" labelSpanL="4" labelSpanM="4"
+						layout="ResponsiveGridLayout" maxContainerCols="2" minWidth="1024">
+						<f:content>
+							<!--<Label text="Warehouse Number" required="true" class="sapUiSmallMarginTop"></Label>-->
+							<!--<ComboBox id="warehouseWarehouseScreenId" filterSecondaryValues="true" showSecondaryValues="true" placeholder="Select Warehouse Number"-->
+							<!--	selectionChange="selectStorageType"></ComboBox>-->
+							<!--<Label text="Storage Bin" class="sapUiSmallMarginTop"></Label>-->
+							<!--<ComboBox id="storageBinWarehouseScreenId" filterSecondaryValues="true" showSecondaryValues="true" placeholder="Select Storage Bin"></ComboBox>-->
+							<!--<Label text="Storage Type" class="sapUiSmallMarginTop"></Label>-->
+							<!--<ComboBox id="storageTypeWarehouseScreenId" filterSecondaryValues="true" showSecondaryValues="true" placeholder="Select Storage Type"-->
+							<!--	selectionChange="selectMaterial"></ComboBox>-->
+							<!--<Label text="Material" class="sapUiSmallMarginTop"></Label>-->
+							<!--<ComboBox id="materialWarehouseScreenId" filterSecondaryValues="true" showSecondaryValues="true" selectionChange="selectStorageBin"-->
+							<!--	placeholder="Select Material"></ComboBox>-->
+							<!--items="{ 
+											path: '/material',
+											sorter: { path: '' }
+										}">
+								<core:ListItem key="{key}" text="{text}" additionalText="{key}"/>
+							</ComboBox>-->
+							<!--items="{ 
+											path: '/material',
+											sorter: { path: '' }
+										}">
+								<core:ListItem key="{key}" text="{text}" additionalText="{key}"/>
+							</ComboBox>-->
+							<!--<Button icon="sap-icon://bar-code" iconFirst="true" text="Scan Barcode" width="22em" press="onScanStorageBin" type="Emphasized"/>-->
+							<!--items="{ 
+											path: '/',
+											sorter: { path: 'WareHouseNumber' }
+										}">
+								<core:ListItem text="{WareHouseNumber}" />
+							</ComboBox>-->
+							<!--<Label text="Plant" class="sapUiSmallMarginTop"></Label>-->
+							<!--<ComboBox id="plantWarehouseScreenId" showSecondaryValues="true" placeholder="Enter Plant"></ComboBox>-->
+							<!--items="{ 
+											path: '/storageType',
+											sorter: { path: '' }
+										}">
+								<core:ListItem key="{key}" text="{text}" additionalText="{key}"/>
+							</ComboBox>-->
+							<Label text="Warehouse Number" required="true" class="sapUiSmallMarginTop"></Label>
+							<ComboBox id="warehouseWarehouseScreenId" filterSecondaryValues="true" showSecondaryValues="true" placeholder="Select Warehouse Number"
+								selectionChange="selectStorageBin"></ComboBox>
+							<Label text="Storage Bin" class="sapUiSmallMarginTop"></Label>
+							<Input id="storageBinWarehouseScreenId" enabled="true" placeholder="Please Scan Bin Number" change="SelectStorageType"></Input>
+							<!--<ComboBox id="storageBinWarehouseScreenId" filterSecondaryValues="true" showSecondaryValues="true" selectionChange="SelectStorageType"-->
+							<!--	placeholder="Select Storage Bin"></ComboBox>-->
+							<Label text="Storage Type" class="sapUiSmallMarginTop"></Label>
+							<Input value="" id="storageTypeWarehouseScreenId" enabled="false"></Input>
+							<!--<ComboBox id="storageTypeWarehouseScreenId" filterSecondaryValues="true" showSecondaryValues="true" placeholder="Select Storage Type"></ComboBox>-->
+							<Label text="Material" class="sapUiSmallMarginTop"></Label>
+							<ComboBox id="materialWarehouseScreenId" filterSecondaryValues="true" showSecondaryValues="true" placeholder="Select Material"
+								selectionChange="SelectMaterial"></ComboBox>
+						</f:content>
+					</f:SimpleForm>
+				</content>
+				<footer>
+					<Bar>
+						<contentMiddle>
+							<Button text="Search" press="onSubmitWarehouseScreen" type="Emphasized"/>
+						</contentMiddle>
+					</Bar>
+				</footer>
+			</Page>
+		</pages>
+	</App>
+</mvc:View>

@@ -1,0 +1,55 @@
+<mvc:View xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" controllerName="com.axium.Axium.controller.BoxQuantity"
+	xmlns:html="http://www.w3.org/1999/xhtml">
+	<App>
+		<pages>
+			<Page>
+				<!--<customHeader>-->
+				<!--	<Bar>-->
+				<!--		<contentLeft>-->
+				<!--			<Button id="back" text="BACK" press="onPressBack"/>-->
+				<!--		</contentLeft>-->
+				<!--		<contentMiddle>-->
+				<!--			<Text text="Box Quantity"></Text>-->
+				<!--		</contentMiddle>-->
+				<!--	</Bar>-->
+				<!--</customHeader>-->
+				<content>
+					<Table id="boxquantityTable" items="{BoxDetails>/boxQuantitySet}" mode="Delete" delete="deleteRow" enableBusyIndicator="true">
+						<headerToolbar>
+							<Toolbar>
+								<Button icon="sap-icon://add" text="Row" press="addRow"/>
+							</Toolbar>
+						</headerToolbar>
+						<columns>
+							<Column minScreenWidth="Phone">
+								<Text text="Number of Boxes"/>
+							</Column>
+							<Column minScreenWidth="Phone">
+								<Text text="Quantity per box"/>
+							</Column>
+							<Column minScreenWidth="Phone">
+								<Text text="UOM"/>
+							</Column>
+						</columns>
+						<items>
+							<ColumnListItem>
+								<cells>
+									<Input id="number" value="{BoxDetails>Number}" enabled="true" placeholder="Number of Boxes"/>
+									<SearchField id="valueId" value="{BoxDetails>Value}" showSearchButton="false" placeholder="Quantity Per Box"/>
+									<Input id="weightId" value="{BoxDetails>Weight}" enabled="false" placeholder="Unit of Measurement"/>
+								</cells>
+							</ColumnListItem>
+						</items>
+					</Table>
+				</content>
+				<footer>
+					<Bar>
+						<contentRight>
+							<Button text="Next" press="onNext" type="Accept"/>
+						</contentRight>
+					</Bar>
+				</footer>
+			</Page>
+		</pages>
+	</App>
+</mvc:View>

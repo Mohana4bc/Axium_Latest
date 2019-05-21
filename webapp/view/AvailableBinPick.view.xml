@@ -1,0 +1,25 @@
+<mvc:View xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" controllerName="com.axium.Axium.controller.AvailableBinPick"
+	xmlns:html="http://www.w3.org/1999/xhtml">
+	<App>
+		<pages>
+			<Page title="Available Bins" showNavButton="true" navButtonPress="onPressBack">
+				<content>
+					<Table id="idtable1" items="{path:'oAvailableBins>/results'}">
+						<columns>
+							<Column>
+								<Label id="id1" text="Available Bins"/>
+							</Column>
+						</columns>
+						<items>
+							<ColumnListItem>
+								<cells>
+									<Text text="{oAvailableBins>StorageBin}"/>
+								</cells>
+							</ColumnListItem>
+						</items>
+					</Table>
+				</content>
+			</Page>
+		</pages>
+	</App>
+</mvc:View>

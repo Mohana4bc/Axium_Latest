@@ -1,0 +1,126 @@
+<mvc:View xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" controllerName="com.axium.Axium.controller.ScanQuantityView"
+	xmlns:html="http://www.w3.org/1999/xhtml" xmlns:f="sap.ui.layout.form" xmlns:l="sap.ui.layout" xmlns:tnt="sap.tnt">
+	<App>
+		<pages>
+			<Page title="FG Pick Scan Quantity for Delivery {oMatSelect>/myDeliveryNum}" showNavButton="true" navButtonPress="onPressBack">
+				<content>
+					<!--<content>-->
+					<!--<l:VerticalLayout class="sapUiSmallMargin">-->
+					<tnt:InfoLabel text="DO NOT PRESS BACK BEFORE SAVING" colorScheme="3" renderMode="Narrow"></tnt:InfoLabel>
+					<!--	<Label text="" design="Bold" width="100%" textAlign="Begin" textDirection="Inherit" visible="true"></Label>-->
+					<!--	<Label text="Material" design="Bold" width="100%" textAlign="Begin" textDirection="Inherit" visible="true"></Label>-->
+					<!--	<Input id="id2" value="{oMatSelect>/myMatNo}" enabled="false"></Input>-->
+					<!--	<Label text="Material Desc" design="Bold" width="100%" textAlign="Begin" textDirection="Inherit" visible="true"></Label>-->
+					<!--	<Input id="id10" value="{oMatSelect>/myMatDesc}" enabled="false"></Input>-->
+					<!--	<Label text="Delivery Number" design="Bold" width="100%" textAlign="Begin" textDirection="Inherit" visible="true"></Label>-->
+					<!--	<Input id="id7" value="{oMatSelect>/myDeliveryNum}" enabled="false"></Input>-->
+					<!--	<Label text="Bin Number" design="Bold" width="100%" textAlign="Begin" textDirection="Inherit" visible="true"></Label>-->
+					<!--	<Input id="id5" value="{oMatSelect>/myBinNum}" enabled="false"></Input>-->
+					<!--	<Label text="Required Quantity" design="Bold" width="100%" textAlign="Begin" textDirection="Inherit" visible="true"></Label>-->
+					<!--	<Input id="id3" value="{oMatSelect>/myQuantity}" enabled="false"></Input>-->
+					<!--	<Label text="Batch Number" design="Bold" width="100%" textAlign="Begin" textDirection="Inherit" visible="true"></Label>-->
+					<!--	<Input id="id8" value="{oMatSelect>/myBatchNum}" enabled="false"></Input>-->
+					<!--	<Label text="Scanned Quantity" design="Bold" width="100%" textAlign="Begin" textDirection="Inherit" visible="true"></Label>-->
+					<!--<Input id="id4" value="" enabled="false"></Input>-->
+					<!--	<Input id="id4"-->
+					<!--		value="{ path: '', type:'sap.ui.model.odata.type.Decimal', formatOptions: { minIntegerDigits: 1, minFractionDigits: 2, maxFractionDigits: 2, decimals: 2, decimalSeparator: '.', roundingMode: 'HALF_CEILING', groupingEnabled: false }}"></Input>-->
+					<!--{oMyScannedQty>/myScanQty}-->
+					<!--	<Label text="HU Number" design="Bold" width="100%" textAlign="Begin" textDirection="Inherit" visible="true"></Label>-->
+					<!--	<Input id="id1" enabled="true" placeholder="Scan HU Number" change="handleSearch"></Input>-->
+					<!--</l:VerticalLayout>-->
+					<!--<VBox height="5%"/>-->
+					<!--<Label text="Material" design="Bold" width="100%" required="false" textAlign="Begin" textDirection="Inherit" visible="true"/>-->
+					<!--<Text id="id2" text="{oMatSelect>/myMatNo}"/>-->
+					<!--<VBox height="5%"/>-->
+					<!--<Label text="Material Description" design="Bold" width="100%" required="false" textAlign="Begin" textDirection="Inherit" visible="true"/>-->
+					<!--<Text id="id10" text="{oMatSelect>/myMatDesc}"/>-->
+					<!--<VBox height="5%"/>-->
+					<!--<Label text="Delivery Number" design="Bold" width="100%" required="false" textAlign="Begin" textDirection="Inherit" visible="true"/>-->
+					<!--<Text id="id7" text="{oMatSelect>/myDeliveryNum}"/>-->
+					<!--<VBox height="5%"/>-->
+					<!--<Label text="Bin Number" design="Bold" width="100%" required="false" textAlign="Begin" textDirection="Inherit" visible="true"/>-->
+					<!--<Text id="id5" text="{oMatSelect>/myBinNum}"/>-->
+					<!--<VBox height="5%"/>-->
+					<!--<Label text="Batch Number" id="batNum" design="Bold" width="100%" required="false" textAlign="Begin" textDirection="Inherit" visible="true"/>-->
+					<!--<Text id="id8" text="{oMatSelect>/myBatchNum}"/>-->
+					<!--<VBox height="5%"/>-->
+					<!--<Label text="Required Pallets" design="Bold" width="100%" required="false" textAlign="Begin" textDirection="Inherit" visible="true"/>-->
+					<!--<Text id="id3" text="{oMatSelect>/myQuantity}"/>-->
+					<!--<VBox height="5%"/>-->
+					<!--<l:VerticalLayout>-->
+					<!--	<Label text="Scanned Pallets" design="Bold" width="100%" textAlign="Begin" textDirection="Inherit" visible="true"></Label>-->
+					<!--	<Input id="id4" value="{oMatSelect>/myScannedQty}" enabled="false"></Input>-->
+					<!--<Input id="id4" enabled="false"-->
+					<!--	value="{ path: '', type:'sap.ui.model.odata.type.Currency', formatOptions: { minIntegerDigits: 3, minFractionDigits: 3, maxFractionDigits: 3, decimals: 3, decimalSeparator: '.', groupingEnabled: false }}"></Input>-->
+					<!--	<Label text="HU Number" design="Bold" width="100%" textAlign="Begin" textDirection="Inherit" visible="true"></Label>-->
+					<!--	<Input id="id1" enabled="true" placeholder="Scan HU Number" liveChange="handleSearch"></Input>-->
+					<!--</l:VerticalLayout>-->
+					<f:SimpleForm columnsL="7" columnsM="7" editable="false" emptySpanL="1" emptySpanM="1" labelSpanL="4" labelSpanM="4"
+						layout="ResponsiveGridLayout" maxContainerCols="2" minWidth="1024">
+						<f:content>
+							<Label design="Bold" text="Material Number" class="sapUiSmallMarginTop"></Label>
+							<Input id="id2" editable="false" value="{oMatSelect>/myMatNo}"/>
+							<Label design="Bold" text="Material Description" class="sapUiSmallMarginTop"></Label>
+							<Input id="id10" editable="false" value="{oMatSelect>/myMatDesc}"/>
+							<!--<Label design="Bold" text="Bin Number" class="sapUiSmallMarginTop"></Label>-->
+							<!--<Input id="id5" editable="false" placeholder="Scan Bin Number" value="{oMatSelect>/myBinNum}"></Input>-->
+							<Label design="Bold" text=" Required Pallets" class="sapUiSmallMarginTop"></Label>
+							<Input id="id3" editable="false" value="{oMatSelect>/myQuantity}"/>
+							<Label design="Bold" text="Scanned Pallets" class="sapUiSmallMarginTop"></Label>
+							<Input id="id4" editable="false" value="{oMatSelect>/myScannedQty}"></Input>
+							<Label design="Bold" text="Scan HU of Same Bin ">
+								<layoutData>
+									<l:GridData span="XL4 L4 M8 S12"/>
+								</layoutData>
+							</Label>
+							<!--<RadioButtonGroup columns="2" id="idBinRequired">-->
+							<!--	<RadioButton text="NO" id="idDontScanBin" select="binNotEnabled"></RadioButton>-->
+							<!--	<RadioButton text="YES" id="idScanBin" select="binEnabled"></RadioButton>-->
+							<!--</RadioButtonGroup>-->
+							<Label design="Bold" text="Bin Number" required="true" class="sapUiSmallMarginTop"></Label>
+							<Input id="idBin" placeholder="Scan Bin Number" change="handleBinNumber"></Input>
+							<Button text="Available Bins" id="idAvailableBins" type="Emphasized" press="onPressAvailableBins"></Button>
+							<Label design="Bold" text="Scan HU of Same Batch ">
+								<layoutData>
+									<l:GridData span="XL4 L4 M8 S12"/>
+								</layoutData>
+							</Label>
+							<RadioButtonGroup columns="2" id="idBatchRequired">
+								<RadioButton text="NO" id="idDontScanBatch" select="batchNotEnabled"></RadioButton>
+								<RadioButton text="YES" id="idScanBatch" select="batchEnabled"></RadioButton>
+							</RadioButtonGroup>
+							<Label design="Bold" text="Batch Number" class="sapUiSmallMarginTop"></Label>
+							<Input id="id8" enabled="false" placeholder="Scan Batch Number" liveChange="handleBatchNumber"></Input>
+							<Label design="Bold" text="Scan HU" class="sapUiSmallMarginTop"></Label>
+							<Input id="id1" enabled="true" placeholder="Scan HU Number" liveChange="handleSearch"></Input>
+						</f:content>
+					</f:SimpleForm>
+					<List items="{oListHU>/HUSet}" headerText="HU Number" mode="SingleSelectLeft" id="idList">
+						<items>
+							<ObjectListItem title="{oListHU>ExternalHU}" id="id6">
+								<attributes>
+									<ObjectAttribute title="Batch Number" text="{oListHU>BatchNo}"/>
+									<ObjectAttribute title="Bin Number" text="{oListHU>BinNumber}"/>
+									<ObjectAttribute title="Scanned Quantity" text="{oListHU>ScannedQnty}"/>
+								</attributes>
+							</ObjectListItem>
+						</items>
+					</List>
+				</content>
+				<footer>
+					<Bar>
+						<contentRight>
+							<Button text="Save" type="Accept" icon="sap-icon://save" press="onSave"/>
+							<Button text="Delete" type="Reject" icon="sap-icon://delete" press="onDelete"/>
+							<!--<OverflowToolbarButton text="Save" press="onDelete" icon="sap-icon://save"/>-->
+							<!--<OverflowToolbarButton text="Delete" press="onDelete" icon="sap-icon://delete"/>-->
+						</contentRight>
+						<!--<contentLeft>-->
+						<!--	<Button text="ADD HU" icon="sap-icon://add" type="Emphasized" press="handleSearch"/>-->
+						<!--</contentLeft>-->
+					</Bar>
+				</footer>
+			</Page>
+		</pages>
+	</App>
+</mvc:View>

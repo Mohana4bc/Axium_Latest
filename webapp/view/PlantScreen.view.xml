@@ -1,0 +1,53 @@
+<mvc:View xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" controllerName="com.axium.Axium.controller.PlantScreen"
+	xmlns:html="http://www.w3.org/1999/xhtml" xmlns:l="sap.ui.layout" xmlns:f="sap.ui.layout.form">
+	<App>
+		<pages>
+			<Page title="IM Stock" showHeader="true" showFooter="true" class="sapUiContentPadding" showNavButton="true" navButtonPress="onPressBack">
+				<content>
+					<f:SimpleForm columnsL="7" columnsM="7" editable="false" emptySpanL="1" emptySpanM="1" labelSpanL="4" labelSpanM="4"
+						layout="ResponsiveGridLayout" maxContainerCols="2" minWidth="1024">
+						<f:content>
+							<!--<Button  text="Scan Barcode" width="22em" press="onScanStorageBin" type="Emphasized"/>-->
+							<Label text="Plant" required="true" class="sapUiSmallMarginTop"></Label>
+							<ComboBox id="plantPlantScreenId" filterSecondaryValues="true" showSecondaryValues="true" placeholder="Enter Plant"
+								selectionChange="selectMaterial" loadItems="plantLoad"></ComboBox>
+							<Label text="Material" class="sapUiSmallMarginTop"></Label>
+							<ComboBox id="materialPlantScreenId" filterSecondaryValues="true" showSecondaryValues="true" placeholder="Enter Material"
+								selectionChange="selectStorageLoc" loadItems="handleLoadItems"></ComboBox>
+							<!---->
+							<!--<Input id="plantPlantScreenId" value="2001" description="Plant 1 CA" enabled="false" editable="fasle"></Input>-->
+							<!--items="{ 
+											path: '/material',
+											sorter: { path: '' }
+										}">
+								<core:ListItem key="{key}" text="{text}" additionalText="{key}"/>
+							</ComboBox>-->
+							<!--<ComboBox id="plantPlantScreenId" showSecondaryValues="true" placeholder="Enter Plant" selectionChange="selectStorageLocation"></ComboBox>-->
+							<!--items="{ 
+											path: '/plant',
+											sorter: { path: '' }
+										}">
+								<core:ListItem key="{key}" text="{text}" additionalText="{key}"/>
+							</ComboBox>-->
+							<Label text="Storage Location" class="sapUiSmallMarginTop"></Label>
+							<ComboBox id="storageLocationPlantScreenId" filterSecondaryValues="true" showSecondaryValues="true" placeholder="Enter Storage Location"></ComboBox>
+							<!--items="{ 
+											path: '/storage',
+											sorter: { path: '' }
+										}">
+								<core:ListItem key="{key}" text="{text}" additionalText="{key}"/>
+							</ComboBox>-->
+						</f:content>
+					</f:SimpleForm>
+				</content>
+				<footer>
+					<Bar>
+						<contentMiddle>
+							<Button text="Search" press="onSubmitPlantScreen" type="Emphasized"/>
+						</contentMiddle>
+					</Bar>
+				</footer>
+			</Page>
+		</pages>
+	</App>
+</mvc:View>
