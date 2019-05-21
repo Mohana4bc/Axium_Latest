@@ -98,7 +98,7 @@ sap.ui.define([
 				model.matDet[sap.ui.selectedIndex].Count = sap.ui.getCore().totalQuantity;
 				that.getView().getModel("PhysicalInventory").refresh(true);
 			}
-			if (sap.ui.getCore().box === "0.000" && sap.ui.getCore().pallet === "0.000") {
+			if (sap.ui.getCore().box === "0" && sap.ui.getCore().pallet === "0") {
 				// sap.ui.getCore().totalQuantity = parseFloat(sap.ui.getCore().count) + parseFloat(count);
 				sap.ui.getCore().totalQuantity = 0 + parseFloat(count);
 				model.matDet[sap.ui.selectedIndex].Count = sap.ui.getCore().totalQuantity;
