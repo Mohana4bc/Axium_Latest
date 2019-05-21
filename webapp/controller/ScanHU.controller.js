@@ -609,6 +609,7 @@ sap.ui.define([
 			var sRouter = sap.ui.core.UIComponent.getRouterFor(this);
 			sRouter.navTo("Home", true);
 		},
+		//Filter Functionality Added
 
 	});
 
