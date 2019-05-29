@@ -350,6 +350,10 @@ sap.ui.define([
 				// if ((binNo.length >= 5) || (binNo.length >= 6) || (binNo.length >= 7) || (binNo.length >=
 				// 		8) || (binNo.length >= 9) || (binNo.length >= 10)) {
 				// if (binNo.length >= 10) {
+				if (binNo === "FGIBD") {
+					that.getView().byId("fgPutAwayBinId").setValue("");
+					MessageBox.error("Scanning of FGIBD bin is not allowed");
+				} else {
 					setTimeout(function () {
 						if (sPreviousHash !== undefined) {
 
@@ -444,6 +448,8 @@ sap.ui.define([
 
 						}
 					}, 1500);
+				}
+
 				// }
 				// else {
 				// 	fgPutAwayFlag = false;
