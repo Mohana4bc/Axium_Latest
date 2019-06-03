@@ -174,74 +174,75 @@ sap.ui.define([
 						HuNumber = HuNumber.replace(/[^A-Z0-9]+/ig, "");
 						HuNumber = HuNumber.replace(/^0+/, '');
 						var flag = oRef.validateHu(HuNumber);
-						if (flag === "") {
-							sap.m.MessageBox.alert("HU Number is not Valid", {
-								title: "Information",
-								onClose: null,
-								styleClass: "",
-								initialFocus: null,
-								textDirection: sap.ui.core.TextDirection.Inherit
-							});
-						} else {
-							if (HuNumber !== "" && flag === "X") {
-								oRef.odataService.read("/HUQtyDetailsSet?$filter=ExternalHU eq '" + HuNumber + "'",
-									null, null, false,
-									function (oData, oResponse) {
-										// oRef.getView().byId("scanHUNumber").setEnabled(false);
-										// oRef.getView().byId("matNumber").setValue(oData.results[0].Material);
-										// oRef.material = oData.results[0].Material;
-										// oRef.getView().byId("matNumber").setEnabled(false);
-										// oRef.getView().byId("materialDesc").setVisible(true);
-										// oRef.getView().byId("materialDesc").setValue(oData.results[0].MaterialDesc);
-										// oRef.getView().byId("BatchNumber").setValue(oData.results[0].BatchNo);
-										// oRef.getView().byId("Quantity").setValue(oData.results[0].ScannedQnty);
-										// oRef.getView().byId("Quantity").setEnabled(false);
-										// oRef.getView().byId("destinationStorage").setEnabled(true);
+						// if (flag === "") {
+						// 	sap.m.MessageBox.alert("HU Number is not Valid", {
+						// 		title: "Information",
+						// 		onClose: null,
+						// 		styleClass: "",
+						// 		initialFocus: null,
+						// 		textDirection: sap.ui.core.TextDirection.Inherit
+						// 	});
+						// } else {
+						if (HuNumber !== "" && flag === "X") {
+							oRef.odataService.read("/HUQtyDetailsSet?$filter=ExternalHU eq '" + HuNumber + "'",
+								null, null, false,
+								function (oData, oResponse) {
+									// oRef.getView().byId("scanHUNumber").setEnabled(false);
+									// oRef.getView().byId("matNumber").setValue(oData.results[0].Material);
+									// oRef.material = oData.results[0].Material;
+									// oRef.getView().byId("matNumber").setEnabled(false);
+									// oRef.getView().byId("materialDesc").setVisible(true);
+									// oRef.getView().byId("materialDesc").setValue(oData.results[0].MaterialDesc);
+									// oRef.getView().byId("BatchNumber").setValue(oData.results[0].BatchNo);
+									// oRef.getView().byId("Quantity").setValue(oData.results[0].ScannedQnty);
+									// oRef.getView().byId("Quantity").setEnabled(false);
+									// oRef.getView().byId("destinationStorage").setEnabled(true);
 
-										var hu = oData.results[0].HU;
-										var material = oData.results[0].Material;
-										var materialDesc = oData.results[0].MaterialDesc;
-										var BatchNo = oData.results[0].BatchNo;
-										var scannedQty = oData.results[0].ScannedQnty;
-										// sap.ui.getCore().huBinTransfer = "X";
+									var hu = oData.results[0].HU;
+									var material = oData.results[0].Material;
+									var materialDesc = oData.results[0].MaterialDesc;
+									var BatchNo = oData.results[0].BatchNo;
+									var scannedQty = oData.results[0].ScannedQnty;
+									// sap.ui.getCore().huBinTransfer = "X";
 
-										// oRef.getView().byId("idBatchNum").setValue
-										// idQty
-										oRef.aData.push({
-											HU: hu,
-											Material: material,
-											MaterialDesc: materialDesc,
-											BatchNo: BatchNo,
-											ScannedQnty: scannedQty
-										});
-										var oModel = new sap.ui.model.json.JSONModel();
-
-										oModel.setData({
-											BinHUMatSet: oRef.aData
-										});
-										oRef.getOwnerComponent().setModel(oModel, "BinHUMatModel");
-										oRef.getView().byId("scanHUNumber").setValue("");
-										oRef.getView().byId("destinationStorage").setEnabled(true);
-									},
-									function (oResponse) {
-										sap.m.MessageBox.alert("Failed to Read HUQtyDetailsSet", {
-											title: "Information",
-											onClose: null,
-											styleClass: "",
-											initialFocus: null,
-											textDirection: sap.ui.core.TextDirection.Inherit
-										});
+									// oRef.getView().byId("idBatchNum").setValue
+									// idQty
+									oRef.aData.push({
+										HU: hu,
+										Material: material,
+										MaterialDesc: materialDesc,
+										BatchNo: BatchNo,
+										ScannedQnty: scannedQty
 									});
-							} else {
-								sap.m.MessageBox.alert("Please enter HU Number", {
-									title: "Information",
-									onClose: null,
-									styleClass: "",
-									initialFocus: null,
-									textDirection: sap.ui.core.TextDirection.Inherit
+									var oModel = new sap.ui.model.json.JSONModel();
+
+									oModel.setData({
+										BinHUMatSet: oRef.aData
+									});
+									oRef.getOwnerComponent().setModel(oModel, "BinHUMatModel");
+									oRef.getView().byId("scanHUNumber").setValue("");
+									oRef.getView().byId("destinationStorage").setEnabled(true);
+								},
+								function (oResponse) {
+									sap.m.MessageBox.alert("Failed to Read HUQtyDetailsSet", {
+										title: "Information",
+										onClose: null,
+										styleClass: "",
+										initialFocus: null,
+										textDirection: sap.ui.core.TextDirection.Inherit
+									});
 								});
-							}
 						}
+						// else {
+						// 	sap.m.MessageBox.alert("Please enter HU Number", {
+						// 		title: "Information",
+						// 		onClose: null,
+						// 		styleClass: "",
+						// 		initialFocus: null,
+						// 		textDirection: sap.ui.core.TextDirection.Inherit
+						// 	});
+						// }
+						// }
 					}, 1000);
 				} else {
 					hflag = true;
@@ -253,75 +254,75 @@ sap.ui.define([
 						HuNumber = HuNumber.replace(/[^A-Z0-9]+/ig, "");
 						HuNumber = HuNumber.replace(/^0+/, '');
 						var flag = oRef.validateHu(HuNumber);
-						if (flag === "") {
-							sap.m.MessageBox.alert("HU Number is not Valid", {
-								title: "Information",
-								onClose: null,
-								styleClass: "",
-								initialFocus: null,
-								textDirection: sap.ui.core.TextDirection.Inherit
-							});
-						} else {
-							if (HuNumber !== "" && flag === "X") {
-								oRef.odataService.read("/HUQtyDetailsSet?$filter=ExternalHU eq '" + HuNumber + "'",
-									null, null, false,
-									function (oData, oResponse) {
-										// oRef.getView().byId("scanHUNumber").setEnabled(false);
-										// oRef.getView().byId("matNumber").setValue(oData.results[0].Material);
-										// oRef.material = oData.results[0].Material;
-										// oRef.getView().byId("matNumber").setEnabled(false);
-										// oRef.getView().byId("materialDesc").setVisible(true);
-										// oRef.getView().byId("materialDesc").setValue(oData.results[0].MaterialDesc);
-										// oRef.getView().byId("BatchNumber").setValue(oData.results[0].BatchNo);
-										// oRef.getView().byId("Quantity").setValue(oData.results[0].ScannedQnty);
-										// oRef.getView().byId("Quantity").setEnabled(false);
-										// oRef.getView().byId("destinationStorage").setEnabled(true);
-										// /*oRef.getView().byId("DestinationBin").setEnabled(true);*/
-										var hu = oData.results[0].HU;
-										var material = oData.results[0].Material;
-										var materialDesc = oData.results[0].MaterialDesc;
-										var BatchNo = oData.results[0].BatchNo;
-										var scannedQty = oData.results[0].ScannedQnty;
-										// sap.ui.getCore().huBinTransfer = "X";
+						// if (flag === "") {
+						// 	sap.m.MessageBox.alert("HU Number is not Valid", {
+						// 		title: "Information",
+						// 		onClose: null,
+						// 		styleClass: "",
+						// 		initialFocus: null,
+						// 		textDirection: sap.ui.core.TextDirection.Inherit
+						// 	});
+						// } else {
+						if (HuNumber !== "" && flag === "X") {
+							oRef.odataService.read("/HUQtyDetailsSet?$filter=ExternalHU eq '" + HuNumber + "'",
+								null, null, false,
+								function (oData, oResponse) {
+									// oRef.getView().byId("scanHUNumber").setEnabled(false);
+									// oRef.getView().byId("matNumber").setValue(oData.results[0].Material);
+									// oRef.material = oData.results[0].Material;
+									// oRef.getView().byId("matNumber").setEnabled(false);
+									// oRef.getView().byId("materialDesc").setVisible(true);
+									// oRef.getView().byId("materialDesc").setValue(oData.results[0].MaterialDesc);
+									// oRef.getView().byId("BatchNumber").setValue(oData.results[0].BatchNo);
+									// oRef.getView().byId("Quantity").setValue(oData.results[0].ScannedQnty);
+									// oRef.getView().byId("Quantity").setEnabled(false);
+									// oRef.getView().byId("destinationStorage").setEnabled(true);
+									// /*oRef.getView().byId("DestinationBin").setEnabled(true);*/
+									var hu = oData.results[0].HU;
+									var material = oData.results[0].Material;
+									var materialDesc = oData.results[0].MaterialDesc;
+									var BatchNo = oData.results[0].BatchNo;
+									var scannedQty = oData.results[0].ScannedQnty;
+									// sap.ui.getCore().huBinTransfer = "X";
 
-										// oRef.getView().byId("idBatchNum").setValue
-										// idQty
-										oRef.aData.push({
-											HU: hu,
-											Material: material,
-											MaterialDesc: materialDesc,
-											BatchNo: BatchNo,
-											ScannedQnty: scannedQty
-										});
-										var oModel = new sap.ui.model.json.JSONModel();
-
-										oModel.setData({
-											BinHUMatSet: oRef.aData
-										});
-										oRef.getOwnerComponent().setModel(oModel, "BinHUMatModel");
-										oRef.getView().byId("scanHUNumber").setValue("");
-										oRef.getView().byId("destinationStorage").setEnabled(true);
-									},
-									function (oResponse) {
-										sap.m.MessageBox.alert("Failed to Read HUQtyDetailsSet", {
-											title: "Information",
-											onClose: null,
-											styleClass: "",
-											initialFocus: null,
-											textDirection: sap.ui.core.TextDirection.Inherit
-										});
+									// oRef.getView().byId("idBatchNum").setValue
+									// idQty
+									oRef.aData.push({
+										HU: hu,
+										Material: material,
+										MaterialDesc: materialDesc,
+										BatchNo: BatchNo,
+										ScannedQnty: scannedQty
 									});
-							}
-							// else {
-							// 	sap.m.MessageBox.alert("Please enter HU Number", {
-							// 		title: "Information",
-							// 		onClose: null,
-							// 		styleClass: "",
-							// 		initialFocus: null,
-							// 		textDirection: sap.ui.core.TextDirection.Inherit
-							// 	});
-							// }
+									var oModel = new sap.ui.model.json.JSONModel();
+
+									oModel.setData({
+										BinHUMatSet: oRef.aData
+									});
+									oRef.getOwnerComponent().setModel(oModel, "BinHUMatModel");
+									oRef.getView().byId("scanHUNumber").setValue("");
+									oRef.getView().byId("destinationStorage").setEnabled(true);
+								},
+								function (oResponse) {
+									sap.m.MessageBox.alert("Failed to Read HUQtyDetailsSet", {
+										title: "Information",
+										onClose: null,
+										styleClass: "",
+										initialFocus: null,
+										textDirection: sap.ui.core.TextDirection.Inherit
+									});
+								});
 						}
+						// else {
+						// 	sap.m.MessageBox.alert("Please enter HU Number", {
+						// 		title: "Information",
+						// 		onClose: null,
+						// 		styleClass: "",
+						// 		initialFocus: null,
+						// 		textDirection: sap.ui.core.TextDirection.Inherit
+						// 	});
+						// }
+						// }
 					}, 1000);
 				} else {
 					hflag = true;
@@ -388,6 +389,13 @@ sap.ui.define([
 									flag = "X";
 								} else {
 									flag = "";
+									sap.m.MessageBox.alert("HU Number is not Valid", {
+										title: "Information",
+										onClose: null,
+										styleClass: "",
+										initialFocus: null,
+										textDirection: sap.ui.core.TextDirection.Inherit
+									});
 								}
 
 							}
