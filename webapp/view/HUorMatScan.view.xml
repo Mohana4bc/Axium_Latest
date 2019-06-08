@@ -38,7 +38,7 @@
 							</Input>
 							<Button id="idMatAdd" text="Add Material" type="Emphasized" press="onAddMaterial"></Button>
 							<Label text="Destination Storage Bin" required="true" class="sapUiSmallMarginTop"></Label>
-							<Input id="DestinationBin" placeholder="Enter Destination Bin" submit="validateBin"></Input>
+							<Input id="DestinationBin" placeholder="Enter Destination Bin" change="validateBin"></Input>
 							<Label text="Destination Storage Type" class="sapUiSmallMarginTop"></Label>
 							<ComboBox id="destinationStorage" showSecondaryValues="true" filterSecondaryValues="true" placeholder="Enter Destination Storage"
 								enabled="false"></ComboBox>

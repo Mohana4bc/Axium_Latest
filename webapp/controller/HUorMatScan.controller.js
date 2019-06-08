@@ -725,9 +725,10 @@ sap.ui.define([
 				// oResult.DestinationStrTyp = DestinationStrTyp;
 				oRef.odataService.create("/BinToBinHSet", data, null, function (oData, oResponse) {
 					var Sresponse = JSON.parse(oResponse.body);
-					var TONum = Sresponse.d.Material;
+					// var TONum = Sresponse.d.Material;
+					var TONum = Sresponse.d.BinToBinSet.results[0].Material;
 					var message = "Successfully Transfered from " + sap.ui.getCore().bintobinTransferSourceBin + " Bin To " + DestinationBin +
-						" Bin";
+						" Bin and TO number " + TONum + " Created Successfully";
 					var dialog = new Dialog({
 						title: "Success",
 						type: "Message",
@@ -784,7 +785,9 @@ sap.ui.define([
 			BatchNo = encodeURIComponent(BatchNo);
 			var flag;
 			if (BatchNo !== "") {
-				oRef.odataService.read("/ScannedBatchNo?BatchNo='" + BatchNo + "'",
+				// RMBTBBatchNo
+				// ScannedBatchNo
+				oRef.odataService.read("/RMBTBBatchNo?BatchNo='" + BatchNo + "'",
 					null, null, false,
 					function (oData, oResponse) {
 						if (oData.Message === "valid Batch No") {
@@ -846,7 +849,6 @@ sap.ui.define([
 		//	onBeforeRendering: function() {
 		//
 		//	},
-
 		/**
 		 * Called when the View has been rendered (so its HTML is part of the document). Post-rendering manipulations of the HTML could be done here.
 		 * This hook is the same one that SAPUI5 controls get after being rendered.
