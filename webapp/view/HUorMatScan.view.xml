@@ -11,6 +11,9 @@
 						<contentMiddle>
 							<Text text="HU/Material Scan"></Text>
 						</contentMiddle>
+						<contentRight>
+							<Button text="Available Bin" press="onAvailableBin" type="Emphasized" enabled="true"></Button>
+						</contentRight>
 					</Bar>
 				</customHeader>
 				<content>
@@ -64,7 +67,7 @@
 						</contentRight>
 						<contentLeft>
 							<Button text="Delete" type="Reject" icon="sap-icon://delete" press="onDelete"/>
-							<Button text="Available Bin" press="onAvailableBin" type="Emphasized" enabled="true"></Button>
+							<!--<Button text="Available Bin" press="onAvailableBin" type="Emphasized" enabled="true"></Button>-->
 						</contentLeft>
 					</Bar>
 				</footer>
