@@ -25,7 +25,7 @@
 								<Text text="Available Bins"/>
 							</Column>
 							<Column minScreenWidth="Phone">
-								<Text text="Available Space"/>
+								<Text text="Available Quantity"/>
 							</Column>
 							<Column minScreenWidth="Phone">
 								<Text text="UOM"/>

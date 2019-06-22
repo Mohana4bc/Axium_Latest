@@ -21,7 +21,7 @@
 						layout="ResponsiveGridLayout" maxContainerCols="2" minWidth="1024">
 						<f:content>
 							<Label text="HU Scan" design="Bold" width="100%" textAlign="Begin" textDirection="Inherit" visible="true"></Label>
-							<SearchField id="scanHUNumber" liveChange="HuScan" showSearchButton="false" placeholder="Scan HU Number"></SearchField>
+							<SearchField id="scanHUNumber"  liveChange="HuScan" showSearchButton="false" placeholder="Scan HU Number"></SearchField>
 							<Label text="Material" design="Bold" width="100%" textAlign="Begin" textDirection="Inherit" visible="true"></Label>
 							<ComboBox id="matNumber" showSecondaryValues="true" filterSecondaryValues="true" selectionChange="MatScan" placeholder="Scan Material"></ComboBox>
 							<Label text="Material Description" design="Bold" width="100%" textAlign="Begin" textDirection="Inherit" visible="true"></Label>

@@ -24,6 +24,7 @@ sap.ui.define([
 		},
 		_onObjectMatched: function (oEvent) {
 			var oRef = this;
+			sap.ui.getCore().matMandtforAB = "";
 			oRef.warehouseNumber = oEvent.getParameter("arguments").warehouseNumber;
 			oRef.sourceStorage = oEvent.getParameter("arguments").sourceStorage;
 			oRef.sourceBin = oEvent.getParameter("arguments").sourceBin;
@@ -40,6 +41,7 @@ sap.ui.define([
 				oRef.getView().byId("idMatAdd").setVisible(false);
 				oRef.getView().byId("destinationStorage").setEnabled(true);
 				sap.ui.getCore().bintobinTransferIndicator = "";
+				sap.ui.getCore().availableBinMandt = "true";
 
 			} else {
 				if (oRef.whBintoBinFlag === "false") {
@@ -50,6 +52,7 @@ sap.ui.define([
 					oRef.getView().byId("Quantity").setVisible(true);
 					oRef.getView().byId("idMatAdd").setVisible(true);
 					sap.ui.getCore().bintobinTransferIndicator = "X";
+					sap.ui.getCore().availableBinMandt = "false";
 				}
 			}
 
@@ -200,6 +203,7 @@ sap.ui.define([
 
 									var hu = oData.results[0].HU;
 									var material = oData.results[0].Material;
+									sap.ui.getCore().matMandtforAB = material;
 									var materialDesc = oData.results[0].MaterialDesc;
 									var BatchNo = oData.results[0].BatchNo;
 									var scannedQty = oData.results[0].ScannedQnty;
@@ -418,6 +422,7 @@ sap.ui.define([
 				materialScan,
 				materialDesc, UOM;
 			var material = oRef.getView().byId("matNumber").getSelectedItem().getAdditionalText();
+			sap.ui.getCore().matMandtforAB = material;
 			sap.ui.getCore().globalMaterialNumber = material;
 			oRef.material = material;
 			var flag = oRef.valiateMaterial(material);
@@ -515,6 +520,7 @@ sap.ui.define([
 		onAddMaterial: function () {
 			var oRef = this;
 			var materialDesc = oRef.getView().byId("matNumber").getValue();
+			sap.ui.getCore().matMandtforAB = oRef.getView().byId("matNumber").getSelectedItem().getAdditionalText();
 			// var material = oRef.getView().byId("matNumber").getSelectedItem().getAdditionalText();
 			// var materialDesc = oRef.getView().byId("materialDesc").getValue();
 			var BatchNo = oRef.getView().byId("BatchNumber").getValue();
@@ -603,44 +609,76 @@ sap.ui.define([
 		onAvailableBin: function () {
 			var oRef = this;
 			var flagHu = "";
-			var oModel = new sap.ui.model.json.JSONModel();
-			var Bin = [];
-			oModel.setData({
-				binSet: Bin
-			});
-			oRef.getOwnerComponent().setModel(oModel, "Bins");
-			var oBinModel = oRef.getOwnerComponent().getModel("Bins");
-			var modelData = oBinModel.getData();
-			oRef.destinationStorage = this.getView().byId("destinationStorage").getSelectedItem().getAdditionalText();
-			var HUno = oRef.getView().byId("scanHUNumber").getValue();
 			var matNo = oRef.getView().byId("matNumber").getValue();
-			// if (HUno !== undefined && HUno !== "") {
-			// 	flagHu = 'X';
+			var HUno = oRef.getView().byId("scanHUNumber").getValue();
+			var dummyFlag = true;
+			// if(HUno === "" || matNo === ""){
+
 			// }
-			flagHu = sap.ui.getCore().huBinTransfer;
-			oRef.odataService.read("/AvailableBinsFGRMSet?$filter=WareHouse eq '" + oRef.warehouseNumber + "' and Flag eq '" + flagHu +
-				"' and Material eq '" + matNo + "' and StorageTyp eq '" + oRef.destinationStorage + "'", null, null, false,
-				function (oData, oResponse) {
-					for (var i = 0; i < oData.results.length; i++) {
-						modelData.binSet.push({
-							StorageBin: oData.results[i].StorageBin,
-							AvailSpace: oData.results[i].AvailSpace,
-							UOMBIN: oData.results[i].UOM,
-						});
-					}
-					oBinModel.refresh();
-				},
-				function (oResponse) {
-					sap.m.MessageBox.alert("Failed to Load the Bins", {
-						title: "Information",
-						onClose: null,
-						styleClass: "",
-						initialFocus: null,
-						textDirection: sap.ui.core.TextDirection.Inherit
-					});
+			if (sap.ui.getCore().availableBinMandt === "true" && (sap.ui.getCore().matMandtforAB === "" || sap.ui.getCore().matMandtforAB ===
+					undefined)) {
+				dummyFlag = false;
+				// MessageBox.error("Please scan HU number to check for available bins");
+				// matNo = sap.ui.getCore().matMandtforAB;
+			} else if (sap.ui.getCore().availableBinMandt === "false" && (sap.ui.getCore().matMandtforAB === "" || sap.ui.getCore().matMandtforAB ===
+					undefined)) {
+				// matNo = oRef.getView().byId("matNumber").getSelectedItem().getAdditionalText();
+				dummyFlag = false;
+				// MessageBox.error("Please scan Material to check for available bins");
+			}
+
+			if (dummyFlag === false) {
+				MessageBox.error("Please scan material or HU number to check for available bins");
+			} else {
+				var oModel = new sap.ui.model.json.JSONModel();
+				var Bin = [];
+				oModel.setData({
+					binSet: Bin
 				});
-			var oRouter = this.getOwnerComponent().getRouter();
-			oRouter.navTo("BinTransferBins", {});
+				oRef.getOwnerComponent().setModel(oModel, "Bins");
+				var oBinModel = oRef.getOwnerComponent().getModel("Bins");
+				var modelData = oBinModel.getData();
+
+				oRef.destinationStorage = this.getView().byId("destinationStorage").getValue();
+				if (oRef.destinationStorage !== "") {
+					oRef.destinationStorage = this.getView().byId("destinationStorage").getSelectedItem().getAdditionalText();
+				} else {
+					oRef.destinationStorage = "";
+				}
+
+				// if (HUno !== undefined && HUno !== "") {
+				// 	flagHu = 'X';
+				// }
+				flagHu = sap.ui.getCore().huBinTransfer;
+				oRef.odataService.read("/AvailableBinsFGRMSet?$filter=WareHouse eq '" + oRef.warehouseNumber + "' and Flag eq '" + flagHu +
+					"' and Material eq '" + matNo + "' and StorageTyp eq '" + oRef.destinationStorage + "'", null, null, false,
+					function (oData, oResponse) {
+						for (var i = 0; i < oData.results.length; i++) {
+							modelData.binSet.push({
+								StorageBin: oData.results[i].StorageBin,
+								AvailSpace: oData.results[i].AvailSpace,
+								UOMBIN: oData.results[i].UOM,
+							});
+						}
+						// Bin Number 
+						// Available Quantity
+						// UOM
+
+						oBinModel.refresh();
+					},
+					function (oResponse) {
+						sap.m.MessageBox.alert("Failed to Load the Bins", {
+							title: "Information",
+							onClose: null,
+							styleClass: "",
+							initialFocus: null,
+							textDirection: sap.ui.core.TextDirection.Inherit
+						});
+					});
+				var oRouter = this.getOwnerComponent().getRouter();
+				oRouter.navTo("BinTransferBins", {});
+			}
+
 		},
 
 		onSave: function () {
