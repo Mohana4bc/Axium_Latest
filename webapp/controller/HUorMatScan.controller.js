@@ -24,7 +24,7 @@ sap.ui.define([
 		},
 		_onObjectMatched: function (oEvent) {
 			var oRef = this;
-			sap.ui.getCore().matMandtforAB = "";
+			// sap.ui.getCore().matMandtforAB = "";
 			oRef.warehouseNumber = oEvent.getParameter("arguments").warehouseNumber;
 			oRef.sourceStorage = oEvent.getParameter("arguments").sourceStorage;
 			oRef.sourceBin = oEvent.getParameter("arguments").sourceBin;
@@ -520,31 +520,32 @@ sap.ui.define([
 		onAddMaterial: function () {
 			var oRef = this;
 			var materialDesc = oRef.getView().byId("matNumber").getValue();
-			sap.ui.getCore().matMandtforAB = oRef.getView().byId("matNumber").getSelectedItem().getAdditionalText();
+			sap.ui.getCore().matMandtforAB = sap.ui.getCore().globalMaterialNumber;
 			// var material = oRef.getView().byId("matNumber").getSelectedItem().getAdditionalText();
 			// var materialDesc = oRef.getView().byId("materialDesc").getValue();
 			var BatchNo = oRef.getView().byId("BatchNumber").getValue();
 			var scannedQty = oRef.getView().byId("Quantity").getValue();
 			// sap.ui.getCore().huBinTransfer = "";
 
-			if (BatchNo === "") {
-				oRef.aData.push({
-					HU: "",
-					Material: sap.ui.getCore().globalMaterialNumber,
-					MaterialDesc: materialDesc,
-					BatchNo: BatchNo,
-					ScannedQnty: scannedQty
-				});
-				var oModel = new sap.ui.model.json.JSONModel();
+			if (BatchNo === "" || scannedQty === "") {
+				// oRef.aData.push({
+				// 	HU: "",
+				// 	Material: sap.ui.getCore().globalMaterialNumber,
+				// 	MaterialDesc: materialDesc,
+				// 	BatchNo: BatchNo,
+				// 	ScannedQnty: scannedQty
+				// });
+				// var oModel = new sap.ui.model.json.JSONModel();
 
-				oModel.setData({
-					BinHUMatSet: oRef.aData
-				});
-				oRef.getOwnerComponent().setModel(oModel, "BinHUMatModel");
-				oRef.getView().byId("matNumber").setValue("");
-				oRef.getView().byId("materialDesc").setValue("");
-				oRef.getView().byId("BatchNumber").setValue("");
-				oRef.getView().byId("Quantity").setValue("");
+				// oModel.setData({
+				// 	BinHUMatSet: oRef.aData
+				// });
+				// oRef.getOwnerComponent().setModel(oModel, "BinHUMatModel");
+				// oRef.getView().byId("matNumber").setValue("");
+				// oRef.getView().byId("materialDesc").setValue("");
+				// oRef.getView().byId("BatchNumber").setValue("");
+				// oRef.getView().byId("Quantity").setValue("");
+				MessageBox.error("Batch Number and Quantity are mandatory fields ");
 			} else {
 				var myBatchValidation = oRef.batchValidation(BatchNo);
 
@@ -649,6 +650,7 @@ sap.ui.define([
 				// if (HUno !== undefined && HUno !== "") {
 				// 	flagHu = 'X';
 				// }
+				matNo = sap.ui.getCore().matMandtforAB;
 				flagHu = sap.ui.getCore().huBinTransfer;
 				oRef.odataService.read("/AvailableBinsFGRMSet?$filter=WareHouse eq '" + oRef.warehouseNumber + "' and Flag eq '" + flagHu +
 					"' and Material eq '" + matNo + "' and StorageTyp eq '" + oRef.destinationStorage + "'", null, null, false,
@@ -691,131 +693,137 @@ sap.ui.define([
 			}
 			var DestinationBin = oRef.getView().byId("DestinationBin").getValue();
 			//var Material = oRef.getView().byId("matNumber").getValue();
-			var Material = oRef.material;
-			var RequirementQnty = oRef.getView().byId("Quantity").getValue();
-			var BatchNo = oRef.getView().byId("BatchNumber").getValue();
-			if (BatchNo === undefined) {
-				BatchNo = "";
-			}
-			var WareHouseNumber = oRef.warehouseNumber;
-			var SourceStrTyp = oRef.sourceStorage;
-			if (sap.ui.getCore().TypeafterBin === "true") {
-				var DestinationStrTyp = oRef.getView().byId("destinationStorage").getValue();
+			if (DestinationBin === "") {
+				MessageBox.error("Please Scan Destination Bin");
 			} else {
-				var DestinationStrTyp = oRef.getView().byId("destinationStorage").getSelectedItem().getAdditionalText();
-			}
-			var UOM = oRef.UOM;
-			var batchValidate;
-			if (UOM === undefined) {
-				UOM = "";
-			}
-			if (sap.ui.getCore().bintobinTransferSourceBin === DestinationBin) {
-				sap.m.MessageBox.alert("Source and Destination Bin cannot be same", {
-					title: "Information",
-					onClose: null,
-					styleClass: "",
-					initialFocus: null,
-					textDirection: sap.ui.core.TextDirection.Inherit
-				});
-				oRef.getView().byId("DestinationBin").setValue("");
-			} else {
-				// if (SourceBin !== "" && ExternalHU !== undefined && DestinationBin !== "" && Material !== "" && BatchNo !==
-				// 	undefined && WareHouseNumber !== "" && SourceStrTyp !== "" && DestinationStrTyp !== "") {
-				// if (BatchNo !== "") {
-				// 	batchValidate = oRef.batchValidation(BatchNo);
-				// } else {
-				// 	batchValidate = "X";
-				// }
-				// if (batchValidate === "X") {
-				var data = {};
-				data.BinToBinSet = [];
-				data.Indicator = sap.ui.getCore().bintobinTransferIndicator;
-				var result = this.oList.getModel("BinHUMatModel").getData();
-				$.each(result.BinHUMatSet, function (index, item) {
-					var temp = {};
-					temp.Indicator = sap.ui.getCore().bintobinTransferIndicator;
-					temp.SourceBin = sap.ui.getCore().bintobinTransferSourceBin;
-					temp.ExternalHU = item.HU;
-					temp.DestinationBin = DestinationBin;
-					temp.Material = item.Material;
-					temp.RequirementQnty = item.ScannedQnty;
-					temp.BatchNo = item.BatchNo;
-					temp.WareHouseNumber = sap.ui.getCore().bintobinTransferWareHouseNumber;
-					temp.SourceStrTyp = sap.ui.getCore().bintobinTransferSourceStorage;
-					temp.DestinationStrTyp = DestinationStrTyp;
-					data.BinToBinSet.push(temp);
-				});
-
-				// 			sap.ui.getCore().bintobinTransferWareHouseNumber = oRef.warehouseNumber;
-				// sap.ui.getCore().bintobinTransferSourceStorage = oRef.sourceStorage;
-				// sap.ui.getCore().bintobinTransferSourceBin = oRef.sourceBin;
-
-				// oResult.SourceBin = SourceBin;
-				// oResult.ExternalHU = ExternalHU;
-				// oResult.DestinationBin = DestinationBin;
-				// oResult.Material = Material;
-				// oResult.RequirementQnty = RequirementQnty;
-				// oResult.UOM = UOM;
-				// oResult.BatchNo = BatchNo;
-				// oResult.Plant = "";
-				// oResult.WareHouseNumber = WareHouseNumber;
-				// oResult.SourceStrTyp = SourceStrTyp;
-				// oResult.DestinationStrTyp = DestinationStrTyp;
-				oRef.odataService.create("/BinToBinHSet", data, null, function (oData, oResponse) {
-					var Sresponse = JSON.parse(oResponse.body);
-					// var TONum = Sresponse.d.Material;
-					var TONum = Sresponse.d.BinToBinSet.results[0].Material;
-					var message = "Successfully Transfered from " + sap.ui.getCore().bintobinTransferSourceBin + " Bin To " + DestinationBin +
-						" Bin and TO number " + TONum + " Created Successfully";
-					var dialog = new Dialog({
-						title: "Success",
-						type: "Message",
-						content: new Text({
-							text: message
-						}),
-						beginButton: new Button({
-							text: "OK",
-							press: function () {
-								var aData = oRef.getView().getModel("BinHUMatModel").getData();
-								oRef.aData = [];
-								oRef.getView().getModel("BinHUMatModel").setData(oRef.aData);
-								oRef.setEmpty();
-								dialog.close();
-								var oRouter = oRef.getOwnerComponent().getRouter();
-								oRouter.navTo("BinToBin", {});
-							}
-						}),
-						afterClose: function () {
-							dialog.destroy();
-						}
-					});
-					dialog.open();
-				}, function (oResponse) {
-					var Sresponse = JSON.parse(oResponse.response.body);
-					// var message = Sresponse.error.message.value;
-					var message = Sresponse.error.innererror.errordetails[0].message;
-					sap.m.MessageBox.alert(message, {
-						title: "Error",
+				var Material = oRef.material;
+				var RequirementQnty = oRef.getView().byId("Quantity").getValue();
+				var BatchNo = oRef.getView().byId("BatchNumber").getValue();
+				if (BatchNo === undefined) {
+					BatchNo = "";
+				}
+				var WareHouseNumber = oRef.warehouseNumber;
+				var SourceStrTyp = oRef.sourceStorage;
+				if (sap.ui.getCore().TypeafterBin === "true") {
+					var DestinationStrTyp = oRef.getView().byId("destinationStorage").getValue();
+				} else {
+					var DestinationStrTyp = oRef.getView().byId("destinationStorage").getSelectedItem().getAdditionalText();
+				}
+				var UOM = oRef.UOM;
+				var batchValidate;
+				if (UOM === undefined) {
+					UOM = "";
+				}
+				if (sap.ui.getCore().bintobinTransferSourceBin === DestinationBin) {
+					sap.m.MessageBox.alert("Source and Destination Bin cannot be same", {
+						title: "Information",
 						onClose: null,
 						styleClass: "",
 						initialFocus: null,
 						textDirection: sap.ui.core.TextDirection.Inherit
 					});
+					oRef.getView().byId("DestinationBin").setValue("");
+				} else {
+					// if (SourceBin !== "" && ExternalHU !== undefined && DestinationBin !== "" && Material !== "" && BatchNo !==
+					// 	undefined && WareHouseNumber !== "" && SourceStrTyp !== "" && DestinationStrTyp !== "") {
+					// if (BatchNo !== "") {
+					// 	batchValidate = oRef.batchValidation(BatchNo);
+					// } else {
+					// 	batchValidate = "X";
+					// }
+					// if (batchValidate === "X") {
+					var data = {};
+					data.BinToBinSet = [];
+					data.Indicator = sap.ui.getCore().bintobinTransferIndicator;
+					var result = this.oList.getModel("BinHUMatModel").getData();
+					$.each(result.BinHUMatSet, function (index, item) {
+						var temp = {};
+						temp.Indicator = sap.ui.getCore().bintobinTransferIndicator;
+						temp.SourceBin = sap.ui.getCore().bintobinTransferSourceBin;
+						temp.ExternalHU = item.HU;
+						temp.DestinationBin = DestinationBin;
+						temp.Material = item.Material;
+						temp.RequirementQnty = item.ScannedQnty;
+						temp.BatchNo = item.BatchNo;
+						temp.WareHouseNumber = sap.ui.getCore().bintobinTransferWareHouseNumber;
+						temp.SourceStrTyp = sap.ui.getCore().bintobinTransferSourceStorage;
+						temp.DestinationStrTyp = DestinationStrTyp;
+						data.BinToBinSet.push(temp);
+					});
 
-				});
-				// } 
-				// else {
-				// 	sap.m.MessageBox.alert("Batch Number is Not Valid", {
-				// 		title: "Information",
-				// 		onClose: null,
-				// 		styleClass: "",
-				// 		initialFocus: null,
-				// 		textDirection: sap.ui.core.TextDirection.Inherit
-				// 	});
-				// 	oRef.getView().byId("BatchNumber").setValue("");
-				// }
-				// }
+					// 			sap.ui.getCore().bintobinTransferWareHouseNumber = oRef.warehouseNumber;
+					// sap.ui.getCore().bintobinTransferSourceStorage = oRef.sourceStorage;
+					// sap.ui.getCore().bintobinTransferSourceBin = oRef.sourceBin;
+
+					// oResult.SourceBin = SourceBin;
+					// oResult.ExternalHU = ExternalHU;
+					// oResult.DestinationBin = DestinationBin;
+					// oResult.Material = Material;
+					// oResult.RequirementQnty = RequirementQnty;
+					// oResult.UOM = UOM;
+					// oResult.BatchNo = BatchNo;
+					// oResult.Plant = "";
+					// oResult.WareHouseNumber = WareHouseNumber;
+					// oResult.SourceStrTyp = SourceStrTyp;
+					// oResult.DestinationStrTyp = DestinationStrTyp;
+					oRef.odataService.create("/BinToBinHSet", data, null, function (oData, oResponse) {
+						var Sresponse = JSON.parse(oResponse.body);
+						// var TONum = Sresponse.d.Material;
+						var TONum = Sresponse.d.BinToBinSet.results[0].Material;
+						var message = "Successfully Transfered from " + sap.ui.getCore().bintobinTransferSourceBin + " Bin To " + DestinationBin +
+							" Bin and TO number " + TONum + " Created Successfully";
+						var dialog = new Dialog({
+							title: "Success",
+							type: "Message",
+							content: new Text({
+								text: message
+							}),
+							beginButton: new Button({
+								text: "OK",
+								press: function () {
+									var aData = oRef.getView().getModel("BinHUMatModel").getData();
+									oRef.aData = [];
+									oRef.getView().getModel("BinHUMatModel").setData(oRef.aData);
+									oRef.setEmpty();
+									dialog.close();
+									sap.ui.getCore().matMandtforAB = "";
+									var oRouter = oRef.getOwnerComponent().getRouter();
+									oRouter.navTo("BinToBin", {});
+								}
+							}),
+							afterClose: function () {
+								dialog.destroy();
+							}
+						});
+						dialog.open();
+					}, function (oResponse) {
+						var Sresponse = JSON.parse(oResponse.response.body);
+						// var message = Sresponse.error.message.value;
+						var message = Sresponse.error.innererror.errordetails[0].message;
+						sap.m.MessageBox.alert(message, {
+							title: "Error",
+							onClose: null,
+							styleClass: "",
+							initialFocus: null,
+							textDirection: sap.ui.core.TextDirection.Inherit
+						});
+
+					});
+					// } 
+					// else {
+					// 	sap.m.MessageBox.alert("Batch Number is Not Valid", {
+					// 		title: "Information",
+					// 		onClose: null,
+					// 		styleClass: "",
+					// 		initialFocus: null,
+					// 		textDirection: sap.ui.core.TextDirection.Inherit
+					// 	});
+					// 	oRef.getView().byId("BatchNumber").setValue("");
+					// }
+					// }
+				}
 			}
+
 		},
 		batchValidation: function (BatchNo) {
 			var oRef = this;
@@ -871,6 +879,7 @@ sap.ui.define([
 		},
 		onPressBack: function () {
 			var oRef = this;
+			sap.ui.getCore().matMandtforAB = "";
 			oRef.setEmpty();
 			var aData = oRef.getView().getModel("BinHUMatModel").getData();
 			oRef.aData = [];
