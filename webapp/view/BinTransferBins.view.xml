@@ -25,6 +25,9 @@
 								<Text text="Available Bins"/>
 							</Column>
 							<Column minScreenWidth="Phone">
+								<Text text="Batch Number"/>
+							</Column>
+							<Column minScreenWidth="Phone">
 								<Text text="Available Quantity"/>
 							</Column>
 							<Column minScreenWidth="Phone">
@@ -35,6 +38,7 @@
 							<ColumnListItem>
 								<cells>
 									<Text text="{Bins>StorageBin}"/>
+									<Text text="{Bins>BatchNo}"></Text>
 									<Text text="{Bins>AvailSpace}"/>
 									<Text text="{Bins>UOMBIN}"/>
 								</cells>

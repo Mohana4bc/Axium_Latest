@@ -659,7 +659,8 @@ sap.ui.define([
 							modelData.binSet.push({
 								StorageBin: oData.results[i].StorageBin,
 								AvailSpace: oData.results[i].AvailSpace,
-								UOMBIN: oData.results[i].UOM,
+								BatchNo: oData.results[i].BatchNo,
+								UOMBIN: oData.results[i].UOM
 							});
 						}
 						// Bin Number 
