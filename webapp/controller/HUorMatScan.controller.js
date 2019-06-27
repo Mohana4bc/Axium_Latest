@@ -47,7 +47,7 @@ sap.ui.define([
 				if (oRef.whBintoBinFlag === "false") {
 					oRef.getView().byId("scanHUNumber").setVisible(false);
 					oRef.getView().byId("matNumber").setVisible(true);
-					oRef.getView().byId("materialDesc").setVisible(false);
+					oRef.getView().byId("materialDesc").setVisible(true);
 					oRef.getView().byId("BatchNumber").setVisible(true);
 					oRef.getView().byId("Quantity").setVisible(true);
 					oRef.getView().byId("idMatAdd").setVisible(true);
@@ -79,21 +79,45 @@ sap.ui.define([
 
 				});
 
-			oRef.odataService.read("/MaterialsSet?$filter=WareHouseNumber eq '" + oRef.warehouseNumber + "'",
-				null, null, false,
+			// oRef.odataService.read("/MaterialsSet?$filter=WareHouseNumber eq '" + oRef.warehouseNumber + "'",
+			// 	null, null, false,
+			// 	function (oData, oResponse) {
+			// 		if (oRef.getView().byId("matNumber") !== undefined) {
+			// 			oRef.getView().byId("matNumber").destroyItems();
+			// 		}
+			// 		for (var i = 0; i < oData.results.length; i++) {
+			// 			oRef.getView().byId("matNumber").addItem(
+			// 				new sap.ui.core.ListItem({
+			// 					text: oData.results[i].MaterialDesc,
+			// 					//key: response.results[i].Material,
+			// 					additionalText: oData.results[i].Material
+			// 				}));
+			// 		}
+			// 	});
+		},
+		onMaterialValidate: function () {
+			var oRef = this;
+			var mat = oRef.getView().byId("matNumber").getValue();
+			oRef.odataService.read("/MaterialSet('" + mat + "')", null, null, false, function (oData, oResponse) {
+					var matdesc = oResponse.data.MaterialDesc;
+					oRef.getView().byId("materialDesc").setValue(matdesc);
+					oRef.MatScan(mat);
+					// console.log(oResponse);
+				},
 				function (oData, oResponse) {
-					if (oRef.getView().byId("matNumber") !== undefined) {
-						oRef.getView().byId("matNumber").destroyItems();
+					// console.log(oResponse);
+					var error = JSON.parse(oData.response.body);
+					var errorMsg = error.error.message.value;
+					if (errorMsg === "Material Not Found.") {
+						oRef.getView().byId("matNumber").setValue("");
+						MessageBox.error("Please scan a correct material");
+					} else {
+						oRef.getView().byId("matNumber").setValue("");
+						MessageBox.error("Please scan a correct material");
 					}
-					for (var i = 0; i < oData.results.length; i++) {
-						oRef.getView().byId("matNumber").addItem(
-							new sap.ui.core.ListItem({
-								text: oData.results[i].MaterialDesc,
-								//key: response.results[i].Material,
-								additionalText: oData.results[i].Material
-							}));
-					}
-				});
+				}
+			);
+
 		},
 		validateBin: function () {
 			var oRef = this;
@@ -106,25 +130,29 @@ sap.ui.define([
 			setTimeout(function () {
 				if (storageType !== "") {
 					var present = "";
-					var binSelected = oRef.getView().byId("DestinationBin").getValue();
-					var oBinModel = oRef.getOwnerComponent().getModel("Bins");
-					var modelData = oBinModel.getData();
-					// for (var i = 0; i < modelData.binSet.length; i++) {
-					// 	if (modelData.binSet[i].StorageBin === binSelected) {
-					// 		present = 'X';
-					// 	}
-					// }
-					// if (present === "") {
-					// 	sap.m.MessageBox.alert("Please Select a valid Bin", {
-					// 		title: "Information",
-					// 		onClose: null,
-					// 		styleClass: "",
-					// 		initialFocus: null,
-					// 		textDirection: sap.ui.core.TextDirection.Inherit
-					// 	});
-					// 	oRef.getView().byId("DestinationBin").setValue("");
-					// } 
-					// else {
+					// var binSelected = oRef.getView().byId("DestinationBin").getValue();
+					// var oBinModel = oRef.getOwnerComponent().getModel("Bins");
+					oRef.odataService.read("/AutoStorageTypeSet?$filter=WareHouseNumber eq '" + oRef.warehouseNumber + "' and BinNumber eq '" +
+						destinationBin +
+						"'", null, null, false,
+						function (oData, oResponse) {
+							var destStorageType;
+							for (var j = 0; j < oData.results.length; j++) {
+								destStorageType = oData.results[j].StorageType;
+							}
+							oRef.getView().byId("destinationStorage").setValue(destStorageType);
+							sap.ui.getCore().TypeafterBin = "true";
+						},
+						function (oResponse) {
+							sap.m.MessageBox.alert("Failed to Load the storage type of scanned Bin", {
+								title: "Information",
+								onClose: null,
+								styleClass: "",
+								initialFocus: null,
+								textDirection: sap.ui.core.TextDirection.Inherit
+							});
+						});
+
 					sap.ui.getCore().TypeafterBin = "false";
 					// }
 				} else {
@@ -416,12 +444,13 @@ sap.ui.define([
 			// }, 1000);
 
 		},
-		MatScan: function () {
+		MatScan: function (mat) {
 			var oRef = this;
 			var Indicator,
 				materialScan,
 				materialDesc, UOM;
-			var material = oRef.getView().byId("matNumber").getSelectedItem().getAdditionalText();
+			var material = mat;
+			// var material = oRef.getView().byId("matNumber").getSelectedItem().getAdditionalText();
 			sap.ui.getCore().matMandtforAB = material;
 			sap.ui.getCore().globalMaterialNumber = material;
 			oRef.material = material;
@@ -449,8 +478,8 @@ sap.ui.define([
 								oRef.getView().byId("BatchNumber").setVisible(true);
 							}
 							oRef.getView().byId("scanHUNumber").setVisible(false);
-							oRef.getView().byId("materialDesc").setValue("");
-							oRef.getView().byId("materialDesc").setVisible(false);
+							// oRef.getView().byId("materialDesc").setValue("");
+							// oRef.getView().byId("materialDesc").setVisible(true);
 							oRef.getView().byId("BatchNumber").setEnabled(true);
 							oRef.getView().byId("Quantity").setEnabled(true);
 							oRef.getView().byId("UOM").setVisible(true);
@@ -519,37 +548,90 @@ sap.ui.define([
 		},
 		onAddMaterial: function () {
 			var oRef = this;
-			var materialDesc = oRef.getView().byId("matNumber").getValue();
+			var materialDesc = oRef.getView().byId("materialDesc").getValue();
 			sap.ui.getCore().matMandtforAB = sap.ui.getCore().globalMaterialNumber;
 			// var material = oRef.getView().byId("matNumber").getSelectedItem().getAdditionalText();
 			// var materialDesc = oRef.getView().byId("materialDesc").getValue();
 			var BatchNo = oRef.getView().byId("BatchNumber").getValue();
 			var scannedQty = oRef.getView().byId("Quantity").getValue();
 			// sap.ui.getCore().huBinTransfer = "";
+			var batchMaintained = oRef.getView().byId("BatchNumber").getVisible();
+			if (batchMaintained === true) {
+				if (BatchNo === "" || scannedQty === "") {
+					// oRef.aData.push({
+					// 	HU: "",
+					// 	Material: sap.ui.getCore().globalMaterialNumber,
+					// 	MaterialDesc: materialDesc,
+					// 	BatchNo: BatchNo,
+					// 	ScannedQnty: scannedQty
+					// });
+					// var oModel = new sap.ui.model.json.JSONModel();
 
-			if (BatchNo === "" || scannedQty === "") {
-				// oRef.aData.push({
-				// 	HU: "",
-				// 	Material: sap.ui.getCore().globalMaterialNumber,
-				// 	MaterialDesc: materialDesc,
-				// 	BatchNo: BatchNo,
-				// 	ScannedQnty: scannedQty
-				// });
-				// var oModel = new sap.ui.model.json.JSONModel();
+					// oModel.setData({
+					// 	BinHUMatSet: oRef.aData
+					// });
+					// oRef.getOwnerComponent().setModel(oModel, "BinHUMatModel");
+					// oRef.getView().byId("matNumber").setValue("");
+					// oRef.getView().byId("materialDesc").setValue("");
+					// oRef.getView().byId("BatchNumber").setValue("");
+					// oRef.getView().byId("Quantity").setValue("");
+					MessageBox.error("Batch Number and Quantity are mandatory fields ");
+				} else {
+					var myBatchValidation = oRef.batchValidation(BatchNo);
 
-				// oModel.setData({
-				// 	BinHUMatSet: oRef.aData
-				// });
-				// oRef.getOwnerComponent().setModel(oModel, "BinHUMatModel");
-				// oRef.getView().byId("matNumber").setValue("");
-				// oRef.getView().byId("materialDesc").setValue("");
-				// oRef.getView().byId("BatchNumber").setValue("");
-				// oRef.getView().byId("Quantity").setValue("");
-				MessageBox.error("Batch Number and Quantity are mandatory fields ");
+					if (myBatchValidation === "X") {
+						oRef.aData.push({
+							HU: "",
+							Material: sap.ui.getCore().globalMaterialNumber,
+							MaterialDesc: materialDesc,
+							BatchNo: BatchNo,
+							ScannedQnty: scannedQty
+						});
+						var oModel = new sap.ui.model.json.JSONModel();
+
+						oModel.setData({
+							BinHUMatSet: oRef.aData
+						});
+						oRef.getOwnerComponent().setModel(oModel, "BinHUMatModel");
+						oRef.getView().byId("matNumber").setValue("");
+						oRef.getView().byId("materialDesc").setValue("");
+						oRef.getView().byId("BatchNumber").setValue("");
+						oRef.getView().byId("Quantity").setValue("");
+					} else {
+						sap.m.MessageBox.alert("Batch Number is Not Valid", {
+							title: "Information",
+							onClose: null,
+							styleClass: "",
+							initialFocus: null,
+							textDirection: sap.ui.core.TextDirection.Inherit
+						});
+						oRef.getView().byId("BatchNumber").setValue("");
+					}
+				}
 			} else {
-				var myBatchValidation = oRef.batchValidation(BatchNo);
+				if (scannedQty === "") {
+					// oRef.aData.push({
+					// 	HU: "",
+					// 	Material: sap.ui.getCore().globalMaterialNumber,
+					// 	MaterialDesc: materialDesc,
+					// 	BatchNo: BatchNo,
+					// 	ScannedQnty: scannedQty
+					// });
+					// var oModel = new sap.ui.model.json.JSONModel();
 
-				if (myBatchValidation === "X") {
+					// oModel.setData({
+					// 	BinHUMatSet: oRef.aData
+					// });
+					// oRef.getOwnerComponent().setModel(oModel, "BinHUMatModel");
+					// oRef.getView().byId("matNumber").setValue("");
+					// oRef.getView().byId("materialDesc").setValue("");
+					// oRef.getView().byId("BatchNumber").setValue("");
+					// oRef.getView().byId("Quantity").setValue("");
+					MessageBox.error("Please enter quantity");
+				} else {
+					// var myBatchValidation = oRef.batchValidation(BatchNo);
+
+					// if (myBatchValidation === "X") {
 					oRef.aData.push({
 						HU: "",
 						Material: sap.ui.getCore().globalMaterialNumber,
@@ -567,15 +649,17 @@ sap.ui.define([
 					oRef.getView().byId("materialDesc").setValue("");
 					oRef.getView().byId("BatchNumber").setValue("");
 					oRef.getView().byId("Quantity").setValue("");
-				} else {
-					sap.m.MessageBox.alert("Batch Number is Not Valid", {
-						title: "Information",
-						onClose: null,
-						styleClass: "",
-						initialFocus: null,
-						textDirection: sap.ui.core.TextDirection.Inherit
-					});
-					oRef.getView().byId("BatchNumber").setValue("");
+					// } 
+					// else {
+					// 	sap.m.MessageBox.alert("Batch Number is Not Valid", {
+					// 		title: "Information",
+					// 		onClose: null,
+					// 		styleClass: "",
+					// 		initialFocus: null,
+					// 		textDirection: sap.ui.core.TextDirection.Inherit
+					// 	});
+					// 	oRef.getView().byId("BatchNumber").setValue("");
+					// }
 				}
 			}
 
@@ -862,9 +946,9 @@ sap.ui.define([
 			oRef.getView().byId("scanHUNumber").setEnabled(true);
 			oRef.getView().byId("matNumber").setValue("");
 			oRef.getView().byId("matNumber").setEnabled(true);
-			oRef.getView().byId("matNumber").clearSelection(true);
+			// oRef.getView().byId("matNumber").clearSelection(true);
 			oRef.getView().byId("materialDesc").setValue("");
-			oRef.getView().byId("materialDesc").setVisible(false);
+			oRef.getView().byId("materialDesc").setValue("");
 			oRef.getView().byId("BatchNumber").setVisible(true);
 			oRef.getView().byId("BatchNumber").setValue("");
 			oRef.getView().byId("BatchNumber").setEnabled(false);

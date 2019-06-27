@@ -13,24 +13,24 @@ sap.ui.define([
 
 			this.odataService = new sap.ui.model.odata.ODataModel("/sap/opu/odata/sap/ZWM_GW_RFSCREENS_SRV/", true);
 
-			this.odataService.read("/MaterialsSet", null, null, false, function (response) {
-				if (that.getView().byId("materialWarehouseScreenId") !== undefined) {
-					that.getView().byId("materialWarehouseScreenId").destroyItems();
-				}
-				for (var i = 0; i < response.results.length; i++) {
-					that.getView().byId("materialWarehouseScreenId").addItem(
-						new sap.ui.core.ListItem({
-							// text: response.results[i].Material,
-							// key: response.results[i].Material,
-							// additionalText: response.results[i].MaterialDesc
+			// this.odataService.read("/MaterialsSet", null, null, false, function (response) {
+			// 	if (that.getView().byId("materialWarehouseScreenId") !== undefined) {
+			// 		that.getView().byId("materialWarehouseScreenId").destroyItems();
+			// 	}
+			// 	for (var i = 0; i < response.results.length; i++) {
+			// 		that.getView().byId("materialWarehouseScreenId").addItem(
+			// 			new sap.ui.core.ListItem({
+			// 				// text: response.results[i].Material,
+			// 				// key: response.results[i].Material,
+			// 				// additionalText: response.results[i].MaterialDesc
 
-							text: response.results[i].MaterialDesc,
-							key: response.results[i].MaterialDesc,
-							additionalText: response.results[i].Material
+			// 				text: response.results[i].MaterialDesc,
+			// 				key: response.results[i].MaterialDesc,
+			// 				additionalText: response.results[i].Material
 
-						}));
-				}
-			});
+			// 			}));
+			// 	}
+			// });
 
 			// this.odataService.read("/StorageTypeSet", null, null, false, function (response) {
 			// 	if (that.getView().byId("storageTypeWarehouseScreenId") !== undefined) {
@@ -110,7 +110,7 @@ sap.ui.define([
 			var oStoragebin = oRef.getView().byId("storageBinWarehouseScreenId");
 			var oWH = oRef.getView().byId("warehouseWarehouseScreenId");
 
-			oMat.clearSelection();
+			// oMat.clearSelection();
 			// oStoragetype.clearSelection();
 			// oStoragebin.clearSelection();
 			oWH.clearSelection();
@@ -150,6 +150,7 @@ sap.ui.define([
 
 		setEmpty: function () {
 			this.getView().byId("materialWarehouseScreenId").setValue("");
+			this.getView().byId("idWMMatDesc").setValue("");
 			this.getView().byId("storageTypeWarehouseScreenId").setValue("");
 			this.getView().byId("storageBinWarehouseScreenId").setValue("");
 			this.getView().byId("warehouseWarehouseScreenId").setValue("");
@@ -448,8 +449,32 @@ sap.ui.define([
 					});
 			}, 1000);
 		},
-		SelectMaterial: function () {
-			sap.ui.getCore().matNum = this.getView().byId("materialWarehouseScreenId").getSelectedItem().getAdditionalText();
+		// SelectMaterial: function () {
+		// 	sap.ui.getCore().matNum = this.getView().byId("materialWarehouseScreenId").getSelectedItem().getAdditionalText();
+		// },
+		wmMatValidate: function () {
+			var oRef = this;
+			var mat = oRef.getView().byId("materialWarehouseScreenId").getValue();
+			oRef.odataService.read("/MaterialSet('" + mat + "')", null, null, false, function (oData, oResponse) {
+					var matdesc = oResponse.data.MaterialDesc;
+					oRef.getView().byId("idWMMatDesc").setValue(matdesc);
+					// oRef.MatScan(mat);
+					// console.log(oResponse);
+				},
+				function (oData, oResponse) {
+					// console.log(oResponse);
+					var error = JSON.parse(oData.response.body);
+					var errorMsg = error.error.message.value;
+					if (errorMsg === "Material Not Found.") {
+						oRef.getView().byId("materialWarehouseScreenId").setValue("");
+						MessageBox.error("Please scan a correct material");
+					} else {
+						oRef.getView().byId("materialWarehouseScreenId").setValue("");
+						MessageBox.error("Please scan a correct material");
+					}
+				}
+			);
+
 		},
 
 		onSubmitWarehouseScreen: function () {
@@ -486,7 +511,7 @@ sap.ui.define([
 				// } else {
 				// matnr = sap.ui.getCore().matNum;
 				// matnr = "";
-				matnr = sap.ui.getCore().matNum;
+				// matnr = sap.ui.getCore().matNum;
 				// }
 				var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
 				oRouter.navTo("WarehouseScreenOutput", {});

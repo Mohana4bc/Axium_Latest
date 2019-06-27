@@ -26,19 +26,21 @@ sap.ui.define([
 
 		},
 		onBeforeShow: function () {
-			this.getView().byId("idHUMatCount").setValue("0")
+			this.getView().byId("idHUMatCount").setValue("0");
 			var oRef = this;
 			var aData = oRef.getView().getModel("InvenHUBin").getData();
 			oRef.aData = [];
 			oRef.getView().getModel("InvenHUBin").setData(oRef.aData);
 			var oHU = oRef.getView().byId("idHUNum");
 			var oMatNum = oRef.getView().byId("idMatNum");
+			var oMatDesc = oRef.getView().byId("idInvenMatDesc");
 			var oBatchNum = oRef.getView().byId("idBatchNum");
 			var oQty = oRef.getView().byId("idQty");
 			var oAddButton = oRef.getView().byId("idAdd");
 
 			if (sap.ui.getCore().InvenStrLocFlag === true) {
 				oMatNum.setVisible(false);
+				oMatDesc.setVisible(false);
 				oBatchNum.setVisible(false);
 				oQty.setVisible(false);
 				oAddButton.setVisible(false);
@@ -60,26 +62,27 @@ sap.ui.define([
 					// 				}));
 					// 		}
 					// 	});
-					oRef.odataService.read("/MaterialsSet", null, null, false, function (response) {
-						if (oRef.getView().byId("idMatNum") !== undefined) {
-							oRef.getView().byId("idMatNum").destroyItems();
-						}
-						for (var i = 0; i < response.results.length; i++) {
-							oRef.getView().byId("idMatNum").addItem(
-								new sap.ui.core.ListItem({
-									// text: response.results[i].Material,
-									// key: response.results[i].Material,
-									// additionalText: response.results[i].MaterialDesc
+					// oRef.odataService.read("/MaterialsSet", null, null, false, function (response) {
+					// 	if (oRef.getView().byId("idMatNum") !== undefined) {
+					// 		oRef.getView().byId("idMatNum").destroyItems();
+					// 	}
+					// 	for (var i = 0; i < response.results.length; i++) {
+					// 		oRef.getView().byId("idMatNum").addItem(
+					// 			new sap.ui.core.ListItem({
+					// 				// text: response.results[i].Material,
+					// 				// key: response.results[i].Material,
+					// 				// additionalText: response.results[i].MaterialDesc
 
-									text: response.results[i].MaterialDesc,
-									key: response.results[i].MaterialDesc,
-									additionalText: response.results[i].Material
+					// 				text: response.results[i].MaterialDesc,
+					// 				key: response.results[i].MaterialDesc,
+					// 				additionalText: response.results[i].Material
 
-								}));
-						}
-					});
+					// 			}));
+					// 	}
+					// });
 					oHU.setVisible(false);
 					oMatNum.setVisible(true);
+					oMatDesc.setVisible(true);
 					oBatchNum.setVisible(true);
 					oQty.setVisible(true);
 					oAddButton.setVisible(true);
@@ -279,23 +282,46 @@ sap.ui.define([
 			}
 
 		},
-		selectMaterial: function (oEvent) {
-			sap.ui.getCore().globalMat = this.getView().byId("idMatNum").getSelectedItem().getAdditionalText();
+		// selectMaterial: function (oEvent) {
+		// 	sap.ui.getCore().globalMat = this.getView().byId("idMatNum").getSelectedItem().getAdditionalText();
+		// },
+		invenMatValidate: function () {
+			var oRef = this;
+			var mat = oRef.getView().byId("idMatNum").getValue();
+			oRef.odataService.read("/MaterialSet('" + mat + "')", null, null, false, function (oData, oResponse) {
+					var matdesc = oResponse.data.MaterialDesc;
+					oRef.getView().byId("idInvenMatDesc").setValue(matdesc);
+					// oRef.MatScan(mat);
+					// console.log(oResponse);
+				},
+				function (oData, oResponse) {
+					// console.log(oResponse);
+					var error = JSON.parse(oData.response.body);
+					var errorMsg = error.error.message.value;
+					if (errorMsg === "Material Not Found.") {
+						oRef.getView().byId("idMatNum").setValue("");
+						MessageBox.error("Please scan a correct material");
+					} else {
+						oRef.getView().byId("idMatNum").setValue("");
+						MessageBox.error("Please scan a correct material");
+					}
+				}
+			);
 		},
 		onAddMaterial: function () {
 			var oRef = this;
-			var oMat = sap.ui.getCore().globalMat;
+			var oMat = oRef.getView().byId("idMatNum").getValue();
 			var oBatchNo = oRef.getView().byId("idBatchNum").getValue();
 			var oQty = oRef.getView().byId("idQty").getValue();
-			var oMat = oRef.getView().byId("idMatNum").getValue();
+			var oMatDesc = oRef.getView().byId("idInvenMatDesc").getValue();
 			oRef.aData.push({
 				ExternalHU: "",
 				StorageLocation: sap.ui.getCore().StorageLocation,
 				Plant: sap.ui.getCore().PlantNumber,
 				BatchNumber: oBatchNo,
 				Quantity: oQty,
-				Material: sap.ui.getCore().globalMat,
-				MatDesc: oMat
+				Material: oMat,
+				MatDesc: oMatDesc
 			});
 			var oModel = new sap.ui.model.json.JSONModel();
 
@@ -304,6 +330,7 @@ sap.ui.define([
 			});
 			oRef.getOwnerComponent().setModel(oModel, "InvenHUBin");
 			oRef.getView().byId("idMatNum").setValue("");
+			oRef.getView().byId("idInvenMatDesc").setValue("");
 			oRef.getView().byId("idBatchNum").setValue("");
 			oRef.getView().byId("idQty").setValue("");
 			var huMatCount = oRef.getView().byId("idHUMatCount").getValue();

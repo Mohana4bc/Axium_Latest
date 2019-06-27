@@ -57,8 +57,11 @@
 							<Input value="" id="storageTypeWarehouseScreenId" enabled="false"></Input>
 							<!--<ComboBox id="storageTypeWarehouseScreenId" filterSecondaryValues="true" showSecondaryValues="true" placeholder="Select Storage Type"></ComboBox>-->
 							<Label text="Material" class="sapUiSmallMarginTop"></Label>
-							<ComboBox id="materialWarehouseScreenId" filterSecondaryValues="true" showSecondaryValues="true" placeholder="Select Material"
-								selectionChange="SelectMaterial"></ComboBox>
+							<Input id="materialWarehouseScreenId" value="" placeholder="Please Scan Material" change="wmMatValidate"></Input>
+							<!--<ComboBox id="materialWarehouseScreenId" filterSecondaryValues="true" showSecondaryValues="true" placeholder="Select Material"-->
+							<!--	selectionChange="SelectMaterial"></ComboBox>-->
+							<Label text="Material Description" class="sapUiSmallMarginTop"></Label>
+							<Input id="idWMMatDesc" value="" editable="false" enabled="false"></Input>
 						</f:content>
 					</f:SimpleForm>
 				</content>

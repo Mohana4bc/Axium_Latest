@@ -105,7 +105,7 @@ sap.ui.define([
 			var oPlant = oRef.getView().byId("plantPlantScreenId");
 			var oStorageLoc = oRef.getView().byId("storageLocationPlantScreenId");
 
-			oMat.clearSelection();
+			// oMat.clearSelection();
 			oPlant.clearSelection();
 			oStorageLoc.clearSelection();
 
@@ -145,6 +145,7 @@ sap.ui.define([
 
 		setEmpty: function () {
 			this.getView().byId("materialPlantScreenId").setValue("");
+			this.getView().byId("idMaterialDescription").setValue("");
 			this.getView().byId("plantPlantScreenId").setValue("");
 			this.getView().byId("storageLocationPlantScreenId").setValue("");
 			sap.ui.getCore().matNum = "";
@@ -189,22 +190,22 @@ sap.ui.define([
 			// 		}
 			// 	});
 			// } else {
-			this.odataService.read("/PlantMaterialSet?$filter=Plant eq'" + plant + "'", null, null,
-				false,
-				function (response) {
-					if (that.getView().byId("materialPlantScreenId") !== undefined) {
-						that.getView().byId("materialPlantScreenId").destroyItems();
-					}
-					for (var i = 0; i < response.results.length; i++) {
-						that.getView().byId("materialPlantScreenId").addItem(
-							new sap.ui.core.ListItem({
-								text: response.results[i].MaterialDesc,
-								key: response.results[i].MaterialDesc,
+			// this.odataService.read("/PlantMaterialSet?$filter=Plant eq'" + plant + "'", null, null,
+			// 	false,
+			// 	function (response) {
+			// 		if (that.getView().byId("materialPlantScreenId") !== undefined) {
+			// 			that.getView().byId("materialPlantScreenId").destroyItems();
+			// 		}
+			// 		for (var i = 0; i < response.results.length; i++) {
+			// 			that.getView().byId("materialPlantScreenId").addItem(
+			// 				new sap.ui.core.ListItem({
+			// 					text: response.results[i].MaterialDesc,
+			// 					key: response.results[i].MaterialDesc,
 
-								additionalText: response.results[i].Material
-							}));
-					}
-				});
+			// 					additionalText: response.results[i].Material
+			// 				}));
+			// 		}
+			// 	});
 			// var that = this;
 			setTimeout(function () {
 				that.odataService.read("/StorageLocSet?$filter=Plant eq '" + plant + "'", null, null,
@@ -230,11 +231,35 @@ sap.ui.define([
 			// }
 
 		},
+		validateMaterial: function () {
+			var oRef = this;
+			var mat = oRef.getView().byId("materialPlantScreenId").getValue();
+			oRef.odataService.read("/MaterialSet('" + mat + "')", null, null, false, function (oData, oResponse) {
+					var matdesc = oResponse.data.MaterialDesc;
+					oRef.getView().byId("idMaterialDescription").setValue(matdesc);
+					oRef.selectStorageLoc();
+					// oRef.MatScan(mat);
+					// console.log(oResponse);
+				},
+				function (oData, oResponse) {
+					// console.log(oResponse);
+					var error = JSON.parse(oData.response.body);
+					var errorMsg = error.error.message.value;
+					if (errorMsg === "Material Not Found.") {
+						oRef.getView().byId("materialPlantScreenId").setValue("");
+						MessageBox.error("Please scan a correct material");
+					} else {
+						oRef.getView().byId("materialPlantScreenId").setValue("");
+						MessageBox.error("Please scan a correct material");
+					}
+				}
+			);
+		},
 
 		selectStorageLoc: function () {
-			sap.ui.getCore().matNum = this.getView().byId("materialPlantScreenId").getSelectedItem().getAdditionalText();
+			// sap.ui.getCore().matNum = this.getView().byId("materialPlantScreenId").getSelectedItem().getAdditionalText();
 			// console.log(sap.ui.getCore().matNum);
-			var materialNum = sap.ui.getCore().matNum;
+			// var materialNum = sap.ui.getCore().matNum;
 			var plant = this.getView().byId("plantPlantScreenId").getValue();
 			var that = this;
 			setTimeout(function () {
@@ -265,7 +290,7 @@ sap.ui.define([
 				// if (matnr === "") {
 				// 	matnr = "";
 				// } else {
-				matnr = sap.ui.getCore().matNum;
+				// matnr = sap.ui.getCore().matNum;
 				// }
 
 				var werks = this.getView().byId("plantPlantScreenId").getValue();

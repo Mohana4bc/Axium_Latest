@@ -27,8 +27,11 @@
 							<!--<Label design="Bold" text="Material Number" class="sapUiSmallMarginTop"></Label>-->
 							<!--<Input value="" id="idMatNum" textAlign="Left" width="100%"/>-->
 							<Label text="Material Number" design="Bold" width="100%" textAlign="Begin" textDirection="Inherit" visible="true"></Label>
-							<ComboBox id="idMatNum" showSecondaryValues="true" filterSecondaryValues="true" placeholder="Select Material"
-								selectionChange="selectMaterial"></ComboBox>
+							<!--<ComboBox id="idMatNum" showSecondaryValues="true" filterSecondaryValues="true" placeholder="Select Material"-->
+							<!--	selectionChange="selectMaterial"></ComboBox>-->
+							<Input id="idMatNum" value="" change="invenMatValidate"></Input>
+							<Label text="Material Description" design="Bold" width="100%" textAlign="Begin" textDirection="Inherit" visible="true"></Label>
+							<Input id="idInvenMatDesc" value="" editable="false" enabled="false"></Input>
 							<Label design="Bold" text="Batch Number " class="sapUiSmallMarginTop"></Label>
 							<Input value="" id="idBatchNum" enabled="true" textAlign="Left" width="100%"/>
 							<Label design="Bold" text="Qty " class="sapUiSmallMarginTop"></Label>

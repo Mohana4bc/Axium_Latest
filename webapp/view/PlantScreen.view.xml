@@ -12,8 +12,11 @@
 							<ComboBox id="plantPlantScreenId" filterSecondaryValues="true" showSecondaryValues="true" placeholder="Enter Plant"
 								selectionChange="selectMaterial" loadItems="plantLoad"></ComboBox>
 							<Label text="Material" class="sapUiSmallMarginTop"></Label>
-							<ComboBox id="materialPlantScreenId" filterSecondaryValues="true" showSecondaryValues="true" placeholder="Enter Material"
-								selectionChange="selectStorageLoc" loadItems="handleLoadItems"></ComboBox>
+							<Input id="materialPlantScreenId" value="" placeholder="Please Scan Material" change="validateMaterial"></Input>
+							<Label text="Material Description" class="sapUiSmallMarginTop"></Label>
+							<Input id="idMaterialDescription" value="" editable="false" enabled="false"></Input>
+							<!--<ComboBox id="materialPlantScreenId" filterSecondaryValues="true" showSecondaryValues="true" placeholder="Enter Material"-->
+							<!--	selectionChange="selectStorageLoc" loadItems="handleLoadItems"></ComboBox>-->
 							<!---->
 							<!--<Input id="plantPlantScreenId" value="2001" description="Plant 1 CA" enabled="false" editable="fasle"></Input>-->
 							<!--items="{ 
