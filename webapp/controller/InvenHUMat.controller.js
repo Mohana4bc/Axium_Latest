@@ -38,6 +38,14 @@ sap.ui.define([
 			var oQty = oRef.getView().byId("idQty");
 			var oAddButton = oRef.getView().byId("idAdd");
 
+			oRef.getView().byId("binId").setValue("");
+			oRef.getView().byId("idDPlant").setValue("");
+			oRef.getView().byId("idDSloc").setValue("");
+			oRef.getView().byId("idMatNum").setValue("");
+			oRef.getView().byId("idInvenMatDesc").setValue("");
+			oRef.getView().byId("idBatchNum").setValue("");
+			oRef.getView().byId("idQty").setValue("");
+
 			if (sap.ui.getCore().InvenStrLocFlag === true) {
 				oMatNum.setVisible(false);
 				oMatDesc.setVisible(false);
@@ -342,7 +350,15 @@ sap.ui.define([
 			var oRef = this;
 			var oHU = oRef.getView().byId("idHUNum");
 			var oMatNum = oRef.getView().byId("idMatNum");
-			oRef.getView().byId("idHUMatCount").setValue("");
+			oRef.getView().byId("idHUMatCount").setValue("0");
+			oRef.getView().byId("binId").setValue("");
+			oRef.getView().byId("idDPlant").setValue("");
+			oRef.getView().byId("idDSloc").setValue("");
+			oRef.getView().byId("idMatNum").setValue("");
+			oRef.getView().byId("idInvenMatDesc").setValue("");
+			oRef.getView().byId("idBatchNum").setValue("");
+			oRef.getView().byId("idQty").setValue("");
+
 			var sRouter = sap.ui.core.UIComponent.getRouterFor(this);
 			sRouter.navTo("InventoryPlntStrloc", true);
 			oHU.setVisible(true);
@@ -423,6 +439,40 @@ sap.ui.define([
 			// }
 
 		},
+		dPlantValidation: function () {
+			var oRef = this;
+			var dPlant = oRef.getView().byId("idDPlant").getValue();
+			oRef.odataService.read("/ReconPlantValidation?Plant='" + dPlant + "'", {
+				success: cSuccess,
+				failed: cFailed
+			});
+
+			function cSuccess(data, response) {
+
+			}
+
+			function cFailed(data, response) {
+
+			}
+
+		},
+		dSlocValidation: function () {
+			var oRef = this;
+			var dPlant = oRef.getView().byId("idDPlant").getValue();
+			var dSloc = oRef.getView().byId("idDSloc").getValue();
+			oRef.odataService.read("/ReconSlocValidation?Plant='" + dPlant + "' and Sloc='" + dSloc + "'", {
+				success: cSuccess,
+				failed: cFailed
+			});
+
+			function cSuccess(data, response) {
+
+			}
+
+			function cFailed(data, response) {
+
+			}
+		},
 		onInvenSubmit: function () {
 			var oBinNumber = this.getView().byId("binId").getValue();
 			if (oBinNumber === "") {
@@ -443,6 +493,8 @@ sap.ui.define([
 					temp.Material = item.Material;
 					temp.Handlingunit = item.ExternalHU;
 					temp.BinNumber = oBinNumber;
+					temp.DPLANT = this.getView().byId("idDPlant").getValue();
+					temp.DSLOC = this.getView().byId("idDSloc").getValue();
 					data.NavReconHeadItems.push(temp);
 				});
 				this.odataService.create("/ReconAppHeaderSet", data, null, function (odata, response) {
@@ -457,7 +509,7 @@ sap.ui.define([
 								var sPreviousHash = sHistory.getPreviousHash();
 								if (sPreviousHash !== undefined) {
 									oRef.getView().byId("binId").setValue("");
-									oRef.getView().byId("idHUMatCount").setValue("");
+									oRef.getView().byId("idHUMatCount").setValue("0");
 									window.history.go(-1);
 								}
 							}
@@ -476,7 +528,7 @@ sap.ui.define([
 								var sPreviousHash = sHistory.getPreviousHash();
 								if (sPreviousHash !== undefined) {
 									oRef.getView().byId("binId").setValue("");
-									oRef.getView().byId("idHUMatCount").setValue("");
+									oRef.getView().byId("idHUMatCount").setValue("0");
 									window.history.go(-1);
 								}
 							}

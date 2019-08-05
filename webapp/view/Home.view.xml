@@ -34,7 +34,7 @@
 							iconFirst="true" type="Emphasized" press="onPressFGPick" icon="sap-icon://bar-code"/>
 						<Button text="Physical Inventory" class="sapMBtnContent" iconDensityAware="false" visible="true" enabled="true" width="325px"
 							iconFirst="true" type="Emphasized" press="onPhysicalInventory" icon="sap-icon://bar-code"/>
-						<Button text="Inventory Recon App" class="sapMBtnContent" iconDensityAware="false" visible="true" enabled="true" width="325px"
+						<Button text="Stock Transfer App" class="sapMBtnContent" iconDensityAware="false" visible="true" enabled="true" width="325px"
 							iconFirst="true" type="Emphasized" press="onInventoryPress" icon="sap-icon://bar-code"/>
 						<!--<Button text="Bin To Bin Transfer" iconDensityAware="false" visible="true" enabled="true" width="219px" iconFirst="true" type="Emphasized"-->
 						<!--	press="onPressBinToBin" icon="sap-icon://shelf"/>-->

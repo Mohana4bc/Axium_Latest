@@ -2,16 +2,17 @@
 	xmlns:html="http://www.w3.org/1999/xhtml" xmlns:l="sap.ui.layout" xmlns:f="sap.ui.layout.form">
 	<App>
 		<pages>
-			<Page title="Inventory" showNavButton="true" navButtonPress="onPressBack">
+			<Page title="Stock Transfer From" showNavButton="true" navButtonPress="onPressBack">
 				<content>
 					<f:SimpleForm columnsL="7" columnsM="7" editable="false" emptySpanL="1" emptySpanM="1" labelSpanL="4" labelSpanM="4"
 						layout="ResponsiveGridLayout" maxContainerCols="2" minWidth="1024">
 						<f:content>
-							<Label text="Plant" required="true" class="sapUiSmallMarginTop"></Label>
-							<ComboBox id="plantPlantScreenId" filterSecondaryValues="true" showSecondaryValues="true" placeholder="Select Plant"
+							<Label text="Source Plant" required="true" class="sapUiSmallMarginTop"></Label>
+							<ComboBox id="plantPlantScreenId" filterSecondaryValues="true" showSecondaryValues="true" placeholder="Select Source Plant"
 								selectionChange="selectStorageLocation" loadItems="plantLoad"></ComboBox>
-							<Label text="Storage Location" required="true" class="sapUiSmallMarginTop"></Label>
-							<ComboBox id="storageLocationPlantScreenId" filterSecondaryValues="true" showSecondaryValues="true" placeholder="Select Storage Location"></ComboBox>
+							<Label text="Source Storage Location" required="true" class="sapUiSmallMarginTop"></Label>
+							<ComboBox id="storageLocationPlantScreenId" filterSecondaryValues="true" showSecondaryValues="true"
+								placeholder="Select Source Storage Location"></ComboBox>
 						</f:content>
 					</f:SimpleForm>
 				</content>
