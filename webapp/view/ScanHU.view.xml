@@ -6,10 +6,10 @@
 				<!--<tnt:InfoLabel text="PLEASE SCAN BIN NUMBER BEFORE SUBMIT" colorScheme="3" renderMode="Narrow"></tnt:InfoLabel>-->
 				<customHeader>
 					<Bar>
-						<contentRight>
-							<Label design="Bold" text="Bin Number" required="true" class="sapUiSmallMarginTop"></Label>
-							<Input id="fgPutAwayBinId" enabled="true" placeholder="Please Scan Bin Number" change="onBinScan"></Input>
-						</contentRight>
+						<!--<contentRight>-->
+						<!--	<Label design="Bold" text="Bin Number" required="true" class="sapUiSmallMarginTop"></Label>-->
+						<!--	<Input id="fgPutAwayBinId" enabled="true" placeholder="Please Scan Bin Number" change="onBinScan"></Input>-->
+						<!--</contentRight>-->
 						<contentMiddle>
 							<Label text="FG Put Away"></Label>
 							<!--<Text text="{oDeliveryNo>DeliveryNo}"></Text>-->
@@ -26,6 +26,8 @@
 							<Label text="Warehouse Number" required="true" class="sapUiSmallMarginTop"></Label>
 							<ComboBox id="fgWareHouseid" filterSecondaryValues="true" showSecondaryValues="true" placeholder="Select Warehouse Number"
 								selectionChange="getWareHouseNum"></ComboBox>
+							<!--<Label text="Bin Number" required="true" class="sapUiSmallMarginTop"></Label>-->
+							<!--<Input id="fgPutAwayBinId" enabled="true" placeholder="Please Scan Bin Number" change="onBinScan"></Input>-->
 							<Label text="HU Number" class="sapUiSmallMarginTop"></Label>
 							<SearchField id="id1" placeholder="Scan Handling Unit Number" liveChange="onhandleSearch" showSearchButton="false"/>
 						</f:content>
@@ -47,7 +49,7 @@
 							<Button text="Available Bins" type="Emphasized" press="onPressavailableBins"/>
 						</contentLeft>
 						<contentRight>
-							<Button text="Submit" id="idSubmit" type="Accept" icon="sap-icon://save" press="onSubmit"/>
+							<Button text="Next" id="idSubmit" type="Accept" icon="sap-icon://save" press="onNext"/>
 							<Button text="Delete" type="Reject" icon="sap-icon://delete" press="onDelete"/>
 						</contentRight>
 					</Bar>

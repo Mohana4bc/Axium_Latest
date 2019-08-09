@@ -448,11 +448,16 @@ sap.ui.define([
 			});
 
 			function cSuccess(data, response) {
+				console.log(response);
+				if (response.data.Message === "INVALID") {
+					oRef.getView().byId("idDPlant").setValue("");
+					MessageBox.error("Please scan a valid plant");
+				}
 
 			}
 
 			function cFailed(data, response) {
-
+				// console.log(response);
 			}
 
 		},
@@ -460,12 +465,26 @@ sap.ui.define([
 			var oRef = this;
 			var dPlant = oRef.getView().byId("idDPlant").getValue();
 			var dSloc = oRef.getView().byId("idDSloc").getValue();
-			oRef.odataService.read("/ReconSlocValidation?Plant='" + dPlant + "' and Sloc='" + dSloc + "'", {
+			// ReconSlocValidation ? Sloc = 'FP01' & Plant = '1001' / ReconSlocValidation ? Plant = '" + dPlant + "'
+			// and Sloc = '" + dSloc + "'
+			// "
+			// /ReconSlocValidation?Sloc='" + dSloc + "'& Plant='" + dPlant + "'"
+			// ReconSlocValidation?Sloc='FP01'&Plant='1001' 
+			// "/ReconSlocValidation?Plant = '" + dPlant + "'&Sloc = '" + dSloc + "'"
+			oRef.odataService.read("/ReconSlocValidation?Sloc='" + dSloc + "'&Plant='" + dPlant + "'", {
 				success: cSuccess,
 				failed: cFailed
 			});
 
 			function cSuccess(data, response) {
+				console.log(response);
+				if (response.data.Message === "INVALID") {
+					oRef.getView().byId("idDSloc").setValue("");
+					MessageBox.error("Please scan a valid storage location");
+				} else if (response.data.Message === "Enter Plant and Storage Location") {
+					oRef.getView().byId("idDSloc").setValue("");
+					MessageBox.error("Please scan destination plant first");
+				}
 
 			}
 
@@ -475,8 +494,11 @@ sap.ui.define([
 		},
 		onInvenSubmit: function () {
 			var oBinNumber = this.getView().byId("binId").getValue();
-			if (oBinNumber === "") {
-				MessageBox.error("Please Scan Bin Number");
+			var oPlant = this.getView().byId("idDPlant").getValue();
+			var oSloc = this.getView().byId("idDSloc").getValue();
+
+			if (oBinNumber === "" || oPlant === "" || oSloc === "") {
+				MessageBox.error("Please scan all the mandatory fields");
 			} else {
 				var data = {};
 				data.NavReconHeadItems = [];
@@ -493,13 +515,15 @@ sap.ui.define([
 					temp.Material = item.Material;
 					temp.Handlingunit = item.ExternalHU;
 					temp.BinNumber = oBinNumber;
-					temp.DPLANT = this.getView().byId("idDPlant").getValue();
-					temp.DSLOC = this.getView().byId("idDSloc").getValue();
+					temp.DPlant = oPlant;
+					temp.DSloc = oSloc;
 					data.NavReconHeadItems.push(temp);
 				});
 				this.odataService.create("/ReconAppHeaderSet", data, null, function (odata, response) {
+					var matDoc = response.data.BinNumber;
+					var msg = "Goods Movement is Successfull, Material Document Number is: " + matDoc + "";
 					// MessageBox.success("Data Saved");
-					MessageBox.success("Data Successfully Saved", {
+					MessageBox.success(msg, {
 						title: "Success",
 						Action: "OK",
 						onClose: function (oAction) {
@@ -519,7 +543,7 @@ sap.ui.define([
 						textDirection: sap.ui.core.TextDirection.Inherit
 					});
 				}, function () {
-					MessageBox.error("HU's Scanned Are Already Saved", {
+					MessageBox.error("Error Saving Data", {
 						title: "Error",
 						Action: "Close",
 						onClose: function (oAction) {

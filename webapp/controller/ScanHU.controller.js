@@ -145,7 +145,7 @@ sap.ui.define([
 							else {
 								MessageBox.error(data.Message);
 								oRef.getView().byId("id1").setValue("");
-								oRef.getView().byId("fgPutAwayBinId").setValue("");
+								// oRef.getView().byId("fgPutAwayBinId").setValue("");
 							}
 
 						}
@@ -226,7 +226,7 @@ sap.ui.define([
 							else {
 								MessageBox.error(data.Message);
 								oRef.getView().byId("id1").setValue("");
-								oRef.getView().byId("fgPutAwayBinId").setValue("");
+								// oRef.getView().byId("fgPutAwayBinId").setValue("");
 							}
 
 						}
@@ -334,7 +334,7 @@ sap.ui.define([
 		onBinScan: function () {
 			var that = this;
 			var oWH = that.getView().byId("fgWareHouseid").getValue();
-			var binNo = that.getView().byId("fgPutAwayBinId");
+			// var binNo = that.getView().byId("fgPutAwayBinId");
 			if (oWH === "") {
 				MessageBox.error("Please Select WareHouse Number");
 				binNo.setValue("");
@@ -344,7 +344,8 @@ sap.ui.define([
 				var sPreviousHash = sHistory.getPreviousHash();
 				var HUnumber = that.getView().byId("id1").getValue();
 				// var data1 = that.getView().byId("idMat").getValue();
-				var binNo = that.getView().byId("fgPutAwayBinId").getValue();
+				var binNo = sap.ui.getCore().byId("fgPutAwayBinId").getValue();
+				// var binNo = that.getView().byId("fgPutAwayBinId").getValue();
 				var fgPutAwayFlag = true;
 				// setTimeout(function () {
 				// if ((binNo.length >= 5) || (binNo.length >= 6) || (binNo.length >= 7) || (binNo.length >=
@@ -372,6 +373,9 @@ sap.ui.define([
 							} else {
 								// if (response.Message === "valid Bin") {
 								if (response.Message === "Valid Destination") {
+									// this.dialog = sap.ui.xmlfragment("com.axium.Axium.view.Binnumber", this);
+									// this.dialog.close();
+									that.onSubmit();
 
 									// that.odataService.read("/AvailableBinsFGRMSet?$filter=WareHouse eq '" + oWH +
 									// 	"' and Flag eq 'X' and Material eq '" + sap.ui.getCore().MatNum + "'",
@@ -437,7 +441,8 @@ sap.ui.define([
 									initialFocus: null,
 									textDirection: sap.ui.core.TextDirection.Inherit
 								});
-								that.getView().byId("fgPutAwayBinId").setValue("");
+								sap.ui.getCore().byId("fgPutAwayBinId").setValue("");
+								// that.getView().byId("fgPutAwayBinId").setValue("");
 
 							}
 
@@ -465,6 +470,24 @@ sap.ui.define([
 
 		},
 
+		onNext: function (oEvent) {
+			// if (!this.dialog) {
+			this.dialog = sap.ui.xmlfragment("com.axium.Axium.view.Binnumber", this);
+			this.getView().addDependent(this.dialog);
+			this.dialog.open();
+			// }
+
+		},
+		// onDialogClose: function (oEvent) {
+		// 	this.dialog = sap.ui.xmlfragment("com.axium.Axium.view.Binnumber", this);
+		// 	this.dialog.destroy();
+		// },
+		onSave: function (oEvent) {
+			var oRef = this;
+			oRef.onBinScan();
+			// this.dialog = sap.ui.xmlfragment("com.axium.Axium.view.Binnumber", this);
+
+		},
 		onSubmit: function (oEvent) {
 			var oRef = this;
 			var tempVar = oRef.getView().byId("id1").getValue();
@@ -474,7 +497,7 @@ sap.ui.define([
 			if (result.length === 0) {
 				MessageBox.error("Please Scan HU's");
 			} else {
-				var binNo = oRef.getView().byId("fgPutAwayBinId").getValue();
+				var binNo = sap.ui.getCore().byId("fgPutAwayBinId").getValue();
 				var oWH = oRef.getView().byId("fgWareHouseid").getValue();
 				if (binNo === "" || oWH === "") {
 					MessageBox.error("Please Select/Scan Mandatory Fields");
@@ -515,8 +538,12 @@ sap.ui.define([
 										oRef.getView().byId("idList").destroyItems();
 										this.getView().byId("id1").setValue("");
 										oRef.getView().byId("fgWareHouseid").setValue("");
-										oRef.getView().byId("fgPutAwayBinId").setValue("");
+										// oRef.getView().byId("fgPutAwayBinId").setValue("");
 										this.saveFlag = true;
+										// this.dialog = sap.ui.xmlfragment("com.axium.Axium.view.Binnumber", this);
+										this.dialog.destroy();
+										var sRouter = sap.ui.core.UIComponent.getRouterFor(this);
+										sRouter.navTo("Home", true);
 										// var sHistory = History.getInstance();
 										// var sPreviousHash = sHistory.getPreviousHash();
 										// if (sPreviousHash !== undefined) {
@@ -527,7 +554,12 @@ sap.ui.define([
 								styleClass: "",
 								initialFocus: null,
 								textDirection: sap.ui.core.TextDirection.Inherit
+									// this.dialog = sap.ui.xmlfragment("com.axium.Axium.view.Binnumber", this);
+									// that.dialog.destroy();
+									// oRef.dialog.close();
 							});
+							// this.dialog.close();
+							// this.dialog.destroy();
 							// oRef.getView().byId("idSubmit").setEnabled(false);
 							// sap.ui.getCore().FGPutAwaySubmit = false;
 							// var data = oRef.getView().getModel("oListHU").getData();
@@ -558,13 +590,59 @@ sap.ui.define([
 								}
 
 							});
+
+							// onClose: function (oAction) {
+							// 		if (oAction === sap.m.MessageBox.Action.OK) {
+							// 			var oRef = this;
+							// 			var aData = oRef.getView().getModel("oListHU").getData();
+							// 			oRef.aData = [];
+							// 			oRef.getView().getModel("oListHU").setData(oRef.aData);
+							// 			oRef.getView().getModel("oListHU").refresh(true);
+							// 			oRef.getView().byId("idList").destroyItems();
+							// 			this.getView().byId("id1").setValue("");
+							// 			oRef.getView().byId("fgWareHouseid").setValue("");
+							// 			// oRef.getView().byId("fgPutAwayBinId").setValue("");
+							// 			this.saveFlag = true;
+							// 			// this.dialog = sap.ui.xmlfragment("com.axium.Axium.view.Binnumber", this);
+							// 			this.dialog.destroy();
+							// 			var sRouter = sap.ui.core.UIComponent.getRouterFor(this);
+							// 			sRouter.navTo("Home", true);
+							// 			// var sHistory = History.getInstance();
+							// 			// var sPreviousHash = sHistory.getPreviousHash();
+							// 			// if (sPreviousHash !== undefined) {
+							// 			// 	window.history.go(-1);
+							// 			// }
+							// 		}
+							// 	}.bind(oRef)
+
 							MessageBox.error(msg, {
 								title: "Error",
-								onClose: null,
+								Action: "CLOSE",
+								onClose: function (oAction) {
+									if (oAction === sap.m.MessageBox.Action.CLOSE) {
+										var oRef = this;
+										var aData = oRef.getView().getModel("oListHU").getData();
+										oRef.aData = [];
+										oRef.getView().getModel("oListHU").setData(oRef.aData);
+										oRef.getView().getModel("oListHU").refresh(true);
+										oRef.getView().byId("idList").destroyItems();
+										this.getView().byId("id1").setValue("");
+										oRef.getView().byId("fgWareHouseid").setValue("");
+										// oRef.getView().byId("fgPutAwayBinId").setValue("");
+										this.saveFlag = true;
+										// this.dialog = sap.ui.xmlfragment("com.axium.Axium.view.Binnumber", this);
+										this.dialog.destroy();
+										var sRouter = sap.ui.core.UIComponent.getRouterFor(this);
+										sRouter.navTo("Home", true);
+									}
+
+								}.bind(oRef),
 								styleClass: "",
 								initialFocus: null,
 								textDirection: sap.ui.core.TextDirection.Inherit
 							});
+							this.dialog.close();
+							this.dialog.destroy();
 						});
 					} else {
 						MessageBox.information("Bin Number Missing");
@@ -614,7 +692,7 @@ sap.ui.define([
 				oRef.getView().byId("idList").destroyItems();
 				this.getView().byId("id1").setValue("");
 				oRef.getView().byId("fgWareHouseid").setValue("");
-				oRef.getView().byId("fgPutAwayBinId").setValue("");
+				// oRef.getView().byId("fgPutAwayBinId").setValue("");
 			}
 			// sap.ui.getCore().FGPutAwaySubmit = false;
 			var sRouter = sap.ui.core.UIComponent.getRouterFor(this);
