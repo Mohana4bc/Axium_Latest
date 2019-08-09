@@ -7,11 +7,14 @@
 				<customHeader>
 					<Bar>
 						<contentRight>
-							<!--<Label design="Bold" text="Door Number" required="true" class="sapUiSmallMarginTop"></Label>-->
-							<!--<Input id="doorid" enabled="false" placeholder="Please Scan Door Number" liveChange="doorValidation"></Input>-->
+							<!--<Label text="FG Pick Materials"></Label>-->
+							<Label text="Door No" required="true"></Label>
+							<Input id="doorid" enabled="false" placeholder="Scan Door Number" liveChange="doorValidation"></Input>
 						</contentRight>
 						<contentMiddle>
-							<Label text="FG Pick Materials"></Label>
+							<!--<Label text="Door No" required="true" class="sapUiSmallMarginTop"></Label>-->
+							<!--<Input id="doorid" enabled="false" placeholder="Scan Door Number" liveChange="doorValidation"></Input>-->
+							<!--<Label text="Materials"></Label>-->
 							<!--<Text text="{oDeliveryNo>DeliveryNo}"></Text>-->
 						</contentMiddle>
 						<contentLeft>
@@ -20,10 +23,10 @@
 					</Bar>
 				</customHeader>
 				<content>
-					<l:VerticalLayout>
-						<Label design="Bold" text="Door Number" required="true" class="sapUiSmallMarginTop"></Label>
-						<Input id="doorid" enabled="false" placeholder="Please Scan Door No" liveChange="doorValidation"></Input>
-					</l:VerticalLayout>
+					<!--<l:VerticalLayout>-->
+					<!--	<Label design="Bold" text="Door Number" required="true" class="sapUiSmallMarginTop"></Label>-->
+					<!--	<Input id="doorid" enabled="false" placeholder="Please Scan Door No" liveChange="doorValidation"></Input>-->
+					<!--</l:VerticalLayout>-->
 					<!--<ScrollContainer width="100%" vertical="true" focusable="true">-->
 					<!--<Label design="Bold" text="Door Number" required="true" class="sapUiSmallMarginTop"></Label>-->
 					<!--<Input id="doorid" enabled="false" placeholder="Please Scan Door Number" liveChange="doorValidation"></Input>-->
@@ -75,9 +78,10 @@
 				</content>
 				<!--<footer>-->
 				<!--	<Bar>-->
-				<!--		<contentRight>-->
-				<!--			<Button text="PGI Submit" press="onFullSubmit" type="Accept"/>-->
-				<!--		</contentRight>-->
+				<!--		<contentLeft>-->
+				<!--			<Label design="Bold" text="Door No:" required="true" class="sapUiSmallMarginTop"></Label>-->
+				<!--			<Input id="doorid" enabled="false" placeholder="Scan Door No to Submit" liveChange="doorValidation"></Input>-->
+				<!--		</contentLeft>-->
 				<!--	</Bar>-->
 				<!--</footer>-->
 			</Page>
