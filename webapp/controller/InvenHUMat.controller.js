@@ -512,15 +512,16 @@ sap.ui.define([
 					temp.StorageLoc = sap.ui.getCore().StorageLocation;
 					temp.Batch = item.BatchNumber;
 					temp.Scannedqty = item.Quantity;
+					// temp.Scannedqty = "2";
 					temp.Material = item.Material;
 					temp.Handlingunit = item.ExternalHU;
-					temp.BinNumber = oBinNumber;
+					temp.Carrier = oBinNumber;
 					temp.DPlant = oPlant;
 					temp.DSloc = oSloc;
 					data.NavReconHeadItems.push(temp);
 				});
 				this.odataService.create("/ReconAppHeaderSet", data, null, function (odata, response) {
-					var matDoc = response.data.BinNumber;
+					var matDoc = response.data.Carrier;
 					var msg = "Goods Movement is Successfull, Material Document Number is: " + matDoc + "";
 					// MessageBox.success("Data Saved");
 					MessageBox.success(msg, {
@@ -542,8 +543,10 @@ sap.ui.define([
 						initialFocus: null,
 						textDirection: sap.ui.core.TextDirection.Inherit
 					});
-				}, function () {
-					MessageBox.error("Error Saving Data", {
+				}, function (response) {
+					var error = JSON.parse(response.response.body);
+					var msg = error.error.innererror.errordetails[0].message;
+					MessageBox.error(msg, {
 						title: "Error",
 						Action: "Close",
 						onClose: function (oAction) {
