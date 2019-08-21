@@ -49,7 +49,7 @@
 							<Button text="Available Bins" type="Emphasized" press="onPressavailableBins"/>
 						</contentLeft>
 						<contentRight>
-							<Button text="Next" id="idSubmit" type="Accept" icon="sap-icon://save" press="onNext"/>
+							<Button text="Next" id="idSubmit" type="Emphasized" icon="sap-icon://accept" press="onNext"/>
 							<Button text="Delete" type="Reject" icon="sap-icon://delete" press="onDelete"/>
 						</contentRight>
 					</Bar>
