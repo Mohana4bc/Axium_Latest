@@ -114,11 +114,9 @@
 			}
 		},
 		"resources": {
-			"css": [
-				{
-					"uri": "css/style.css"
-				}
-			]
+			"css": [{
+				"uri": "css/style.css"
+			}]
 		},
 		"routing": {
 			"config": {
@@ -130,223 +128,183 @@
 				"controlId": "idAppControl",
 				"clearControlAggregation": false
 			},
-			"routes": [
-				{
-					"pattern": "",
-					"name": "Home",
-					"target": "Home"
-				},
-				{
-					"pattern": "ScanHU",
-					"name": "ScanHU",
-					"target": "ScanHU"
-				},
-				{
-					"pattern": "BinScan/{HUSelect},{Batch},{descp},{MatNum}",
-					"name": "BinScan",
-					"target": "BinScan"
-				},
-				{
-					"pattern": "AvailableBins",
-					"name": "AvailableBins",
-					"target": "AvailableBins"
-				},
-				{
-					"pattern": "WarehouseScreen",
-					"name": "WarehouseScreen",
-					"target": "WarehouseScreen"
-				},
-				{
-					"pattern": "WarehouseScreenOutput",
-					"name": "WarehouseScreenOutput",
-					"target": "WarehouseScreenOutput"
-				},
-				{
-					"pattern": "PlantScreen",
-					"name": "PlantScreen",
-					"target": "PlantScreen"
-				},
-				{
-					"pattern": "PlantScreenOutput",
-					"name": "PlantScreenOutput",
-					"target": "PlantScreenOutput"
-				},
-				{
-					"pattern": "ScanDelNo",
-					"name": "ScanDelNo",
-					"target": "ScanDelNo"
-				},
-				{
-					"pattern": "FGPickMaterial",
-					"name": "FGPickMaterial",
-					"target": "FGPickMaterial"
-				},
-				{
-					"pattern": "MaterialBinScan",
-					"name": "MaterialBinScan",
-					"target": "MaterialBinScan"
-				},
-				{
-					"pattern": "ScanQuantityView/{MaterialNumber},{MaterialDescription},{Quantity},{DeliveryNo},{ScannedQuantity}",
-					"name": "ScanQuantityView",
-					"target": "ScanQuantityView"
-				},
-				{
-					"pattern": "PutAway",
-					"name": "PutAway",
-					"target": "PutAway"
-				},
-				{
-					"pattern": "Material/{poNumber}",
-					"name": "Material",
-					"target": "Material"
-				},
-				{
-					"pattern": "MaterialDetailBack/{buttonTrue}",
-					"name": "MaterialDetailBack",
-					"target": "Material"
-				},
-				{
-					"pattern": "MaterialSelected/{index},{buttonTrue}",
-					"name": "MaterialSelected",
-					"target": "MaterialSelected"
-				},
-				{
-					"pattern": "MaterialDetail/{material}",
-					"name": "MaterialDetail",
-					"target": "MaterialDetail"
-				},
-				{
-					"pattern": "BinsAvailable",
-					"name": "BinsAvailable",
-					"target": "BinsAvailable"
-				},
-				{
-					"pattern": "BoxQuantity/{batchNumber},{receivedQuantity},{flag},{index}",
-					"name": "BoxQuantity",
-					"target": "BoxQuantity"
-				},
-				{
-					"pattern": "MaterialDetailBoxQuantity/{flag}",
-					"name": "MaterialDetailBoxQuantity",
-					"target": "MaterialDetailBoxQuantity"
-				},
-				{
-					"pattern": "Pick",
-					"name": "Pick",
-					"target": "Pick"
-				},
-				{
-					"pattern": "Return",
-					"name": "Return",
-					"target": "Return"
-				},
-				{
-					"pattern": "BOMPick/{poNumber}",
-					"name": "BOMPick",
-					"target": "BOMPick"
-				},
-				{
-					"pattern": "BinScanPick/{MatSelect}",
-					"name": "BinScanPick",
-					"target": "BinScanPick"
-				},
-				{
-					"pattern": "BOMReturn/{poNumber}",
-					"name": "BOMReturn",
-					"target": "BOMReturn"
-				},
-				{
-					"pattern": "BinScanReturn/{MatSelect}",
-					"name": "BinScanReturn",
-					"target": "BinScanReturn"
-				},
-				{
-					"pattern": "PODetBack/{index}",
-					"name": "PODetBack",
-					"target": "PODetBack"
-				},
-				{
-					"pattern": "PODetailsBack/{index}",
-					"name": "PODetailsBack",
-					"target": "PODetailsBack"
-				},
-				{
-					"pattern": "AvailableBinReturn",
-					"name": "AvailableBinReturn",
-					"target": "AvailableBinReturn"
-				},
-				{
-					"pattern": "AvailableBinPick/{MatSelect}",
-					"name": "AvailableBinPick",
-					"target": "AvailableBinPick"
-				},
-				{
-					"pattern": "PODet",
-					"name": "PODet",
-					"target": "PODet"
-				},
-				{
-					"pattern": "PODetails",
-					"name": "PODetails",
-					"target": "PODetails"
-				},
-				{
-					"pattern": "BinToBin",
-					"name": "BinToBin",
-					"target": "BinToBin"
-				},
-				{
-					"pattern": "HUandMatScan/{warehouseNumber},{sourceStorage},{sourceBin}",
-					"name": "HUandMatScan",
-					"target": "HUandMatScan"
-				},
-				{
-					"pattern": "HUorMatScan/{warehouseNumber},{sourceStorage},{sourceBin},{whBintoBinFlag}",
-					"name": "HUorMatScan",
-					"target": "HUorMatScan"
-				},
-				{
-					"pattern": "DeliveryAvailableBin",
-					"name": "DeliveryAvailableBin",
-					"target": "DeliveryAvailableBin"
-				},
-				{
-					"pattern": "PlantStorageLoc",
-					"name": "PlantStorageLoc",
-					"target": "PlantStorageLoc"
-				},
-				{
-					"pattern": "BinScanPI",
-					"name": "BinScanPI",
-					"target": "BinScanPI"
-				},
-				{
-					"pattern": "MaterialDetPI",
-					"name": "MaterialDetPI",
-					"target": "MaterialDetPI"
-				},
-				{
-					"pattern": "CountPI",
-					"name": "CountPI",
-					"target": "CountPI"
-				},
-				{
-					"pattern": "BinTransferBins",
-					"name": "BinTransferBins",
-					"target": "BinTransferBins"
-				},
-				{
-					"pattern": "InventoryPlntStrloc",
-					"name": "InventoryPlntStrloc",
-					"target": "InventoryPlntStrloc"
-				},
-				{
-					"pattern": "InvenHUMat",
-					"name": "InvenHUMat",
-					"target": "InvenHUMat"
-				}
-			],
+			"routes": [{
+				"pattern": "",
+				"name": "Home",
+				"target": "Home"
+			}, {
+				"pattern": "ScanHU",
+				"name": "ScanHU",
+				"target": "ScanHU"
+			}, {
+				"pattern": "BinScan/{HUSelect},{Batch},{descp},{MatNum}",
+				"name": "BinScan",
+				"target": "BinScan"
+			}, {
+				"pattern": "AvailableBins",
+				"name": "AvailableBins",
+				"target": "AvailableBins"
+			}, {
+				"pattern": "WarehouseScreen",
+				"name": "WarehouseScreen",
+				"target": "WarehouseScreen"
+			}, {
+				"pattern": "WarehouseScreenOutput",
+				"name": "WarehouseScreenOutput",
+				"target": "WarehouseScreenOutput"
+			}, {
+				"pattern": "PlantScreen",
+				"name": "PlantScreen",
+				"target": "PlantScreen"
+			}, {
+				"pattern": "PlantScreenOutput",
+				"name": "PlantScreenOutput",
+				"target": "PlantScreenOutput"
+			}, {
+				"pattern": "ScanDelNo",
+				"name": "ScanDelNo",
+				"target": "ScanDelNo"
+			}, {
+				"pattern": "FGPickMaterial",
+				"name": "FGPickMaterial",
+				"target": "FGPickMaterial"
+			}, {
+				"pattern": "MaterialBinScan",
+				"name": "MaterialBinScan",
+				"target": "MaterialBinScan"
+			}, {
+				"pattern": "ScanQuantityView/{MaterialNumber},{MaterialDescription},{Quantity},{DeliveryNo},{ScannedQuantity}",
+				"name": "ScanQuantityView",
+				"target": "ScanQuantityView"
+			}, {
+				"pattern": "PutAway",
+				"name": "PutAway",
+				"target": "PutAway"
+			}, {
+				"pattern": "Material/{poNumber}",
+				"name": "Material",
+				"target": "Material"
+			}, {
+				"pattern": "MaterialDetailBack/{buttonTrue}",
+				"name": "MaterialDetailBack",
+				"target": "Material"
+			}, {
+				"pattern": "MaterialSelected/{index},{buttonTrue}",
+				"name": "MaterialSelected",
+				"target": "MaterialSelected"
+			}, {
+				"pattern": "MaterialDetail/{material}",
+				"name": "MaterialDetail",
+				"target": "MaterialDetail"
+			}, {
+				"pattern": "BinsAvailable",
+				"name": "BinsAvailable",
+				"target": "BinsAvailable"
+			}, {
+				"pattern": "BoxQuantity/{batchNumber},{receivedQuantity},{flag},{index}",
+				"name": "BoxQuantity",
+				"target": "BoxQuantity"
+			}, {
+				"pattern": "MaterialDetailBoxQuantity/{flag}",
+				"name": "MaterialDetailBoxQuantity",
+				"target": "MaterialDetailBoxQuantity"
+			}, {
+				"pattern": "Pick",
+				"name": "Pick",
+				"target": "Pick"
+			}, {
+				"pattern": "Return",
+				"name": "Return",
+				"target": "Return"
+			}, {
+				"pattern": "BOMPick/{poNumber}",
+				"name": "BOMPick",
+				"target": "BOMPick"
+			}, {
+				"pattern": "BinScanPick/{MatSelect}",
+				"name": "BinScanPick",
+				"target": "BinScanPick"
+			}, {
+				"pattern": "BOMReturn/{poNumber}",
+				"name": "BOMReturn",
+				"target": "BOMReturn"
+			}, {
+				"pattern": "BinScanReturn/{MatSelect}",
+				"name": "BinScanReturn",
+				"target": "BinScanReturn"
+			}, {
+				"pattern": "PODetBack/{index}",
+				"name": "PODetBack",
+				"target": "PODetBack"
+			}, {
+				"pattern": "PODetailsBack/{index}",
+				"name": "PODetailsBack",
+				"target": "PODetailsBack"
+			}, {
+				"pattern": "AvailableBinReturn",
+				"name": "AvailableBinReturn",
+				"target": "AvailableBinReturn"
+			}, {
+				"pattern": "AvailableBinPick/{MatSelect}",
+				"name": "AvailableBinPick",
+				"target": "AvailableBinPick"
+			}, {
+				"pattern": "PODet",
+				"name": "PODet",
+				"target": "PODet"
+			}, {
+				"pattern": "PODetails",
+				"name": "PODetails",
+				"target": "PODetails"
+			}, {
+				"pattern": "BinToBin",
+				"name": "BinToBin",
+				"target": "BinToBin"
+			}, {
+				"pattern": "HUandMatScan/{warehouseNumber},{sourceStorage},{sourceBin}",
+				"name": "HUandMatScan",
+				"target": "HUandMatScan"
+			}, {
+				"pattern": "HUorMatScan/{warehouseNumber},{sourceStorage},{sourceBin},{whBintoBinFlag}",
+				"name": "HUorMatScan",
+				"target": "HUorMatScan"
+			}, {
+				"pattern": "DeliveryAvailableBin",
+				"name": "DeliveryAvailableBin",
+				"target": "DeliveryAvailableBin"
+			}, {
+				"pattern": "PlantStorageLoc",
+				"name": "PlantStorageLoc",
+				"target": "PlantStorageLoc"
+			}, {
+				"pattern": "BinScanPI",
+				"name": "BinScanPI",
+				"target": "BinScanPI"
+			}, {
+				"pattern": "MaterialDetPI",
+				"name": "MaterialDetPI",
+				"target": "MaterialDetPI"
+			}, {
+				"pattern": "CountPI",
+				"name": "CountPI",
+				"target": "CountPI"
+			}, {
+				"pattern": "BinTransferBins",
+				"name": "BinTransferBins",
+				"target": "BinTransferBins"
+			}, {
+				"pattern": "InventoryPlntStrloc",
+				"name": "InventoryPlntStrloc",
+				"target": "InventoryPlntStrloc"
+			}, {
+				"pattern": "InvenHUMat",
+				"name": "InvenHUMat",
+				"target": "InvenHUMat"
+			}, {
+				"pattern": "BinScanFGPutaway",
+				"name": "BinScanFGPutaway",
+				"target": "BinScanFGPutaway"
+			}],
 			"targets": {
 				"Home": {
 					"viewName": "Home",
@@ -632,6 +590,10 @@
 				"HUorMatScan": {
 					"viewType": "XML",
 					"viewName": "HUorMatScan"
+				},
+				"BinScanFGPutaway": {
+					"viewType": "XML",
+					"viewName": "BinScanFGPutaway"
 				}
 			}
 		}

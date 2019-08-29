@@ -1,8 +1,11 @@
 sap.ui.define([
 	"sap/ui/core/mvc/Controller",
 	"sap/ui/core/routing/History",
-	"sap/m/MessageBox"
-], function (Controller, History, MessageBox) {
+	"sap/m/MessageBox",
+	"sap/m/Dialog",
+	"sap/m/Button",
+	"sap/m/Text"
+], function (Controller, History, MessageBox, Dialog, Button, Text) {
 	"use strict";
 
 	return Controller.extend("com.axium.Axium.controller.ScanHU", {
@@ -337,7 +340,7 @@ sap.ui.define([
 			// var binNo = that.getView().byId("fgPutAwayBinId");
 			if (oWH === "") {
 				MessageBox.error("Please Select WareHouse Number");
-				binNo.setValue("");
+				oWH.setValue("");
 			} else {
 				sap.ui.getCore().flag = false;
 				var sHistory = History.getInstance();
@@ -373,13 +376,35 @@ sap.ui.define([
 							} else {
 								// if (response.Message === "valid Bin") {
 								if (response.Message === "Valid Destination") {
+									// var oRef = this;
+									// var dialog = new Dialog({
+									// 	title: "Confirmation",
+									// 	type: "Message",
+									// 	verticalScrolling: true,
+									// 	content: new Text({
+									// 		text: "Are you sure you want to transfer these HU/s to bin '" + binNo + "'"
+									// 	}),
+									// 	beginButton: new Button({
+									// 		text: 'OK',
+									// 		press: function () {
+									// 			// var oRef = this;
+									// 			that.onSubmit();
+									// 		}
+									// 	}),
+									// 	afterClose: function () {
+									// 		dialog.destroy();
+									// 	}
+									// });
+									// dialog.open();
 									MessageBox.show("Are you sure you want to transfer these HU/s to bin '" + binNo + "'", {
 										icon: MessageBox.Icon.QUESTION,
 										title: "Bin Transfer Confirmation",
 										actions: [MessageBox.Action.YES, MessageBox.Action.NO],
 										onClose: function (oAction) {
 											if (oAction === sap.m.MessageBox.Action.YES) {
+												// MessageBox.Action.Close();
 												that.onSubmit();
+												// MessageBox.Action.Close();
 											} else {
 												sap.ui.getCore().byId("fgPutAwayBinId").setValue("");
 											}
@@ -436,9 +461,12 @@ sap.ui.define([
 
 		onNext: function (oEvent) {
 			// if (!this.dialog) {
-			this.dialog = sap.ui.xmlfragment("com.axium.Axium.view.Binnumber", this);
-			this.getView().addDependent(this.dialog);
-			this.dialog.open();
+			// this.dialog = sap.ui.xmlfragment("com.axium.Axium.view.Binnumber", this);
+			// this.getView().addDependent(this.dialog);
+			// this.dialog.open();
+			var sRouter = sap.ui.core.UIComponent.getRouterFor(this);
+			sRouter.navTo("BinScanFGPutaway", true);
+
 			// }
 
 		},
@@ -501,19 +529,32 @@ sap.ui.define([
 								onClose: function (oAction) {
 									if (oAction === sap.m.MessageBox.Action.OK) {
 										var oRef = this;
+
 										var aData = oRef.getView().getModel("oListHU").getData();
+										var aDataCpy = oRef.getView().getModel("oListHUCpy").getData();
 										oRef.aData = [];
+										oRef.aDataCpy = [];
 										oRef.getView().getModel("oListHU").setData(oRef.aData);
+										oRef.getView().getModel("oListHUCpy").setData(oRef.aDataCpy);
 										oRef.getView().getModel("oListHU").refresh(true);
+										oRef.getView().getModel("oListHUCpy").refresh(true);
 										oRef.getView().byId("idList").destroyItems();
-										this.getView().byId("id1").setValue("");
+										oRef.getView().byId("id1").setValue("");
 										oRef.getView().byId("fgWareHouseid").setValue("");
+
+										// var aData = oRef.getView().getModel("oListHU").getData();
+										// oRef.aData = [];
+										// oRef.getView().getModel("oListHU").setData(oRef.aData);
+										// oRef.getView().getModel("oListHU").refresh(true);
+										// oRef.getView().byId("idList").destroyItems();
+										// this.getView().byId("id1").setValue("");
+										// oRef.getView().byId("fgWareHouseid").setValue("");
 										// oRef.getView().byId("fgPutAwayBinId").setValue("");
 										this.saveFlag = true;
 										// this.dialog = sap.ui.xmlfragment("com.axium.Axium.view.Binnumber", this);
 										this.dialog.destroy();
-										var sRouter = sap.ui.core.UIComponent.getRouterFor(this);
-										sRouter.navTo("Home", true);
+										// var sRouter = sap.ui.core.UIComponent.getRouterFor(this);
+										// sRouter.navTo("Home", true);
 										// var sHistory = History.getInstance();
 										// var sPreviousHash = sHistory.getPreviousHash();
 										// if (sPreviousHash !== undefined) {
@@ -587,21 +628,38 @@ sap.ui.define([
 
 							MessageBox.error(msg, {
 								title: "Error",
-								Action: "CLOSE",
+								Action: "OK",
 								onClose: function (oAction) {
-									if (oAction === sap.m.MessageBox.Action.CLOSE) {
+									if (oAction === sap.m.MessageBox.Action.OK) {
 										var oRef = this;
+
 										var aData = oRef.getView().getModel("oListHU").getData();
+										var aDataCpy = oRef.getView().getModel("oListHUCpy").getData();
 										oRef.aData = [];
+										oRef.aDataCpy = [];
 										oRef.getView().getModel("oListHU").setData(oRef.aData);
+										oRef.getView().getModel("oListHUCpy").setData(oRef.aDataCpy);
 										oRef.getView().getModel("oListHU").refresh(true);
+										oRef.getView().getModel("oListHUCpy").refresh(true);
 										oRef.getView().byId("idList").destroyItems();
-										this.getView().byId("id1").setValue("");
+										oRef.getView().byId("id1").setValue("");
 										oRef.getView().byId("fgWareHouseid").setValue("");
+
+										// var aData = oRef.getView().getModel("oListHU").getData();
+										// oRef.aData = [];
+										// oRef.getView().getModel("oListHU").setData(oRef.aData);
+										// oRef.getView().getModel("oListHU").refresh(true);
+										// oRef.getView().byId("idList").destroyItems();
+										// this.getView().byId("id1").setValue("");
+										// oRef.getView().byId("fgWareHouseid").setValue("");
 										// oRef.getView().byId("fgPutAwayBinId").setValue("");
 										this.saveFlag = true;
 										// this.dialog = sap.ui.xmlfragment("com.axium.Axium.view.Binnumber", this);
 										this.dialog.destroy();
+										// return;
+										// this.onBeforeShow();
+										// var oRouter = sap.ui.core.UIComponent.getRouterFor(this);
+										// oRouter.navTo("ScanHU", {});
 										var sRouter = sap.ui.core.UIComponent.getRouterFor(this);
 										sRouter.navTo("Home", true);
 									}
