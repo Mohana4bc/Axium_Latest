@@ -464,10 +464,20 @@ sap.ui.define([
 			// this.dialog = sap.ui.xmlfragment("com.axium.Axium.view.Binnumber", this);
 			// this.getView().addDependent(this.dialog);
 			// this.dialog.open();
-			var sRouter = sap.ui.core.UIComponent.getRouterFor(this);
-			sRouter.navTo("BinScanFGPutaway", true);
-
-			// }
+			var oRef = this;
+			var result = oRef.oList.getModel("oListHU").getData();
+			if (result.length === 0) {
+				MessageBox.error("Please Scan HU's");
+			} else {
+				// var binNo = sap.ui.getCore().byId("fgPutAwayBinId").getValue();
+				var oWH = oRef.getView().byId("fgWareHouseid").getValue();
+				if (oWH === "") {
+					MessageBox.error("Please Select Warehouse Number");
+				} else {
+					var sRouter = sap.ui.core.UIComponent.getRouterFor(this);
+					sRouter.navTo("BinScanFGPutaway", true);
+				}
+			}
 
 		},
 		// onDialogClose: function (oEvent) {
