@@ -15,7 +15,7 @@
 		},
 		"dataSources": {
 			"ZWM_GW_RFSCREENS_SRV": {
-				"uri": "/Axium/sap/opu/odata/sap/ZWM_GW_RFSCREENS_SRV/",
+				"uri": "/sap/opu/odata/sap/ZWM_GW_RFSCREENS_SRV/",
 				"type": "OData",
 				"settings": {
 					"localUri": "localService/ZWM_GW_RFSCREENS_SRV/metadata.xml"
