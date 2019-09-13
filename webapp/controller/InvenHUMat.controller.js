@@ -104,6 +104,8 @@ sap.ui.define([
 			var hFlag = false;
 			// var huNumber = oRef.getView().byId("id1").getValue();
 			// var materialNumber = oRef.getView().byId("id2").getValue();
+			// var srcPlant = sap.ui.getCore().PlantNumber;
+			// var srcStrLoc = sap.ui.getCore().StorageLocation;
 			var bool = huNumber.startsWith("(");
 			if (bool) {
 				huNumber = huNumber.replace(/[^A-Z0-9]+/ig, "");
@@ -164,7 +166,9 @@ sap.ui.define([
 							} else if (huNumber === "") {
 
 							} else {
-								MessageBox.error("Invalid HU");
+								var msg = data.Message;
+								MessageBox.error(msg);
+								// MessageBox.error("Invalid HU");
 								oRef.getView().byId("idHUNum").setValue("");
 							}
 
@@ -228,7 +232,9 @@ sap.ui.define([
 							} else if (huNumber === "") {
 
 							} else {
-								MessageBox.error("Invalid HU");
+								var msg = data.Message;
+								MessageBox.error(msg);
+								// MessageBox.error("Invalid HU");
 								oRef.getView().byId("idHUNum").setValue("");
 							}
 
@@ -309,7 +315,6 @@ sap.ui.define([
 					if (errorMsg === "Material Not Found.") {
 						oRef.getView().byId("idMatNum").setValue("");
 						MessageBox.error("Please scan a correct material");
-					} else {
 						oRef.getView().byId("idMatNum").setValue("");
 						MessageBox.error("Please scan a correct material");
 					}
