@@ -104,8 +104,8 @@ sap.ui.define([
 			var hFlag = false;
 			// var huNumber = oRef.getView().byId("id1").getValue();
 			// var materialNumber = oRef.getView().byId("id2").getValue();
-			// var srcPlant = sap.ui.getCore().PlantNumber;
-			// var srcStrLoc = sap.ui.getCore().StorageLocation;
+			var srcPlant = sap.ui.getCore().PlantNumber;
+			var srcStrLoc = sap.ui.getCore().StorageLocation;
 			var bool = huNumber.startsWith("(");
 			if (bool) {
 				huNumber = huNumber.replace(/[^A-Z0-9]+/ig, "");
@@ -140,11 +140,13 @@ sap.ui.define([
 						// /ScannedHU?ExternalHU='" +hunumber+"'&Indicator='"+indicator+"' 
 
 						if (extFlag) {
+							// /sap/opu/odata/sap/ZWM_GW_RFSCREENS_SRV/ReconHUScanned/?ExternalHU='1111'&SourcePlant='1001'&SourceSLoc='FP01'
 
-							oRef.odataService.read("/ReconHUScanned?ExternalHU='" + huNumber + "'", {
-								success: cSuccess,
-								failed: cFailed
-							});
+							oRef.odataService.read("ReconHUScanned/?ExternalHU='" + huNumber + "'&SourcePlant='" + srcPlant + "'&SourceSLoc='" +
+								srcStrLoc + "'", {
+									success: cSuccess,
+									failed: cFailed
+								});
 
 						}
 
@@ -206,11 +208,12 @@ sap.ui.define([
 						}
 						// /HUQtyDetailsSet?$filter=ExternalHU eq '" + fnNumber + "' and Material eq '" + tempMat + "'"
 						if (extFlag) {
-
-							oRef.odataService.read("/ReconHUScanned?ExternalHU='" + huNumber + "'", {
-								success: cSuccess,
-								failed: cFailed
-							});
+							// ReconHUScanned/?ExternalHU='211111'&SourcePlant='1001'&SourceSLoc='FP01'
+							oRef.odataService.read("ReconHUScanned/?ExternalHU='" + huNumber + "'&SourcePlant='" + srcPlant + "'&SourceSLoc='" +
+								srcStrLoc + "'", {
+									success: cSuccess,
+									failed: cFailed
+								});
 
 						}
 
