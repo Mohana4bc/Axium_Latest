@@ -50,6 +50,15 @@ sap.ui.define([
 				oRef.getView().getModel("oListHU").refresh(true);
 				this.getView().byId("idList").destroyItems();
 			}
+
+			if (sap.ui.getCore().itemCategory === "KEN") {
+				oRef.getView().byId("idBin").setValue("IM Consignment Stock");
+				oRef.getView().byId("idBin").setEnabled(false);
+			} else {
+				oRef.getView().byId("idBin").setValue("");
+				oRef.getView().byId("idBin").setEnabled(true);
+			}
+
 			// var oList = this.getView().byId("idList");
 			// oList.getBinding("items").refresh(true);
 			// oRef.getView().byId("idBin").setData("");

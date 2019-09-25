@@ -7,15 +7,11 @@
 				<customHeader>
 					<Bar>
 						<contentRight>
-							<!--<Label text="FG Pick Materials"></Label>-->
-							<Label text="Door No" required="true"></Label>
-							<Input id="doorid" enabled="false" placeholder="Scan Door Number" liveChange="doorValidation"></Input>
+							<!--<Label design="Bold" text="Door No." required="true" class="sapUiSmallMarginTop"></Label>-->
+							<Input id="doorid" enabled="false" placeholder="Please Scan Door No" liveChange="doorValidation"></Input>
 						</contentRight>
 						<contentMiddle>
-							<!--<Label text="Door No" required="true" class="sapUiSmallMarginTop"></Label>-->
-							<!--<Input id="doorid" enabled="false" placeholder="Scan Door Number" liveChange="doorValidation"></Input>-->
-							<!--<Label text="Materials"></Label>-->
-							<!--<Text text="{oDeliveryNo>DeliveryNo}"></Text>-->
+							<Label text="FG Pick Materials"></Label>
 						</contentMiddle>
 						<contentLeft>
 							<Button icon="sap-icon://nav-back" press="onPressBack"/>

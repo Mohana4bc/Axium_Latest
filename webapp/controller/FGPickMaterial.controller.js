@@ -280,6 +280,7 @@ sap.ui.define([
 				sap.ui.getCore().requiredPallet = oModel.results[sap.ui.palIndex].Quantity;
 				sap.ui.getCore().scannedPallet = oModel.results[sap.ui.palIndex].ScannedQuantity;
 				sap.ui.getCore().ZscannedPallet = oModel.results[sap.ui.palIndex].ScannedQuantity;
+				sap.ui.getCore().itemCategory = oModel.results[sap.ui.palIndex].ItemCategory;
 				// sap.ui.getCore().matScannedPallet = oModel.results[sap.ui.selectedIndex].ScannedQuantity;
 
 				var oListItem = oEvent.getParameter("listItem") || oEvent.getSource();
