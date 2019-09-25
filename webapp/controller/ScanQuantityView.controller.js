@@ -52,7 +52,7 @@ sap.ui.define([
 			}
 
 			if (sap.ui.getCore().itemCategory === "KEN") {
-				oRef.getView().byId("idBin").setValue("IM Consignment Stock");
+				oRef.getView().byId("idBin").setValue("IM-Bin");
 				oRef.getView().byId("idBin").setEnabled(false);
 			} else {
 				oRef.getView().byId("idBin").setValue("");
