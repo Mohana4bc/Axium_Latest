@@ -620,7 +620,11 @@ sap.ui.define([
 				});
 
 				function cSuccess(data) {
-					oRef.binGet();
+					if (sap.ui.getCore().itemCategory === "KEN") {
+						oRef.itemCategoryValidation();
+					} else {
+						oRef.binGet();
+					}
 
 					// oRef.aData.push({
 					// 	ExternalHU: data.results[0].ExternalHU,
@@ -695,6 +699,39 @@ sap.ui.define([
 
 				// }
 
+			}
+
+			function cFailed() {
+
+			}
+
+		},
+		itemCategoryValidation: function () {
+			var oRef = this;
+			var tempVar = oRef.getView().byId("id1").getValue();
+			var tempMat = oRef.getView().byId("id2").getValue();
+			var bin = oRef.getView().byId("idBin").getValue();
+			this.odataService.read("/HUQtyDetailsSet?$filter=ExternalHU eq '" + tempVar + "' and Material eq '" + tempMat + "'", {
+				// this.odataService.read("/HUQtyDetailsSet?$filter=ExternalHU eq '00000000002000057331' and Material eq '000000003000000724' and ScannedQnty eq '0' and RequirementQnty eq '41600.000' and BinNumber eq 'U_ZONE'", {
+				success: cSuccess,
+				failed: cFailed
+			});
+
+			function cSuccess(data) {
+				oRef.aData.push({
+					ExternalHU: data.results[0].HU,
+					BinNumber: bin,
+					BatchNo: data.results[0].BatchNo,
+					ScannedQnty: data.results[0].ScannedQnty
+				});
+
+				var oModel = new sap.ui.model.json.JSONModel();
+
+				oModel.setData({
+					HUSet: oRef.aData
+				});
+				oRef.getOwnerComponent().setModel(oModel, "oListHU");
+				oRef.onItemPress();
 			}
 
 			function cFailed() {
