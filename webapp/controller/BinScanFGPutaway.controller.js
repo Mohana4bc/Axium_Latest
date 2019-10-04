@@ -112,14 +112,17 @@ sap.ui.define([
 									if (oAction === sap.m.MessageBox.Action.OK) {
 										var oRef = this;
 
-										var aData = oRef.getView().getModel("oListHU").getData();
-										var aDataCpy = oRef.getView().getModel("oListHUCpy").getData();
-										oRef.aData = [];
-										oRef.aDataCpy = [];
-										oRef.getView().getModel("oListHU").setData(oRef.aData);
-										oRef.getView().getModel("oListHUCpy").setData(oRef.aDataCpy);
+										// var aData = oRef.getView().getModel("oListHU").getData();
+										// var aDataCpy = oRef.getView().getModel("oListHUCpy").getData();
+										// oRef.aData = [];
+										// oRef.aDataCpy = [];
+										sap.ui.getCore().aData = [];
+										sap.ui.getCore().aDataCpy = [];
+										oRef.getView().getModel("oListHU").setData(sap.ui.getCore().aData);
+										oRef.getView().getModel("oListHUCpy").setData(sap.ui.getCore().aDataCpy);
 										oRef.getView().getModel("oListHU").refresh(true);
 										oRef.getView().getModel("oListHUCpy").refresh(true);
+										// sap.ui.getCore().listId.destroyItems();
 
 										oRef.getView().byId("fgPutAwayBinId").setValue("");
 										this.saveFlag = true;

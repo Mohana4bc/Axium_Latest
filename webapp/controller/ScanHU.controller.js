@@ -15,6 +15,8 @@ sap.ui.define([
 			this.oList = this.getView().byId("idList");
 			this.aData = [];
 			this.aDataCpy = [];
+			sap.ui.getCore().aData = [];
+			sap.ui.getCore().aDataCpy = [];
 			this.Batchno = "";
 			this.MaterialDesc = "";
 			this.saveFlag = false;
@@ -283,23 +285,41 @@ sap.ui.define([
 					var matDesc = data.results[0].MaterialDesc;
 					var matNum = data.results[0].Material;
 
-					oRef.aData = [];
+					// oRef.aData = [];
+					// oRef.aData = oRef.getView().getModel("oListHU").getData();
+					// oRef.aDataCpy = oRef.getView().getModel("oListHUCpy").getData();
 
-					oRef.aData.push({
+					// oRef.aData.push({
+					// 	ExternalHU: externalHU,
+					// 	MaterialNum: matNum,
+					// 	MaterialDesc: matDesc
+					// });
+					sap.ui.getCore().aData.push({
 						ExternalHU: externalHU,
 						MaterialNum: matNum,
 						MaterialDesc: matDesc
 					});
 
+					// var oModel = new sap.ui.model.json.JSONModel();
+
+					// oModel.setData({
+					// 	HUSet: oRef.aData
+					// });
+
+					// var oModelCpy = new sap.ui.model.json.JSONModel();
+					// oModelCpy.setData({
+					// 	HUSet: oRef.aData
+					// });
+
 					var oModel = new sap.ui.model.json.JSONModel();
 
 					oModel.setData({
-						HUSet: oRef.aData
+						HUSet: sap.ui.getCore().aData
 					});
 
 					var oModelCpy = new sap.ui.model.json.JSONModel();
 					oModelCpy.setData({
-						HUSet: oRef.aData
+						HUSet: sap.ui.getCore().aData
 					});
 
 					oRef.getOwnerComponent().setModel(oModel, "oListHU");
@@ -467,6 +487,7 @@ sap.ui.define([
 			// this.getView().addDependent(this.dialog);
 			// this.dialog.open();
 			var oRef = this;
+			// sap.ui.getCore().listId = oRef.getView().byId("idList");
 			var result = oRef.oList.getModel("oListHU").getData();
 			if (result.length === 0) {
 				MessageBox.error("Please Scan HU's");
