@@ -283,6 +283,8 @@ sap.ui.define([
 					var matDesc = data.results[0].MaterialDesc;
 					var matNum = data.results[0].Material;
 
+					oRef.aData = [];
+
 					oRef.aData.push({
 						ExternalHU: externalHU,
 						MaterialNum: matNum,
