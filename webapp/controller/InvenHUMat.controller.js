@@ -530,7 +530,7 @@ sap.ui.define([
 				});
 				this.odataService.create("/ReconAppHeaderSet", data, null, function (odata, response) {
 					var matDoc = response.data.Carrier;
-					var msg = "Goods Movement is Successfull, Material Document Number is: " + matDoc + "";
+					var msg = "Goods Movement is Successful, Material Document Number is: " + matDoc + "";
 					// MessageBox.success("Data Saved");
 					MessageBox.success(msg, {
 						title: "Success",
