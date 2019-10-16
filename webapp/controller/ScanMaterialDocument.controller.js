@@ -26,9 +26,16 @@ sap.ui.define([
 			this.getView().byId("idScanMaterialDocumentNumber").setValue("");
 		},
 		validateMDNumber: function () {
-			this.getView().byId("idScanMaterialDocumentNumber").setValue("");
+			var oRef = this;
+			var matDocNum = oRef.getView().byId("idScanMaterialDocumentNumber").getValue();
+			oRef.getView().byId("idScanMaterialDocumentNumber").setValue("");
 			var sRouter = sap.ui.core.UIComponent.getRouterFor(this);
 			sRouter.navTo("STRMaterials", true);
+			this.odataService.read("/MatDocDetailsSet?$filter=MaterialDocNo eq '" + matDocNum + "'", null, null, false, function (
+				response) {
+				oRef.getOwnerComponent().getModel("STRMatDocMaterials").setData(response);
+				oRef.getOwnerComponent().getModel("STRMatDocMaterials").refresh(true);
+			});
 		}
 
 		/**

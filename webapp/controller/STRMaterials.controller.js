@@ -31,7 +31,28 @@ sap.ui.define([
 			var sRouter = sap.ui.core.UIComponent.getRouterFor(this);
 			sRouter.navTo("ScanMaterialDocument", true);
 		},
-		onSTRMaterial: function () {
+		onSTRMaterial: function (oEvent) {
+			var selecteditem = oEvent.getSource().getSelectedItem();
+			var bpath = selecteditem.getBindingContextPath();
+			var Mindex = bpath.split('/')[2];
+			sap.ui.selectedIndex = parseFloat(Mindex);
+			var oModel = this.getView().getModel("STRMatDocMaterials").getData();
+			var strMatNum = oModel.results[sap.ui.selectedIndex].MaterialNumber;
+			var strMatDesc = oModel.results[sap.ui.selectedIndex].MaterialDescription;
+			var strMatDocNum = oModel.results[sap.ui.selectedIndex].MaterialDocNo;
+			var strRequiredPallet = oModel.results[sap.ui.selectedIndex].Quantity;
+			var strScannedPallet = "0";
+			var data = {};
+			data.strMatNum = strMatNum;
+			data.strMatDesc = strMatDesc;
+			data.strMatDocNum = strMatDocNum;
+			data.strRequiredPallet = strRequiredPallet;
+			data.strScannedPallet = strScannedPallet;
+			var oRef = this;
+
+			oRef.getOwnerComponent().getModel("STRMaterialDetails").setData(data);
+			oRef.getOwnerComponent().getModel("STRMaterialDetails").refresh(true);
+
 			var sRouter = sap.ui.core.UIComponent.getRouterFor(this);
 			sRouter.navTo("STRHUScan", true);
 		}

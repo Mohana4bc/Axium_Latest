@@ -5,7 +5,7 @@
 			<Page title="Stock Transfer Receipt" showNavButton="true" navButtonPress="onPressBack">
 				<tnt:InfoLabel text="SELECT MATERIAL TO SCAN HU's" colorScheme="3" renderMode="Narrow"></tnt:InfoLabel>
 				<content>
-					<Table enableBusyIndicator="true" items="" mode="SingleSelectMaster" selectionChange="onSTRMaterial" id="idSTRMaterials" growing="true">
+					<Table enableBusyIndicator="true" items="{STRMatDocMaterials>/results}" mode="SingleSelectMaster" selectionChange="onSTRMaterial" id="idSTRMaterials" growing="true">
 						<columns>
 							<Column hAlign="Center" width="60px" demandPopin="true">
 								<Label text="Material Description" design="Bold"></Label>
@@ -26,11 +26,11 @@
 						<items>
 							<ColumnListItem>
 								<cells>
-									<Text text="MaterialDescription"></Text>
-									<Text text="MaterialNumber"></Text>
-									<Text text="MaterialDocumentNumber"></Text>
-									<Text text="Quantity"></Text>
-									<Text text="ScannedQuantity"></Text>
+									<Text text="{STRMatDocMaterials>MaterialDescription}"></Text>
+									<Text text="{STRMatDocMaterials>MaterialNumber}"></Text>
+									<Text text="{STRMatDocMaterials>MaterialDocNo}"></Text>
+									<Text text="{STRMatDocMaterials>Quantity}"></Text>
+									<Text text="0"></Text>
 								</cells>
 							</ColumnListItem>
 						</items>

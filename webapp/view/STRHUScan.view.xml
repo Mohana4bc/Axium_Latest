@@ -8,13 +8,15 @@
 						layout="ResponsiveGridLayout" maxContainerCols="2" minWidth="1024">
 						<f:content>
 							<Label design="Bold" text="Material Number" class="sapUiSmallMarginTop"></Label>
-							<Input id="idSTRMaterialNumber" editable="false" value=""/>
+							<Input id="idSTRMaterialNumber" editable="false" value="{STRMaterialDetails>/strMatNum}"/>
 							<Label design="Bold" text="Material Description" class="sapUiSmallMarginTop"></Label>
-							<Input id="idSTRMaterialDescription" editable="false" value=""/>
+							<Input id="idSTRMaterialDescription" editable="false" value="{STRMaterialDetails>/strMatDesc}"/>
+							<Label design="Bold" text="Material Document Number" class="sapUiSmallMarginTop"></Label>
+							<Input id="idSTRMatDocNum" editable="false" value="{STRMaterialDetails>/strMatDocNum}"/>
 							<Label design="Bold" text=" Required Pallets" class="sapUiSmallMarginTop"></Label>
-							<Input id="idSTRRequiredPallets" editable="false" value=""/>
+							<Input id="idSTRRequiredPallets" editable="false" value="{STRMaterialDetails>/strRequiredPallet}"/>
 							<Label design="Bold" text="Scanned Pallets" class="sapUiSmallMarginTop"></Label>
-							<Input id="idSTRScannedPallets" editable="false" value=""></Input>
+							<Input id="idSTRScannedPallets" editable="false" value="{STRMaterialDetails>/strScannedPallet}"></Input>
 							<Label design="Bold" text="Scan HU" class="sapUiSmallMarginTop"></Label>
 							<Input id="idSTRHU" enabled="true" placeholder="Scan HU Number" liveChange="handleSearch"></Input>
 						</f:content>
