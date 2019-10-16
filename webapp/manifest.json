@@ -350,6 +350,21 @@
 					"pattern": "BinScanFGPutaway",
 					"name": "BinScanFGPutaway",
 					"target": "BinScanFGPutaway"
+				},
+				{
+					"pattern": "ScanMaterialDocument",
+					"name": "ScanMaterialDocument",
+					"target": "ScanMaterialDocument"
+				},
+				{
+					"pattern": "STRMaterials",
+					"name": "STRMaterials",
+					"target": "STRMaterials"
+				},
+				{
+					"pattern": "STRHUScan",
+					"name": "STRHUScan",
+					"target": "STRHUScan"
 				}
 			],
 			"targets": {
@@ -641,6 +656,18 @@
 				"BinScanFGPutaway": {
 					"viewType": "XML",
 					"viewName": "BinScanFGPutaway"
+				},
+				"ScanMaterialDocument": {
+					"viewType": "XML",
+					"viewName": "ScanMaterialDocument"
+				},
+				"STRMaterials": {
+					"viewType": "XML",
+					"viewName": "STRMaterials"
+				},
+				"STRHUScan": {
+					"viewType": "XML",
+					"viewName": "STRHUScan"
 				}
 			}
 		}

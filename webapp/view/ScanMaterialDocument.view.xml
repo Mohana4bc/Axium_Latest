@@ -1,0 +1,13 @@
+<mvc:View xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m"
+	controllerName="com.axium.Axium.controller.ScanMaterialDocument" xmlns:html="http://www.w3.org/1999/xhtml" xmlns:tnt="sap.tnt">
+	<App>
+		<pages>
+			<Page title="Stock Transfer Receipt" showNavButton="true" navButtonPress="onPressBack">
+				<tnt:InfoLabel text="PRESS ENTER/TAP SCREEN AFTER SCANNING MATERIAL DOCUMENT NUMBER" colorScheme="3" renderMode="Narrow"></tnt:InfoLabel>
+				<content>
+					<Input id="idScanMaterialDocumentNumber" placeholder="Scan Material Document Number" value="" change="validateMDNumber"></Input>
+				</content>
+			</Page>
+		</pages>
+	</App>
+</mvc:View>

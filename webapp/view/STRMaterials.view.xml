@@ -1,0 +1,42 @@
+<mvc:View xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" controllerName="com.axium.Axium.controller.STRMaterials"
+	xmlns:html="http://www.w3.org/1999/xhtml" xmlns:tnt="sap.tnt">
+	<App>
+		<pages>
+			<Page title="Stock Transfer Receipt" showNavButton="true" navButtonPress="onPressBack">
+				<tnt:InfoLabel text="SELECT MATERIAL TO SCAN HU's" colorScheme="3" renderMode="Narrow"></tnt:InfoLabel>
+				<content>
+					<Table enableBusyIndicator="true" items="" mode="SingleSelectMaster" selectionChange="onSTRMaterial" id="idSTRMaterials" growing="true">
+						<columns>
+							<Column hAlign="Center" width="60px" demandPopin="true">
+								<Label text="Material Description" design="Bold"></Label>
+							</Column>
+							<Column hAlign="Center" width="60px" demandPopin="true">
+								<Label text="Material Number" design="Bold"></Label>
+							</Column>
+							<Column hAlign="Center" width="60px" demandPopin="true">
+								<Label text="Material Document Number" design="Bold"></Label>
+							</Column>
+							<Column hAlign="Center" width="60px" demandPopin="true">
+								<Label text="Required Pallets" design="Bold"></Label>
+							</Column>
+							<Column hAlign="Center" width="60px" demandPopin="true">
+								<Label text="Scanned Pallets" design="Bold"></Label>
+							</Column>
+						</columns>
+						<items>
+							<ColumnListItem>
+								<cells>
+									<Text text="MaterialDescription"></Text>
+									<Text text="MaterialNumber"></Text>
+									<Text text="MaterialDocumentNumber"></Text>
+									<Text text="Quantity"></Text>
+									<Text text="ScannedQuantity"></Text>
+								</cells>
+							</ColumnListItem>
+						</items>
+					</Table>
+				</content>
+			</Page>
+		</pages>
+	</App>
+</mvc:View>

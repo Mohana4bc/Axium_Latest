@@ -8,7 +8,7 @@
 					<!--<VBox alignItems="Center">-->
 					<!--	<Image width="219px" height="40px" src="images/Axium_Logo.png"></Image>-->
 					<!--</VBox>-->
-					<VBox height="20%" alignItems="Center"/>
+					<VBox height="10%" alignItems="Center"/>
 					<VBox alignItems="Center">
 						<!--<Button text="Finished Goods Put Away" iconDensityAware="false" visible="true" enabled="true" width="219px" iconFirst="true"-->
 						<!--	type="Emphasized" press="onPressFG" icon="sap-icon://order-status"/>-->
@@ -36,6 +36,8 @@
 							iconFirst="true" type="Emphasized" press="onPhysicalInventory" icon="sap-icon://bar-code"/>
 						<Button text="Stock Transfer App" class="sapMBtnContent" iconDensityAware="false" visible="true" enabled="true" width="325px"
 							iconFirst="true" type="Emphasized" press="onInventoryPress" icon="sap-icon://bar-code"/>
+						<Button text="Stock Transfer Receipt" class="sapMBtnContent" iconDensityAware="false" visible="true" enabled="true" width="325px"
+							iconFirst="true" type="Emphasized" press="onStockTransferReceipt" icon="sap-icon://bar-code"/>
 						<!--<Button text="Bin To Bin Transfer" iconDensityAware="false" visible="true" enabled="true" width="219px" iconFirst="true" type="Emphasized"-->
 						<!--	press="onPressBinToBin" icon="sap-icon://shelf"/>-->
 					</VBox>
