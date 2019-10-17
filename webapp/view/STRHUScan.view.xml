@@ -18,16 +18,15 @@
 							<Label design="Bold" text="Scanned Pallets" class="sapUiSmallMarginTop"></Label>
 							<Input id="idSTRScannedPallets" editable="false" value="{STRMaterialDetails>/strScannedPallet}"></Input>
 							<Label design="Bold" text="Scan HU" class="sapUiSmallMarginTop"></Label>
-							<Input id="idSTRHU" enabled="true" placeholder="Scan HU Number" liveChange="handleSearch"></Input>
+							<Input id="idSTRHU" enabled="true" placeholder="Scan HU Number" liveChange="validateHU"></Input>
 						</f:content>
 					</f:SimpleForm>
-					<List items="" headerText="HU Number" mode="SingleSelectLeft" id="idList">
+					<List items="{oListHU>/HUSet}" headerText="HU Number" mode="SingleSelectLeft" id="idList">
 						<items>
-							<ObjectListItem title="" id="id6">
+							<ObjectListItem title="{oListHU>ExternalHU}" id="idExternalHU">
 								<attributes>
-									<ObjectAttribute title="" text=""/>
-									<ObjectAttribute title="" text=""/>
-									<ObjectAttribute title="" text=""/>
+									<ObjectAttribute title="Batch Number" text="{oListHU>BatchNo}"/>
+									<ObjectAttribute title="Scanned Quantity" text="{oListHU>ScannedQnty}"/>
 								</attributes>
 							</ObjectListItem>
 						</items>
@@ -37,7 +36,6 @@
 					<Bar>
 						<contentRight>
 							<Button text="Save" type="Accept" icon="sap-icon://save" press="onSave"/>
-							<Button text="Delete" type="Reject" icon="sap-icon://delete" press="onDelete"/>
 						</contentRight>
 					</Bar>
 				</footer>

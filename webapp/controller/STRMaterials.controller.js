@@ -19,6 +19,8 @@ sap.ui.define([
 					this.onBeforeShow(evt);
 				}, this)
 			});
+			sap.ui.getCore().doorFlag = this.getView().byId("doorid");
+			sap.ui.getCore().doorFlag.setEnabled(false);
 
 		},
 		onBeforeShow: function () {
@@ -26,6 +28,27 @@ sap.ui.define([
 			var oTable = oRef.getView().byId("idSTRMaterials");
 			oTable.setMode("SingleSelectMaster");
 			oTable.removeSelections("true");
+			var oTableData = oRef.getOwnerComponent().getModel("STRMatDocMaterials").getData();
+			sap.ui.getCore().reqSumFlag = 0;
+			sap.ui.getCore().scanSumFlag = 0;
+
+			$.each(oTableData, function (index, item) {
+
+				var i;
+				for (i = 0; i < item.length; i++) {
+					var temp = {};
+					temp.Quantity = parseFloat(item[i].Quantity);
+					temp.ScannedQuantity = parseFloat(item[i].ScannedQuantity);
+					sap.ui.getCore().reqSumFlag = sap.ui.getCore().reqSumFlag + temp.Quantity;
+					sap.ui.getCore().scanSumFlag = sap.ui.getCore().scanSumFlag + temp.ScannedQuantity;
+
+				}
+			});
+			if (sap.ui.getCore().scanSumFlag === sap.ui.getCore().reqSumFlag) {
+				sap.ui.getCore().doorFlag.setEnabled(true);
+			} else {
+				sap.ui.getCore().doorFlag.setEnabled(false);
+			}
 		},
 		onPressBack: function () {
 			var sRouter = sap.ui.core.UIComponent.getRouterFor(this);
@@ -41,7 +64,7 @@ sap.ui.define([
 			var strMatDesc = oModel.results[sap.ui.selectedIndex].MaterialDescription;
 			var strMatDocNum = oModel.results[sap.ui.selectedIndex].MaterialDocNo;
 			var strRequiredPallet = oModel.results[sap.ui.selectedIndex].Quantity;
-			var strScannedPallet = "0";
+			var strScannedPallet = oModel.results[sap.ui.selectedIndex].ScannedQuantity;
 			var data = {};
 			data.strMatNum = strMatNum;
 			data.strMatDesc = strMatDesc;
@@ -55,6 +78,49 @@ sap.ui.define([
 
 			var sRouter = sap.ui.core.UIComponent.getRouterFor(this);
 			sRouter.navTo("STRHUScan", true);
+		},
+		doorValidation: function () {
+			var oRef = this;
+			var dFlag = true;
+			var tempDoor = oRef.getView().byId("doorid").getValue();
+			if (tempDoor.length >= 3) {
+				setTimeout(function () {
+					var doorFlag = true;
+					oRef.odataService.read("/ScannedDoorNo?DoorNo='" + tempDoor + "'", {
+						success: cSuccess,
+						failed: cFailed
+					});
+
+					function cSuccess(data, response) {
+						if (tempDoor === "") {
+							MessageBox.error("Please Scan Valid Door Number");
+							doorFlag = false;
+							return doorFlag;
+						} else {
+							if (data.DoorDesc === "Valid Door No") {
+								oRef.onSubmit();
+							} else {
+								MessageBox.error("Please Scan Valid Door Number");
+								oRef.getView().byId("doorid").setValue("");
+								doorFlag = false;
+								return doorFlag;
+							}
+
+						}
+					}
+
+					function cFailed(data, response) {
+
+					}
+				}, 1000);
+
+			} else {
+				dFlag = false;
+				return dFlag;
+			}
+		},
+		onSubmit: function () {
+			alert("done");
 		}
 
 		/**

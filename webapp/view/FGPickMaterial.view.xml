@@ -8,7 +8,7 @@
 					<Bar>
 						<contentRight>
 							<!--<Label design="Bold" text="Door No." required="true" class="sapUiSmallMarginTop"></Label>-->
-							<Input id="doorid" enabled="false" placeholder="Please Scan Door No" liveChange="doorValidation"></Input>
+							<Input id="doorid" enabled="" placeholder="Please Scan Door No" liveChange="doorValidation"></Input>
 						</contentRight>
 						<contentMiddle>
 							<Label text="FG Pick Materials"></Label>

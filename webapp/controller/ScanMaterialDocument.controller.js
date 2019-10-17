@@ -25,7 +25,38 @@ sap.ui.define([
 			sRouter.navTo("Home", true);
 			this.getView().byId("idScanMaterialDocumentNumber").setValue("");
 		},
+
 		validateMDNumber: function () {
+			var oRef = this;
+			var matDocNum = oRef.getView().byId("idScanMaterialDocumentNumber").getValue();
+			oRef.odataService.read("/MaterialDocValidation/?MaterialDocNo='" + matDocNum + "'", {
+				success: cSuccess,
+				failed: cFailed
+			});
+
+			function cSuccess(data, response) {
+				if (data.ValidMatDocInd === "Valid") {
+					if (data.DocAlreadyPosted === "No") {
+						oRef.strMatDocDetails();
+					} else {
+						MessageBox.error("Material movement completed");
+						oRef.getView().byId("idScanMaterialDocumentNumber").setValue("");
+					}
+
+				} else {
+					MessageBox.error("Please enter valid material document number");
+					oRef.getView().byId("idScanMaterialDocumentNumber").setValue("");
+				}
+
+			}
+
+			function cFailed() {
+				MessageBox.error("Unable to read material document number");
+				oRef.getView().byId("idScanMaterialDocumentNumber").setValue("");
+			}
+
+		},
+		strMatDocDetails: function () {
 			var oRef = this;
 			var matDocNum = oRef.getView().byId("idScanMaterialDocumentNumber").getValue();
 			oRef.getView().byId("idScanMaterialDocumentNumber").setValue("");
