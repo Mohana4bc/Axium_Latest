@@ -29,6 +29,7 @@ sap.ui.define([
 		validateMDNumber: function () {
 			var oRef = this;
 			var matDocNum = oRef.getView().byId("idScanMaterialDocumentNumber").getValue();
+			sap.ui.getCore().matDocNum = matDocNum;
 			oRef.odataService.read("/MaterialDocValidation/?MaterialDocNo='" + matDocNum + "'", {
 				success: cSuccess,
 				failed: cFailed

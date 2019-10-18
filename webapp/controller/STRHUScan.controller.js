@@ -43,10 +43,10 @@ sap.ui.define([
 			oRef.getView().getModel("oListHU").setData(oRef.aData);
 			oRef.getView().getModel("oListHU").refresh(true);
 			this.getView().byId("idList").destroyItems();
-			var aData = oRef.getView().getModel("STRMatDocMaterials").getData();
-			var sQuantity = oRef.getView().byId("idSTRScannedPallets").getValue();
-			aData.results[sap.ui.selectedIndex].ScannedQuantity = "2";
-			oRef.getView().getModel("STRMatDocMaterials").refresh(true);
+			// var aData = oRef.getView().getModel("STRMatDocMaterials").getData();
+			// var sQuantity = oRef.getView().byId("idSTRScannedPallets").getValue();
+			// aData.results[sap.ui.selectedIndex].ScannedQuantity = "2";
+			// oRef.getView().getModel("STRMatDocMaterials").refresh(true);
 		},
 		validateHU: function () {
 			var oRef = this;

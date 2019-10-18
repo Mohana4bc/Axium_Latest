@@ -120,7 +120,45 @@ sap.ui.define([
 			}
 		},
 		onSubmit: function () {
-			alert("done");
+
+			var oRef = this;
+			oRef.odataService.read("/MaterialDoc313mvtSet?$filter=MaterialDocNo eq'" + sap.ui.getCore().matDocNum + "'", {
+				success: cSuccess,
+				failed: cFailed
+			});
+
+			function cSuccess(data, response) {
+
+				var error = data.results[0].ErrorMessage;
+				var newdocnum = data.results[0].MaterialDocNoNew;
+				if (newdocnum !== "") {
+
+					MessageBox.success("Material Movement Successful, Material Document Number is " + newdocnum + "", {
+						title: "Success",
+						Action: "OK",
+						onClose: function (oAction) {
+							if (oAction === sap.m.MessageBox.Action.OK) {
+								oRef.getView().byId("doorid").setValue("");
+								var sRouter = sap.ui.core.UIComponent.getRouterFor(this);
+								sRouter.navTo("ScanMaterialDocument", true);
+							}
+						}.bind(oRef),
+						styleClass: "",
+						initialFocus: null,
+						textDirection: sap.ui.core.TextDirection.Inherit
+					});
+
+				} else {
+					oRef.getView().byId("doorid").setValue("");
+					MessageBox.error(error);
+				}
+
+			}
+
+			function cFailed(data, response) {
+
+			}
+
 		}
 
 		/**
