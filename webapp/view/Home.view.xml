@@ -34,7 +34,7 @@
 							iconFirst="true" type="Emphasized" press="onPressFGPick" icon="sap-icon://bar-code"/>
 						<Button text="Physical Inventory" class="sapMBtnContent" iconDensityAware="false" visible="true" enabled="true" width="325px"
 							iconFirst="true" type="Emphasized" press="onPhysicalInventory" icon="sap-icon://bar-code"/>
-						<Button text="Stock Transfer App" class="sapMBtnContent" iconDensityAware="false" visible="true" enabled="true" width="325px"
+						<Button text="Stock Transfer" class="sapMBtnContent" iconDensityAware="false" visible="true" enabled="true" width="325px"
 							iconFirst="true" type="Emphasized" press="onInventoryPress" icon="sap-icon://bar-code"/>
 						<Button text="Stock Transfer Receipt" class="sapMBtnContent" iconDensityAware="false" visible="true" enabled="true" width="325px"
 							iconFirst="true" type="Emphasized" press="onStockTransferReceipt" icon="sap-icon://bar-code"/>
