@@ -76,27 +76,27 @@ sap.ui.define([
 			// if ((storageBin.length >= 5) || (storageBin.length >= 6) || (storageBin.length >= 7) || (storageBin.length >=
 			// 		8) || (storageBin.length >= 9) || (storageBin.length >= 10)) {
 			// if (storageBin.length <= 10) {
-				setTimeout(function () {
-					oRef.odataService.read("/AutoStorageTypeSet?$filter=WareHouseNumber eq '" + warehouseNumber + "' and BinNumber eq '" +
-						storageBin +
-						"'", null, null, false,
-						function (oData, oResponse) {
-							var sourceStorageType;
-							for (var i = 0; i < oData.results.length; i++) {
-								sourceStorageType = oData.results[i].StorageType;
-							}
-							oRef.getView().byId("sourceStorage").setValue(sourceStorageType);
-						},
-						function (oResponse) {
-							sap.m.MessageBox.alert("Failed to Load the storage type of scanned Bin", {
-								title: "Information",
-								onClose: null,
-								styleClass: "",
-								initialFocus: null,
-								textDirection: sap.ui.core.TextDirection.Inherit
-							});
+			setTimeout(function () {
+				oRef.odataService.read("/AutoStorageTypeSet?$filter=WareHouseNumber eq '" + warehouseNumber + "' and BinNumber eq '" +
+					storageBin +
+					"'", null, null, false,
+					function (oData, oResponse) {
+						var sourceStorageType;
+						for (var i = 0; i < oData.results.length; i++) {
+							sourceStorageType = oData.results[i].StorageType;
+						}
+						oRef.getView().byId("sourceStorage").setValue(sourceStorageType);
+					},
+					function (oResponse) {
+						sap.m.MessageBox.alert("Failed to Load the storage type of scanned Bin", {
+							title: "Information",
+							onClose: null,
+							styleClass: "",
+							initialFocus: null,
+							textDirection: sap.ui.core.TextDirection.Inherit
 						});
-				}, 1000);
+					});
+			}, 1000);
 			// }
 			// else {
 			// 	storageBinFlag = true;
@@ -111,11 +111,11 @@ sap.ui.define([
 			var sourceStorage = this.getView().byId("sourceStorage").getValue();
 			var sourceBin = this.getView().byId("sourceBin").getValue();
 			var whBintoBinFlag = false;
-			if (warehouseNumber === "A01" || warehouseNumber === "A04") {
+			if (warehouseNumber === "A01" || warehouseNumber === "A04" || warehouseNumber === "A08") {
 				whBintoBinFlag = true;
 				sap.ui.getCore().huBinTransfer = "X";
 			} else {
-				if (warehouseNumber === "A02" || warehouseNumber === "A05") {
+				if (warehouseNumber === "A02" || warehouseNumber === "A05" || warehouseNumber === "A09") {
 					whBintoBinFlag = false;
 					sap.ui.getCore().huBinTransfer = "";
 				}
