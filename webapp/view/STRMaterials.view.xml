@@ -18,37 +18,39 @@
 					</Bar>
 				</customHeader>
 				<content>
-					<Table enableBusyIndicator="true" items="{STRMatDocMaterials>/results}" mode="SingleSelectMaster" selectionChange="onSTRMaterial"
-						id="idSTRMaterials" growing="true">
-						<columns>
-							<Column hAlign="Center" width="60px" demandPopin="true">
-								<Label text="Material Description" design="Bold"></Label>
-							</Column>
-							<Column hAlign="Center" width="60px" demandPopin="true">
-								<Label text="Material Number" design="Bold"></Label>
-							</Column>
-							<Column hAlign="Center" width="60px" demandPopin="true">
-								<Label text="Material Document Number" design="Bold"></Label>
-							</Column>
-							<Column hAlign="Center" width="60px" demandPopin="true">
-								<Label text="Required Pallets" design="Bold"></Label>
-							</Column>
-							<Column hAlign="Center" width="60px" demandPopin="true">
-								<Label text="Scanned Pallets" design="Bold"></Label>
-							</Column>
-						</columns>
-						<items>
-							<ColumnListItem>
-								<cells>
-									<Text text="{STRMatDocMaterials>MaterialDescription}"></Text>
-									<Text text="{STRMatDocMaterials>MaterialNumber}"></Text>
-									<Text text="{STRMatDocMaterials>MaterialDocNo}"></Text>
-									<Text text="{STRMatDocMaterials>Quantity}"></Text>
-									<Text text="{STRMatDocMaterials>ScannedQuantity}"></Text>
-								</cells>
-							</ColumnListItem>
-						</items>
-					</Table>
+					<ScrollContainer id="oScroll" height="500px" vertical="true" focusable="true">
+						<Table enableBusyIndicator="true" items="{STRMatDocMaterials>/results}" mode="SingleSelectMaster" selectionChange="onSTRMaterial"
+							id="idSTRMaterials" growing="true">
+							<columns>
+								<Column hAlign="Center" width="60px" demandPopin="true">
+									<Label text="Material Description" design="Bold"></Label>
+								</Column>
+								<Column hAlign="Center" width="60px" demandPopin="true">
+									<Label text="Material Number" design="Bold"></Label>
+								</Column>
+								<Column hAlign="Center" width="60px" demandPopin="true">
+									<Label text="Material Document Number" design="Bold"></Label>
+								</Column>
+								<Column hAlign="Center" width="60px" demandPopin="true">
+									<Label text="Required Pallets" design="Bold"></Label>
+								</Column>
+								<Column hAlign="Center" width="60px" demandPopin="true">
+									<Label text="Scanned Pallets" design="Bold"></Label>
+								</Column>
+							</columns>
+							<items>
+								<ColumnListItem>
+									<cells>
+										<Text text="{STRMatDocMaterials>MaterialDescription}"></Text>
+										<Text text="{STRMatDocMaterials>MaterialNumber}"></Text>
+										<Text text="{STRMatDocMaterials>MaterialDocNo}"></Text>
+										<Text text="{STRMatDocMaterials>Quantity}"></Text>
+										<Text text="{STRMatDocMaterials>ScannedQuantity}"></Text>
+									</cells>
+								</ColumnListItem>
+							</items>
+						</Table>
+					</ScrollContainer>
 				</content>
 			</Page>
 		</pages>

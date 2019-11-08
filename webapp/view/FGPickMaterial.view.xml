@@ -26,6 +26,7 @@
 					<!--<ScrollContainer width="100%" vertical="true" focusable="true">-->
 					<!--<Label design="Bold" text="Door Number" required="true" class="sapUiSmallMarginTop"></Label>-->
 					<!--<Input id="doorid" enabled="false" placeholder="Please Scan Door Number" liveChange="doorValidation"></Input>-->
+					<ScrollContainer id="oScroll" height="500px" vertical="true" focusable="true">
 					<Table enableBusyIndicator="true" items="{oDeliveryNo>/results}" mode="SingleSelectMaster" selectionChange="onSelectMaterial"
 						id="FGPickMaterials" growing="true">
 						<columns>
@@ -69,7 +70,7 @@
 							</ColumnListItem>
 						</items>
 					</Table>
-					<!--</ScrollContainer>-->
+					</ScrollContainer>
 					<!--<Dialog escapeHandler=".onEscapePress" title="Scan Door Number" id="doorDialog"/>-->
 				</content>
 				<!--<footer>-->
