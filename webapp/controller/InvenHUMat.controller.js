@@ -292,6 +292,11 @@ sap.ui.define([
 				sap.ui.getCore().initialCount = parseFloat(huMatCount) + 1;
 				oRef.getView().byId("idHUMatCount").setValue(sap.ui.getCore().initialCount);
 
+				setTimeout(function () {
+					var oInput = oRef.getView().byId("idHUNum");
+					oInput.focus();
+				}, 1000);
+
 			}
 
 			function cFailed() {
@@ -492,6 +497,12 @@ sap.ui.define([
 				} else if (response.data.Message === "Enter Plant and Storage Location") {
 					oRef.getView().byId("idDSloc").setValue("");
 					MessageBox.error("Please scan destination plant first");
+				} else {
+					var oRef = this;
+					setTimeout(function () {
+						var oInput = oRef.getView().byId("idHUNum");
+						oInput.focus();
+					}, 1000);
 				}
 
 			}
@@ -530,7 +541,12 @@ sap.ui.define([
 				});
 				this.odataService.create("/ReconAppHeaderSet", data, null, function (odata, response) {
 					var matDoc = response.data.Carrier;
-					var msg = "Goods Movement is Successful, Material Document Number is: " + matDoc + "";
+					if (matDoc === "") {
+						var msg = "All HU's are saved successfully. CSR will take care of posting"
+					} else {
+						var msg = "Goods Movement is Successful, Material Document Number is: " + matDoc + "";
+					}
+
 					// MessageBox.success("Data Saved");
 					MessageBox.success(msg, {
 						title: "Success",
