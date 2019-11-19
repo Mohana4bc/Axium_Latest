@@ -587,64 +587,86 @@ sap.ui.define([
 					// sap.ui.getCore().myflag = false;
 				},
 				function (odata, response) {
-					console.log(response);
-					// var errorResponse = JSON.parse(odata.response.body);
-					var errorResponse = JSON.parse(odata.response.body);
-					var errorDetailsRFC = errorResponse.error.message.value;
-					// var error1 = errorResponse.error.innererror.errordetails[0].message;
-					var error1 = errorResponse.error.innererror.errordetails;
-					$.each(error1, function (index, item) {
-						if (index != error1.length - 1) {
-							error1 = item.message;
-						}
 
+					MessageBox.success("All the HU 's are now scanned. Contact CSR for further postings", {
+						title: "Success",
+						Action: "OK",
+						onClose: function (oAction) {
+							if (oAction === sap.m.MessageBox.Action.OK) {
+								oRef.getView().byId("doorid").setValue("");
+								sap.ui.getCore().doorFlag.setEnabled(false);
+								var sRouter = sap.ui.core.UIComponent.getRouterFor(oRef);
+								sRouter.navTo("ScanDelNo", true);
+							}
+						}.bind(oRef),
+						styleClass: "",
+						initialFocus: null,
+						textDirection: sap.ui.core.TextDirection.Inherit
 					});
-					// var errorDetails = errorResponse.error.innererror.errordetails;
-					// var errorString = "";
+					sap.ui.getCore().listFlag = true;
+					sap.ui.getCore().dontScanBatchRadioBtn.setSelected(true);
+					sap.ui.getCore().clearBatchNumber.setValue("");
 
-					// // var errorString = "Data could not be submitted";
-					// $.each(errorDetails, function (index, item) {
-					// 	if (index !== errorDetails.length - 1) {
-					// 		errorString = errorString + item.code + " " + item.message + "\n";
+					// commented for handling unknown error
+
+					// console.log(response);
+					// // var errorResponse = JSON.parse(odata.response.body);
+					// var errorResponse = JSON.parse(odata.response.body);
+					// var errorDetailsRFC = errorResponse.error.message.value;
+					// // var error1 = errorResponse.error.innererror.errordetails[0].message;
+					// var error1 = errorResponse.error.innererror.errordetails;
+					// $.each(error1, function (index, item) {
+					// 	if (index != error1.length - 1) {
+					// 		error1 = item.message;
 					// 	}
-					// });
-					// errorDetails
-					if (errorDetailsRFC.startsWith("RFC")) {
-						errorDetailsRFC = "All the HU 's are now scanned. Contact CSR for further postings";
-						MessageBox.error(errorDetailsRFC, {
-							title: "Error",
-							Action: "Close",
-							onClose: function (oAction) {
-								if (oAction === "CLOSE") {
-									var sHistory = History.getInstance();
-									var sPreviousHash = sHistory.getPreviousHash();
-									if (sPreviousHash !== undefined) {
-										sap.ui.getCore().doorFlag.setEnabled(false);
-										sap.ui.getCore().listFlag = true;
-										window.history.go(-1);
-									} else {
-										sap.ui.getCore().doorFlag.setEnabled(false);
-										sap.ui.getCore().listFlag = true;
-										var sRouter = sap.ui.core.UIComponent.getRouterFor(this);
-										sRouter.navTo("ScanDelNo", true);
-									}
-								}
-							},
-							styleClass: "",
-							initialFocus: null,
-							textDirection: sap.ui.core.TextDirection.Inherit
-						});
 
-					} else {
-						// sap.ui.getCore().doorFlag.setEnabled(false);
-						MessageBox.error(error1, {
-							title: "Error",
-							onClose: null,
-							styleClass: "",
-							initialFocus: null,
-							textDirection: sap.ui.core.TextDirection.Inherit
-						});
-					}
+					// });
+					// // var errorDetails = errorResponse.error.innererror.errordetails;
+					// // var errorString = "";
+
+					// // // var errorString = "Data could not be submitted";
+					// // $.each(errorDetails, function (index, item) {
+					// // 	if (index !== errorDetails.length - 1) {
+					// // 		errorString = errorString + item.code + " " + item.message + "\n";
+					// // 	}
+					// // });
+					// // errorDetails
+					// if (errorDetailsRFC.startsWith("RFC")) {
+					// 	errorDetailsRFC = "All the HU 's are now scanned. Contact CSR for further postings";
+					// 	MessageBox.error(errorDetailsRFC, {
+					// 		title: "Error",
+					// 		Action: "Close",
+					// 		onClose: function (oAction) {
+					// 			if (oAction === "CLOSE") {
+					// 				var sHistory = History.getInstance();
+					// 				var sPreviousHash = sHistory.getPreviousHash();
+					// 				if (sPreviousHash !== undefined) {
+					// 					sap.ui.getCore().doorFlag.setEnabled(false);
+					// 					sap.ui.getCore().listFlag = true;
+					// 					window.history.go(-1);
+					// 				} else {
+					// 					sap.ui.getCore().doorFlag.setEnabled(false);
+					// 					sap.ui.getCore().listFlag = true;
+					// 					var sRouter = sap.ui.core.UIComponent.getRouterFor(this);
+					// 					sRouter.navTo("ScanDelNo", true);
+					// 				}
+					// 			}
+					// 		},
+					// 		styleClass: "",
+					// 		initialFocus: null,
+					// 		textDirection: sap.ui.core.TextDirection.Inherit
+					// 	});
+
+					// } else {
+					// 	// sap.ui.getCore().doorFlag.setEnabled(false);
+					// 	MessageBox.error(error1, {
+					// 		title: "Error",
+					// 		onClose: null,
+					// 		styleClass: "",
+					// 		initialFocus: null,
+					// 		textDirection: sap.ui.core.TextDirection.Inherit
+					// 	});
+					// }
 
 				});
 			this.getView().byId("doorid").setValue("");
