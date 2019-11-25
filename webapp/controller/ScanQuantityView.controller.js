@@ -298,6 +298,7 @@ sap.ui.define([
 			var oZFlag = false;
 			var tempVar = this.getView().byId("id8").getValue();
 			tempVar = tempVar.replace(/[^\d]/g, '');
+			this.getView().byId("id8").setValue(tempVar);
 			if (tempVar.length >= 5) {
 				setTimeout(function () {
 					oRef.odataService.read("/ScannedBatchNo?BatchNo='" + tempVar + "'", {
