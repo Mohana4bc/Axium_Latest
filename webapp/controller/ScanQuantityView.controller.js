@@ -668,7 +668,7 @@ sap.ui.define([
 				// 	MessageBox.information("Please Scan HU of Same Bin Number");
 				// 	oRef.getView().byId("id1").setValue("");
 				// // } else {
-				var huBatch = data.results[0].BatchNo;
+				var huBatch = data.results[0].BatchNo1;
 				var binData = oRef.getView().getModel("oDelAvailableBin").getData();
 				for (var i = 0; i < binData.results.length; i++) {
 					if (huBatch === binData.results[i].BatchNo) {
