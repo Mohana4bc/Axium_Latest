@@ -111,11 +111,15 @@ sap.ui.define([
 			var sourceStorage = this.getView().byId("sourceStorage").getValue();
 			var sourceBin = this.getView().byId("sourceBin").getValue();
 			var whBintoBinFlag = false;
-			if (warehouseNumber === "A01" || warehouseNumber === "A04" || warehouseNumber === "A08") {
+			if (warehouseNumber === "A01" || warehouseNumber === "A04" || warehouseNumber === "A08" || warehouseNumber === "A10" ||
+				warehouseNumber === "A12" || warehouseNumber === "A14" || warehouseNumber === "A16" || warehouseNumber === "A18" ||
+				warehouseNumber === "A20" || warehouseNumber === "A22") {
 				whBintoBinFlag = true;
 				sap.ui.getCore().huBinTransfer = "X";
 			} else {
-				if (warehouseNumber === "A02" || warehouseNumber === "A05" || warehouseNumber === "A09") {
+				if (warehouseNumber === "A02" || warehouseNumber === "A05" || warehouseNumber === "A09" || warehouseNumber === "A11" ||
+					warehouseNumber === "A13" || warehouseNumber === "A15" || warehouseNumber === "A17" || warehouseNumber === "A19" ||
+					warehouseNumber === "A21" || warehouseNumber === "A23") {
 					whBintoBinFlag = false;
 					sap.ui.getCore().huBinTransfer = "";
 				}
