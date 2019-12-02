@@ -22,7 +22,16 @@ sap.ui.define([
 						}));
 				}
 			});
+			this.getView().addEventDelegate({
+				onBeforeShow: jQuery.proxy(function (evt) {
+					this.onBeforeShow(evt);
+				}, this)
+			});
 
+		},
+		onBeforeShow: function () {
+			var oRef = this;
+			oRef.getView().byId("idIMButton").setSelected(true);
 		},
 
 		Plant: function (oEvent) {
@@ -54,40 +63,54 @@ sap.ui.define([
 
 		onNext: function () {
 			var that = this;
-			sap.ui.getCore().plnt = that.getView().byId("plantId").getValue();
-			sap.ui.getCore().stgloc = that.getView().byId("storageId").getValue();
-			if (sap.ui.getCore().plnt === "" || sap.ui.getCore().stgloc === "") {
-				MessageBox.alert("Please select the mandatory fields");
-			} else {
-				that.aData = [];
-				that.odataService.read("/CountItemsSet?$filter=StrLoc eq '" + sap.ui.getCore().stgloc + "' and Plant eq '" + sap.ui.getCore().plnt +
-					"'", null, null, false,
-					function (response) {
-						for (var i = 0; i < response.results.length; i++) {
-							var temp = {};
-							temp.bin = response.results[i].BinNumber;
-							temp.status = response.results[i].Status;
-							temp.mat = response.results[i].Material;
-							temp.bat = response.results[i].Batch;
-							that.aData.push(temp);
+			var PyWMbutton = that.getView().byId("idIMButton").getSelected();
+			if (PyWMbutton === true) {
+				sap.ui.getCore().plnt = that.getView().byId("plantId").getValue();
+				sap.ui.getCore().stgloc = that.getView().byId("storageId").getValue();
+				if (sap.ui.getCore().plnt === "" || sap.ui.getCore().stgloc === "") {
+					MessageBox.alert("Please select the mandatory fields");
+				} else {
+					that.aData = [];
+					that.odataService.read("/CountItemsSet?$filter=StrLoc eq '" + sap.ui.getCore().stgloc + "' and Plant eq '" + sap.ui.getCore().plnt +
+						"'", null, null, false,
+						function (response) {
+							for (var i = 0; i < response.results.length; i++) {
+								var temp = {};
+								temp.bin = response.results[i].BinNumber;
+								temp.status = response.results[i].Status;
+								temp.mat = response.results[i].Material;
+								temp.bat = response.results[i].Batch;
+								that.aData.push(temp);
+							}
+							// that.aData.push(temp);
+							var oModel = new sap.ui.model.json.JSONModel();
+
+							oModel.setData({
+								BinSet: that.aData
+							});
+							that.getOwnerComponent().setModel(oModel, "oListHU");
+
+						},
+						function (odata, response) {
+
 						}
-						// that.aData.push(temp);
-						var oModel = new sap.ui.model.json.JSONModel();
-
-						oModel.setData({
-							BinSet: that.aData
-						});
-						that.getOwnerComponent().setModel(oModel, "oListHU");
-
-					},
-					function (odata, response) {
-
-					}
-				);
-				var sRouter = sap.ui.core.UIComponent.getRouterFor(that);
-				sRouter.navTo("BinScanPI", true);
-				that.getView().byId("plantId").setValue("");
-				that.getView().byId("storageId").setValue("");
+					);
+					var sRouter = sap.ui.core.UIComponent.getRouterFor(that);
+					sRouter.navTo("BinScanPI", true);
+					that.getView().byId("plantId").setValue("");
+					that.getView().byId("storageId").setValue("");
+				}
+			} else {
+				sap.ui.getCore().plnt = that.getView().byId("plantId").getValue();
+				sap.ui.getCore().stgloc = that.getView().byId("storageId").getValue();
+				if (sap.ui.getCore().plnt === "" || sap.ui.getCore().stgloc === "") {
+					MessageBox.alert("Please select the mandatory fields");
+				} else {
+					var sRouter = sap.ui.core.UIComponent.getRouterFor(that);
+					sRouter.navTo("PhysicalInventoryIM", true);
+					that.getView().byId("plantId").setValue("");
+					that.getView().byId("storageId").setValue("");
+				}
 			}
 
 		}

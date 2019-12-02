@@ -56,7 +56,8 @@ sap.ui.define([
 			this.setModel(new sap.ui.model.json.JSONModel(), "InvenHUBin");
 			this.setModel(new sap.ui.model.json.JSONModel(), "BinHUMatModel");
 			this.setModel(new sap.ui.model.json.JSONModel(), "STRMatDocMaterials");
-			this.setModel(new sap.ui.model.json.JSONModel(), "STRMaterialDetails");
+			this.setModel(new sap.ui.model.json.JSONModel(), "PYIMListModel");
+			
 
 		}
 	});

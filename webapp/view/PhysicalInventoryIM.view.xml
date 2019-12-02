@@ -1,0 +1,71 @@
+<mvc:View xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m" xmlns:f="sap.ui.layout.form" xmlns:l="sap.ui.layout"
+	controllerName="com.axium.Axium.controller.PhysicalInventoryIM" xmlns:html="http://www.w3.org/1999/xhtml">
+	<App>
+		<pages>
+			<Page title="Physical Inventory IM" showHeader="true" showFooter="true" class="sapUiContentPadding" showNavButton="true"
+				navButtonPress="onPressBack">
+				<content>
+					<f:SimpleForm columnsL="7" columnsM="7" editable="false" emptySpanL="1" emptySpanM="1" labelSpanL="4" labelSpanM="4"
+						layout="ResponsiveGridLayout" maxContainerCols="2" minWidth="1024">
+						<f:content>
+							<Label text="Bin Number" design="Bold" width="100%" textAlign="Begin" textDirection="Inherit" visible="true"></Label>
+							<Input id="binNumber" required="true" value="" placeholder="Please Scan Bin Number" change="onBinValidation"></Input>
+							<Button id="idClearBin" text="Clear Bin" icon="sap-icon://basket" type="Transparent" press="onClearBin"></Button>
+							<Button id="idNextBin" text="NextBin" icon="sap-icon://accept" type="Transparent" press="onNextBin"></Button>
+							<Label text="Number of Pallets" design="Bold" width="100%" textAlign="Begin" textDirection="Inherit" visible="true"></Label>
+							<Input id="palletsNumber" required="true" value="" placeholder="Enter Required Pallets"></Input>
+							<Label text="Scanned Pallets" design="Bold" width="100%" textAlign="Begin" textDirection="Inherit" visible="true"></Label>
+							<Input id="scannedpalletsNumber" required="true" value="0" placeholder="Scanned Pallets" enabled="false"></Input>
+							<Label text="Material" design="Bold" width="100%" textAlign="Begin" textDirection="Inherit" visible="true"></Label>
+							<Input id="matNumber" required="true" value="" placeholder="Please Scan Material" change="onMaterialValidate"></Input>
+							<Label text="Material Description" design="Bold" width="100%" textAlign="Begin" textDirection="Inherit" visible="true"></Label>
+							<Input id="materialDesc" value="" required="true" enabled="false" editable="false"/>
+							<Label text="Batch Number" design="Bold" width="100%" textAlign="Begin" textDirection="Inherit" visible="true"></Label>
+							<Input id="BatchNumber" required="true" value="" placeholder="Enter Batch Number" maxLength="10"/>
+							<Label text="Quantity/Pallets" design="Bold" width="100%" textAlign="Begin" textDirection="Inherit" visible="true"></Label>
+							<Input id="Quantity" value="" required="true" placeholder="Enter Quantity/Pallets">
+								<layoutData>
+									<l:GridData span="L2 M4 S6"/>
+								</layoutData>
+							</Input>
+							<!--<Label text="Pallets" design="Bold" width="100%" textAlign="Begin" textDirection="Inherit" visible="true"></Label>-->
+							<!--<Input id="idPallets" value="" required="true" placeholder="Enter Pallets">-->
+							<!--	<layoutData>-->
+							<!--		<l:GridData span="L2 M4 S6"/>-->
+							<!--	</layoutData>-->
+							<!--</Input>-->
+							<Input id="UOM" value="" required="true" enabled="false" visible="false" placeholder="UOM">
+								<layoutData>
+									<l:GridData span="L2 M4 S6"/>
+								</layoutData>
+							</Input>
+							<Button id="idMatAdd" text="Add Material" width="70%" icon="sap-icon://add" type="Emphasized" press="onAddMaterial"></Button>
+						</f:content>
+					</f:SimpleForm>
+					<List items="{PYIMListModel>/PYIMListSet}" headerText="Materials" mode="MultiSelect" id="idList">
+						<items>
+							<ObjectListItem title="{PYIMListModel>BinNumber}" id="id6">
+								<attributes>
+									<ObjectAttribute title="Material" text="{PYIMListModel>MaterialNumber}"/>
+									<ObjectAttribute title="Material Description" text="{PYIMListModel>MaterialDescription}"/>
+									<ObjectAttribute title="Batch Number" text="{PYIMListModel>Batch}"/>
+									<ObjectAttribute title="Quantity/Pallets" text="{PYIMListModel>Quantity}"/>
+								</attributes>
+							</ObjectListItem>
+						</items>
+					</List>
+				</content>
+				<footer>
+					<Bar>
+						<contentRight>
+							<Button text="Submit" type="Accept" icon="sap-icon://save" press="onSave" enabled="true"/>
+						</contentRight>
+						<contentLeft>
+							<Button text="Delete" type="Reject" icon="sap-icon://delete" press="onDelete"/>
+						</contentLeft>
+					</Bar>
+				</footer>
+			</Page>
+		</pages>
+	</App>
+</mvc:View>

@@ -23,6 +23,17 @@
 							<Label text="Storage Location" design="Bold" width="100%" textAlign="Begin" textDirection="Inherit" required="true"
 								class="sapUiSmallMarginTop"></Label>
 							<ComboBox id="storageId" filterSecondaryValues="true" showSecondaryValues="true" placeholder="Select Storage Location"></ComboBox>
+							<Label design="Bold" text="Physical Inventory ">
+								<layoutData>
+									<l:GridData span="XL4 L4 M8 S12"/>
+								</layoutData>
+							</Label>
+							<RadioButtonGroup columns="2" id="idPyIMWMButton" valueState="Success">
+								<buttons>
+									<RadioButton id="idIMButton" text="WM"/>
+									<RadioButton id="idWMButton" text="IM"/>
+								</buttons>
+							</RadioButtonGroup>
 						</f:content>
 					</f:SimpleForm>
 				</content>
