@@ -303,6 +303,18 @@ sap.ui.define([
 
 		},
 		onSave: function () {
+			var oRef = this;
+			var oRequiredPallets = oRef.getView().byId("palletsNumber").getValue();
+			var oScannedPallets = oRef.getView().byId("scannedpalletsNumber").getValue();
+			if (sap.ui.getCore().stgloc === "RM01") {
+				//Submit Service
+			} else {
+				if (oScannedPallets !== oRequiredPallets) {
+					MessageBox.error("Scanned Pallets/Quantity are not equal");
+				} else {
+					// Submit Service
+				}
+			}
 
 		}
 
