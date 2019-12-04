@@ -1121,7 +1121,7 @@ sap.ui.define([
 
 							var aData = oRef.getView().getModel("oDeliveryNo").getData();
 							aData.results[sap.ui.selectedIndex].ScannedQuantity = sap.ui.getCore().alreadyScannedPallet;
-							aData.results[sap.ui.palIndex].ScannedQuantity = aData.results[sap.ui.selectedIndex].ScannedQuantity;
+							// aData.results[sap.ui.palIndex].ScannedQuantity = aData.results[sap.ui.selectedIndex].ScannedQuantity;
 							oRef.getView().getModel("oDeliveryNo").refresh(true);
 
 							var bData = oRef.getView().getModel("oScannedQtySelect").getData();
@@ -1174,7 +1174,7 @@ sap.ui.define([
 
 				var aData = oRef.getView().getModel("oDeliveryNo").getData();
 				aData.results[sap.ui.selectedIndex].ScannedQuantity = sap.ui.getCore().alreadyScannedPallet;
-				aData.results[sap.ui.palIndex].ScannedQuantity = aData.results[sap.ui.selectedIndex].ScannedQuantity;
+				// aData.results[sap.ui.palIndex].ScannedQuantity = aData.results[sap.ui.selectedIndex].ScannedQuantity;
 				oRef.getView().getModel("oDeliveryNo").refresh(true);
 
 				var bData = oRef.getView().getModel("oScannedQtySelect").getData();
@@ -1400,7 +1400,7 @@ sap.ui.define([
 
 									var aData = oRef.getView().getModel("oDeliveryNo").getData();
 									aData.results[sap.ui.selectedIndex].ScannedQuantity = sap.ui.getCore().alreadyScannedPallet;
-									aData.results[sap.ui.palIndex].ScannedQuantity = aData.results[sap.ui.selectedIndex].ScannedQuantity;
+									// aData.results[sap.ui.palIndex].ScannedQuantity = aData.results[sap.ui.selectedIndex].ScannedQuantity;
 									oRef.getView().getModel("oDeliveryNo").refresh(true);
 
 									var bData = oRef.getView().getModel("oScannedQtySelect").getData();
@@ -1536,7 +1536,7 @@ sap.ui.define([
 
 											var aData = that.getView().getModel("oDeliveryNo").getData();
 											aData.results[sap.ui.selectedIndex].ScannedQuantity = sap.ui.getCore().alreadyScannedPallet;
-											aData.results[sap.ui.palIndex].ScannedQuantity = aData.results[sap.ui.selectedIndex].ScannedQuantity;
+											// aData.results[sap.ui.palIndex].ScannedQuantity = aData.results[sap.ui.selectedIndex].ScannedQuantity;
 											that.getView().getModel("oDeliveryNo").refresh(true);
 
 											var bData = that.getView().getModel("oScannedQtySelect").getData();

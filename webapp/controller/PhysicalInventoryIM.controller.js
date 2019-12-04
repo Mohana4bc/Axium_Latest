@@ -86,6 +86,7 @@ sap.ui.define([
 		},
 		onClearBin: function () {
 			var oRef = this;
+			// var data = oRef.getView().getModel("PYIMListModel").getData(oRef.result);
 			oRef.getView().byId("binNumber").setEnabled(true);
 			oRef.getView().byId("palletsNumber").setEnabled(true);
 			oRef.getView().byId("binNumber").setValue("");
@@ -98,6 +99,7 @@ sap.ui.define([
 			var aData = oRef.getView().getModel("PYIMListModel").getData();
 			oRef.aData = [];
 			oRef.getView().getModel("PYIMListModel").setData(oRef.aData);
+
 		},
 		onNextBin: function () {
 			var oRef = this;

@@ -10,8 +10,8 @@
 						<f:content>
 							<Label text="Bin Number" design="Bold" width="100%" textAlign="Begin" textDirection="Inherit" visible="true"></Label>
 							<Input id="binNumber" required="true" value="" placeholder="Please Scan Bin Number" change="onBinValidation"></Input>
-							<Button id="idClearBin" text="Clear Bin" icon="sap-icon://basket" type="Transparent" press="onClearBin"></Button>
-							<Button id="idNextBin" text="NextBin" icon="sap-icon://accept" type="Transparent" press="onNextBin"></Button>
+							<Button id="idClearBin" text="Clear Bin" width="70%" icon="sap-icon://basket" type="Transparent" press="onClearBin"></Button>
+							<!--<Button id="idNextBin" text="NextBin" icon="sap-icon://accept" type="Transparent" press="onNextBin"></Button>-->
 							<Label text="Number of Pallets" design="Bold" width="100%" textAlign="Begin" textDirection="Inherit" visible="true"></Label>
 							<Input id="palletsNumber" required="true" value="" placeholder="Enter Required Pallets"></Input>
 							<Label text="Scanned Pallets" design="Bold" width="100%" textAlign="Begin" textDirection="Inherit" visible="true"></Label>
