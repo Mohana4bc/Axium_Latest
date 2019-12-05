@@ -144,7 +144,7 @@ sap.ui.define([
 			var oMaterialDescription = oRef.getView().byId("materialDesc").getValue();
 			var oBatch = oRef.getView().byId("BatchNumber").getValue();
 			var scannedPallets = oRef.getView().byId("scannedpalletsNumber").getValue();
-
+			// var decimalRequiredPallets = parseFloat(requiredPallets);
 			if (sap.ui.getCore().stgloc === "RM01") {
 				oRef.RM01MaterialAdd();
 			} else {
@@ -152,66 +152,93 @@ sap.ui.define([
 					requiredPallets === "") {
 					MessageBox.error("Please scan all mandatory fields");
 				} else {
-					var aData = oRef.getView().getModel("PYIMListModel");
-					if (aData !== undefined) {
-						// var aData = oRef.getOwnerComponent().getModel("oListHUCpy").getData();
-						var extFlag = true;
-
-						$.each(aData.oData.PYIMListSet, function (index, item) {
-							var numscannedPallets = parseFloat(scannedPallets);
-							var numrequiredPallets = parseFloat(requiredPallets);
-
-							if (item.BinNumber === oBinNumber && item.MaterialNumber === oMaterialNumber && item.Batch === oBatch && numscannedPallets >
-								numrequiredPallets) {
-								extFlag = false;
-								MessageBox.information("Material already scanned", {
-									title: "Information"
-								});
+					this.odataService.read("/IMValidateRecordNewSet(BinNumber='" + oBinNumber +
+						"',RequiredPallets='" + requiredPallets + "',Material='" + oMaterialNumber + "',BatchNo='" + oBatch + "')",
+						null, null,
+						false,
+						function (data, response) {
+							// console.log(data);
+							// console.log(response);
+							var oMessage = response.data.Message;
+							if (oMessage === "X") {
+								oRef.getView().byId("binNumber").setValue("");
+								oRef.getView().byId("palletsNumber").setValue("");
+								oRef.getView().byId("binNumber").setEnabled(true);
+								oRef.getView().byId("palletsNumber").setEnabled(true);
 								oRef.getView().byId("Quantity").setValue("");
 								oRef.getView().byId("matNumber").setValue("");
+								oRef.getView().byId("scannedpalletsNumber").setValue("0");
 								oRef.getView().byId("materialDesc").setValue("");
 								oRef.getView().byId("BatchNumber").setValue("");
+								MessageBox.error("Data Already Saved in Table");
+							} else {
+								var aData = oRef.getView().getModel("PYIMListModel");
+								if (aData !== undefined) {
+									// var aData = oRef.getOwnerComponent().getModel("oListHUCpy").getData();
+									var extFlag = true;
+
+									$.each(aData.oData.PYIMListSet, function (index, item) {
+										var numscannedPallets = parseFloat(scannedPallets);
+										var numrequiredPallets = parseFloat(requiredPallets);
+
+										if (item.BinNumber === oBinNumber && item.MaterialNumber === oMaterialNumber && item.Batch === oBatch &&
+											numscannedPallets >
+											numrequiredPallets) {
+											extFlag = false;
+											MessageBox.information("Material already scanned", {
+												title: "Information"
+											});
+											oRef.getView().byId("Quantity").setValue("");
+											oRef.getView().byId("matNumber").setValue("");
+											oRef.getView().byId("materialDesc").setValue("");
+											oRef.getView().byId("BatchNumber").setValue("");
+										}
+
+									});
+									if (extFlag === true) {
+										if (scannedPallets === requiredPallets) {
+											MessageBox.error("Materials Picked");
+											oRef.getView().byId("Quantity").setValue("");
+											oRef.getView().byId("matNumber").setValue("");
+											oRef.getView().byId("materialDesc").setValue("");
+											oRef.getView().byId("BatchNumber").setValue("");
+										} else {
+											scannedPallets = parseFloat(scannedPallets) + parseFloat(oQuantity);
+											if (scannedPallets > requiredPallets) {
+												MessageBox.error("Please enter quantity less than required quantity");
+												oRef.getView().byId("Quantity").setValue("");
+											} else {
+												oRef.getView().byId("scannedpalletsNumber").setValue(scannedPallets);
+												oRef.aData.push({
+													BinNumber: oBinNumber,
+													Quantity: oQuantity,
+													MaterialNumber: oMaterialNumber,
+													MaterialDescription: oMaterialDescription,
+													Batch: oBatch
+												});
+
+												var oModel = oRef.getView().getModel("PYIMListModel");
+
+												oModel.setData({
+													PYIMListSet: oRef.aData
+												});
+												oRef.getOwnerComponent().setModel(oModel, "PYIMListModel");
+												oRef.getView().byId("Quantity").setValue("");
+												oRef.getView().byId("matNumber").setValue("");
+												oRef.getView().byId("materialDesc").setValue("");
+												oRef.getView().byId("BatchNumber").setValue("");
+											}
+
+										}
+
+									}
+								}
 							}
+
+						},
+						function () {
 
 						});
-						if (extFlag === true) {
-							if (scannedPallets === requiredPallets) {
-								MessageBox.error("Materials Picked");
-								oRef.getView().byId("Quantity").setValue("");
-								oRef.getView().byId("matNumber").setValue("");
-								oRef.getView().byId("materialDesc").setValue("");
-								oRef.getView().byId("BatchNumber").setValue("");
-							} else {
-								scannedPallets = parseFloat(scannedPallets) + parseFloat(oQuantity);
-								if (scannedPallets > requiredPallets) {
-									MessageBox.error("Please enter quantity less than required quantity");
-									oRef.getView().byId("Quantity").setValue("");
-								} else {
-									oRef.getView().byId("scannedpalletsNumber").setValue(scannedPallets);
-									oRef.aData.push({
-										BinNumber: oBinNumber,
-										Quantity: oQuantity,
-										MaterialNumber: oMaterialNumber,
-										MaterialDescription: oMaterialDescription,
-										Batch: oBatch
-									});
-
-									var oModel = oRef.getView().getModel("PYIMListModel");
-
-									oModel.setData({
-										PYIMListSet: oRef.aData
-									});
-									oRef.getOwnerComponent().setModel(oModel, "PYIMListModel");
-									oRef.getView().byId("Quantity").setValue("");
-									oRef.getView().byId("matNumber").setValue("");
-									oRef.getView().byId("materialDesc").setValue("");
-									oRef.getView().byId("BatchNumber").setValue("");
-								}
-
-							}
-
-						}
-					}
 
 				}
 			}
@@ -224,46 +251,71 @@ sap.ui.define([
 			var oMaterialNumber = oRef.getView().byId("matNumber").getValue();
 			var oMaterialDescription = oRef.getView().byId("materialDesc").getValue();
 			var oBatch = oRef.getView().byId("BatchNumber").getValue();
-			var aData = oRef.getView().getModel("PYIMListModel");
-			if (aData !== undefined) {
-				var extFlag = true;
-				$.each(aData.oData.PYIMListSet, function (index, item) {
-
-					if (item.BinNumber === oBinNumber && item.MaterialNumber === oMaterialNumber && item.Batch === oBatch && item.Quantity ===
-						oQuantity) {
-						extFlag = false;
-						MessageBox.information("Material already scanned", {
-							title: "Information"
-						});
+			var requiredPallets = "";
+			this.odataService.read("/IMValidateRecordNewSet(BinNumber='" + oBinNumber +
+				"',RequiredPallets='" + requiredPallets + "',Material='" + oMaterialNumber + "',BatchNo='" + oBatch + "')",
+				null, null,
+				false,
+				function (data, response) {
+					var oMessage = response.data.Message;
+					if (oMessage === "X") {
+						oRef.getView().byId("binNumber").setValue("");
+						oRef.getView().byId("palletsNumber").setValue("");
+						oRef.getView().byId("binNumber").setEnabled(true);
+						oRef.getView().byId("palletsNumber").setEnabled(true);
 						oRef.getView().byId("Quantity").setValue("");
+						oRef.getView().byId("scannedpalletsNumber").setValue("0");
 						oRef.getView().byId("matNumber").setValue("");
 						oRef.getView().byId("materialDesc").setValue("");
 						oRef.getView().byId("BatchNumber").setValue("");
+						MessageBox.error("Data Already Saved in Table");
+					} else {
+						var aData = oRef.getView().getModel("PYIMListModel");
+						if (aData !== undefined) {
+							var extFlag = true;
+							$.each(aData.oData.PYIMListSet, function (index, item) {
+
+								if (item.BinNumber === oBinNumber && item.MaterialNumber === oMaterialNumber && item.Batch === oBatch && item.Quantity ===
+									oQuantity) {
+									extFlag = false;
+									MessageBox.information("Material already scanned", {
+										title: "Information"
+									});
+									oRef.getView().byId("Quantity").setValue("");
+									oRef.getView().byId("matNumber").setValue("");
+									oRef.getView().byId("materialDesc").setValue("");
+									oRef.getView().byId("BatchNumber").setValue("");
+								}
+
+							});
+							if (extFlag === true) {
+								oRef.aData.push({
+									BinNumber: oBinNumber,
+									Quantity: oQuantity,
+									MaterialNumber: oMaterialNumber,
+									MaterialDescription: oMaterialDescription,
+									Batch: oBatch
+								});
+
+								var oModel = oRef.getView().getModel("PYIMListModel");
+
+								oModel.setData({
+									PYIMListSet: oRef.aData
+								});
+								oRef.getOwnerComponent().setModel(oModel, "PYIMListModel");
+								oRef.getView().byId("Quantity").setValue("");
+								oRef.getView().byId("matNumber").setValue("");
+								oRef.getView().byId("materialDesc").setValue("");
+								oRef.getView().byId("BatchNumber").setValue("");
+							}
+
+						}
 					}
 
+				},
+				function () {
+
 				});
-				if (extFlag === true) {
-					oRef.aData.push({
-						BinNumber: oBinNumber,
-						Quantity: oQuantity,
-						MaterialNumber: oMaterialNumber,
-						MaterialDescription: oMaterialDescription,
-						Batch: oBatch
-					});
-
-					var oModel = oRef.getView().getModel("PYIMListModel");
-
-					oModel.setData({
-						PYIMListSet: oRef.aData
-					});
-					oRef.getOwnerComponent().setModel(oModel, "PYIMListModel");
-					oRef.getView().byId("Quantity").setValue("");
-					oRef.getView().byId("matNumber").setValue("");
-					oRef.getView().byId("materialDesc").setValue("");
-					oRef.getView().byId("BatchNumber").setValue("");
-				}
-
-			}
 
 		},
 		onDelete: function () {
@@ -309,12 +361,131 @@ sap.ui.define([
 			var oRequiredPallets = oRef.getView().byId("palletsNumber").getValue();
 			var oScannedPallets = oRef.getView().byId("scannedpalletsNumber").getValue();
 			if (sap.ui.getCore().stgloc === "RM01") {
-				//Submit Service
+				var passBinNo = oRef.getView().byId("binNumber").getValue();
+				// var passScannedQty = oRef.getView().byId("").getValue();
+				var data = {};
+				data.NavIMheaderIMItems = [];
+				data.BinNumber = passBinNo;
+				data.RequiredPallets = "0";
+				var result = oRef.oList.getModel("PYIMListModel").getData();
+
+				$.each(result.PYIMListSet, function (index, item) {
+					var temp = {};
+					temp.BinNumber = passBinNo;
+					temp.Client = "";
+					temp.RequiredQty = "0";
+					temp.Material = item.MaterialNumber;
+					temp.MaterialDesc = item.MaterialDescription;
+					temp.BatchNo = item.Batch;
+					temp.ScannedQty = item.Quantity;
+					data.NavIMheaderIMItems.push(temp);
+				});
+				this.odataService.create("/IMHeaderSet", data, null, function (odata, response) {
+					MessageBox.show("Scan Another Bin ?", {
+						icon: MessageBox.Icon.SUCCESS,
+						title: "Data Saved Successfully",
+						actions: [MessageBox.Action.YES, MessageBox.Action.NO],
+						onClose: function (oAction) {
+							if (oAction === sap.m.MessageBox.Action.YES) {
+								oRef.getView().byId("binNumber").setValue("");
+								oRef.getView().byId("binNumber").setEnabled(true);
+								oRef.getView().byId("palletsNumber").setEnabled(true);
+								oRef.getView().byId("palletsNumber").setValue("");
+								oRef.getView().byId("Quantity").setValue("");
+								oRef.getView().byId("scannedpalletsNumber").setValue("0");
+								oRef.getView().byId("matNumber").setValue("");
+								oRef.getView().byId("materialDesc").setValue("");
+								oRef.getView().byId("BatchNumber").setValue("");
+								var aData = oRef.getView().getModel("PYIMListModel").getData();
+								oRef.aData = [];
+								oRef.getView().getModel("PYIMListModel").setData(oRef.aData);
+							} else {
+								oRef.getView().byId("binNumber").setValue("");
+								oRef.getView().byId("palletsNumber").setValue("");
+								oRef.getView().byId("binNumber").setEnabled(true);
+								oRef.getView().byId("palletsNumber").setEnabled(true);
+								oRef.getView().byId("Quantity").setValue("");
+								oRef.getView().byId("scannedpalletsNumber").setValue("0");
+								oRef.getView().byId("matNumber").setValue("");
+								oRef.getView().byId("materialDesc").setValue("");
+								oRef.getView().byId("BatchNumber").setValue("");
+								var aData = oRef.getView().getModel("PYIMListModel").getData();
+								oRef.aData = [];
+								oRef.getView().getModel("PYIMListModel").setData(oRef.aData);
+								var sRouter = sap.ui.core.UIComponent.getRouterFor(oRef);
+								sRouter.navTo("PlantStorageLoc", true);
+							}
+						}
+
+					});
+
+				}, function (odata, response) {
+
+				});
 			} else {
 				if (oScannedPallets !== oRequiredPallets) {
 					MessageBox.error("Scanned Pallets/Quantity are not equal");
 				} else {
-					// Submit Service
+					var passBinNo = oRef.getView().byId("binNumber").getValue();
+					var oRequiredPallets = oRef.getView().byId("palletsNumber").getValue();
+					var data = {};
+					data.NavIMheaderIMItems = [];
+					data.BinNumber = passBinNo;
+					data.RequiredPallets = oRequiredPallets;
+					var result = oRef.oList.getModel("PYIMListModel").getData();
+
+					$.each(result.PYIMListSet, function (index, item) {
+						var temp = {};
+						temp.BinNumber = passBinNo;
+						temp.Client = "";
+						temp.RequiredQty = oRequiredPallets;
+						temp.Material = item.MaterialNumber;
+						temp.MaterialDesc = item.MaterialDescription;
+						temp.BatchNo = item.Batch;
+						temp.ScannedQty = item.Quantity;
+						data.NavIMheaderIMItems.push(temp);
+					});
+					this.odataService.create("/IMHeaderSet", data, null, function (odata, response) {
+						MessageBox.show("Scan Another Bin ?", {
+							icon: MessageBox.Icon.SUCCESS,
+							title: "Data Saved Successfully",
+							actions: [MessageBox.Action.YES, MessageBox.Action.NO],
+							onClose: function (oAction) {
+								if (oAction === sap.m.MessageBox.Action.YES) {
+									oRef.getView().byId("binNumber").setValue("");
+									oRef.getView().byId("palletsNumber").setValue("");
+									oRef.getView().byId("binNumber").setEnabled(true);
+									oRef.getView().byId("palletsNumber").setEnabled(true);
+									oRef.getView().byId("Quantity").setValue("");
+									oRef.getView().byId("matNumber").setValue("");
+									oRef.getView().byId("scannedpalletsNumber").setValue("0");
+									oRef.getView().byId("materialDesc").setValue("");
+									oRef.getView().byId("BatchNumber").setValue("");
+									var aData = oRef.getView().getModel("PYIMListModel").getData();
+									oRef.aData = [];
+									oRef.getView().getModel("PYIMListModel").setData(oRef.aData);
+								} else {
+									oRef.getView().byId("binNumber").setValue("");
+									oRef.getView().byId("palletsNumber").setValue("");
+									oRef.getView().byId("binNumber").setEnabled(true);
+									oRef.getView().byId("palletsNumber").setEnabled(true);
+									oRef.getView().byId("Quantity").setValue("");
+									oRef.getView().byId("scannedpalletsNumber").setValue("0");
+									oRef.getView().byId("matNumber").setValue("");
+									oRef.getView().byId("materialDesc").setValue("");
+									oRef.getView().byId("BatchNumber").setValue("");
+									var aData = oRef.getView().getModel("PYIMListModel").getData();
+									oRef.aData = [];
+									oRef.getView().getModel("PYIMListModel").setData(oRef.aData);
+									var sRouter = sap.ui.core.UIComponent.getRouterFor(oRef);
+									sRouter.navTo("PlantStorageLoc", true);
+								}
+							}
+
+						});
+					}, function (odata, response) {
+
+					});
 				}
 			}
 
