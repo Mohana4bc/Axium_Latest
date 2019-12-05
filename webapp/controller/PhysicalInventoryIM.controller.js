@@ -197,7 +197,7 @@ sap.ui.define([
 									});
 									if (extFlag === true) {
 										if (scannedPallets === requiredPallets) {
-											MessageBox.error("Materials Picked");
+											MessageBox.error("Bin Count Completed");
 											oRef.getView().byId("Quantity").setValue("");
 											oRef.getView().byId("matNumber").setValue("");
 											oRef.getView().byId("materialDesc").setValue("");

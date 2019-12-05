@@ -2,7 +2,7 @@
 	controllerName="com.axium.Axium.controller.PhysicalInventoryIM" xmlns:html="http://www.w3.org/1999/xhtml">
 	<App>
 		<pages>
-			<Page title="Physical Inventory IM" showHeader="true" showFooter="true" class="sapUiContentPadding" showNavButton="true"
+			<Page title="Enter the Count" showHeader="true" showFooter="true" class="sapUiContentPadding" showNavButton="true"
 				navButtonPress="onPressBack">
 				<content>
 					<f:SimpleForm columnsL="7" columnsM="7" editable="false" emptySpanL="1" emptySpanM="1" labelSpanL="4" labelSpanM="4"
@@ -13,7 +13,7 @@
 							<Button id="idClearBin" text="Clear Bin" width="70%" icon="sap-icon://basket" type="Transparent" press="onClearBin"></Button>
 							<!--<Button id="idNextBin" text="NextBin" icon="sap-icon://accept" type="Transparent" press="onNextBin"></Button>-->
 							<Label text="Number of Pallets" design="Bold" width="100%" textAlign="Begin" textDirection="Inherit" visible="true"></Label>
-							<Input id="palletsNumber" required="true" value="" placeholder="Enter Required Pallets"></Input>
+							<Input id="palletsNumber" required="true" value="" placeholder="Enter Pallets"></Input>
 							<Label text="Scanned Pallets" design="Bold" width="100%" textAlign="Begin" textDirection="Inherit" visible="true"></Label>
 							<Input id="scannedpalletsNumber" required="true" value="0" placeholder="Scanned Pallets" enabled="false"></Input>
 							<Label text="Material" design="Bold" width="100%" textAlign="Begin" textDirection="Inherit" visible="true"></Label>
