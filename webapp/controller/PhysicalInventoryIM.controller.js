@@ -360,6 +360,8 @@ sap.ui.define([
 			var oRef = this;
 			var oRequiredPallets = oRef.getView().byId("palletsNumber").getValue();
 			var oScannedPallets = oRef.getView().byId("scannedpalletsNumber").getValue();
+			var oPlant = sap.ui.getCore().plnt;
+			var oStrLoc = sap.ui.getCore().stgloc;
 			if (sap.ui.getCore().stgloc === "RM01") {
 				var passBinNo = oRef.getView().byId("binNumber").getValue();
 				// var passScannedQty = oRef.getView().byId("").getValue();
@@ -378,6 +380,8 @@ sap.ui.define([
 					temp.MaterialDesc = item.MaterialDescription;
 					temp.BatchNo = item.Batch;
 					temp.ScannedQty = item.Quantity;
+					temp.Plant = oPlant;
+					temp.StorageLocation = oStrLoc;
 					data.NavIMheaderIMItems.push(temp);
 				});
 				this.odataService.create("/IMHeaderSet", data, null, function (odata, response) {
@@ -443,6 +447,8 @@ sap.ui.define([
 						temp.MaterialDesc = item.MaterialDescription;
 						temp.BatchNo = item.Batch;
 						temp.ScannedQty = item.Quantity;
+						temp.Plant = oPlant;
+						temp.StorageLocation = oStrLoc;
 						data.NavIMheaderIMItems.push(temp);
 					});
 					this.odataService.create("/IMHeaderSet", data, null, function (odata, response) {
