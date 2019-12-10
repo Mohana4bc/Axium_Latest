@@ -123,15 +123,19 @@ sap.ui.define([
 				},
 				function (oData, oResponse) {
 					// console.log(oResponse);
-					var error = JSON.parse(oData.response.body);
-					var errorMsg = error.error.message.value;
-					if (errorMsg === "Material Not Found.") {
-						oRef.getView().byId("idMaterialDescription").setValue("");
-						MessageBox.error("Please scan a correct material");
-					} else {
-						oRef.getView().byId("idMaterialDescription").setValue("");
-						MessageBox.error("Please scan a correct material");
-					}
+					// var error = JSON.parse(oData.response.body);
+					// var errorMsg = error.error.message.value;
+					// if (errorMsg === "Material Not Found.") {
+					// 	oRef.getView().byId("idMaterialDescription").setValue("");
+					// 	MessageBox.error("Please scan a correct material");
+					// } 
+					// else {
+					// 	oRef.getView().byId("idMaterialDescription").setValue("");
+					// 	MessageBox.error("Please scan a correct material");
+					// }
+
+					oRef.getView().byId("matNumber").setValue("");
+					MessageBox.error("Please scan a correct material");
 				}
 			);
 		},
